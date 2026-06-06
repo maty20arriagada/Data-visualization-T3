@@ -67,6 +67,47 @@ st.markdown(
 
     /* Texto del cuerpo con mejor contraste */
     p, label, .stMarkdown { color: #2C3E50; }
+
+    /* ----------------------------------------------------------------- */
+    /* SIDEBAR: fondo claro institucional + alto contraste de texto      */
+    /* ----------------------------------------------------------------- */
+    section[data-testid="stSidebar"] {
+        background-color: #F4F6F8 !important;
+        border-right: 1px solid #E1E5EA;
+    }
+    /* Titulos y labels de los widgets del sidebar en azul oscuro */
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] p {
+        color: #1A2530 !important;
+    }
+    /* Texto de las opciones (radio, multiselect, selectbox) legible */
+    section[data-testid="stSidebar"] [data-baseweb="radio"] div,
+    section[data-testid="stSidebar"] [data-baseweb="select"] div,
+    section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {
+        color: #2C3E50 !important;
+    }
+    /* Campos (selectbox / multiselect) con fondo blanco y borde sutil */
+    section[data-testid="stSidebar"] [data-baseweb="select"] > div,
+    section[data-testid="stSidebar"] [data-baseweb="input"] > div {
+        background-color: #FFFFFF !important;
+        border-color: #CBD3DB !important;
+    }
+    /* Chips de los items seleccionados en el multiselect (alto contraste) */
+    section[data-testid="stSidebar"] [data-baseweb="tag"] {
+        background-color: #175884 !important;
+        color: #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="tag"] span {
+        color: #FFFFFF !important;
+    }
+    /* Punto activo del radio y track del slider en azul institucional */
+    section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[role="slider"] {
+        background-color: #175884 !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -350,20 +391,23 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
         xaxis=dict(title="% hogares pobres",
                    ticksuffix="%", range=[0, 100], gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
-                   title_font=dict(size=SZ_AX_TITLE)),
+                   title_font=dict(size=SZ_AX_TITLE),
+                   title_standoff=12),
         yaxis=dict(title="", autorange="reversed",
                    tickfont=dict(size=SZ_AX_TICK,
                                  color=COLOR_TEXTO_FUERTE)),
-        legend=dict(orientation="h", yanchor="bottom", y=-0.20,
+        # Leyenda mas abajo para que no choque con el titulo del eje X;
+        # la nota del n se separa aun mas para no superponerse a la leyenda.
+        legend=dict(orientation="h", yanchor="top", y=-0.26,
                     xanchor="center", x=0.5,
                     font=dict(size=SZ_LEGEND, family=FONT_FAMILY),
                     traceorder="reversed"),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
-        margin=dict(t=70, b=125, l=110, r=25),
+        margin=dict(t=70, b=155, l=110, r=25),
         width=A4_W, height=A4_H,
         annotations=[dict(
-            x=0.5, y=-0.34, xref="paper", yref="paper",
+            x=0.5, y=-0.46, xref="paper", yref="paper",
             text=f"<i>{n_label}</i>", showarrow=False,
             xanchor="center",
             font=dict(size=SZ_ANNOT, color="#7F8C8D",
@@ -1055,10 +1099,14 @@ def plot_lisa_comunal_norte_grande(gdf_lisa_ng):
             showlegend=True,
         ))
 
+    # El mapa del Norte Grande es una franja vertical angosta: se acota su
+    # dominio a la mitad izquierda del lienzo para dejar la mitad derecha
+    # libre y colocar alli una leyenda VERTICAL sin solapamiento.
     fig.update_geos(
         fitbounds="locations", visible=False,
         projection_type="transverse mercator",
         bgcolor="white",
+        domain=dict(x=[0.0, 0.60], y=[0.0, 1.0]),
     )
     fig.update_layout(
         title=_titulo_a4(
@@ -1066,24 +1114,24 @@ def plot_lisa_comunal_norte_grande(gdf_lisa_ng):
             "Mapa LISA comunal del Norte Grande: pobreza simultánea por ingresos y multidimensional (CASEN 2024)."
         ),
         legend=dict(
-            orientation="h", yanchor="bottom", y=-0.06,
-            xanchor="center", x=0.5,
-            font=dict(size=SZ_LEGEND - 1, family=FONT_FAMILY,
+            orientation="v", yanchor="middle", y=0.52,
+            xanchor="left", x=0.62,
+            font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                       color=COLOR_TEXTO_FUERTE),
             title=dict(text="Clasificación LISA",
-                       font=dict(size=SZ_LEGEND - 1,
-                                 family=FONT_FAMILY,
+                       font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                                  color=COLOR_TEXTO_FUERTE)),
-            bgcolor="rgba(255,255,255,0.85)",
+            bgcolor="rgba(255,255,255,0.0)",
+            itemsizing="constant",
         ),
-        margin=dict(l=10, r=10, t=78, b=72),
+        margin=dict(l=10, r=10, t=78, b=58),
         paper_bgcolor="white", plot_bgcolor="white",
         width=A4_W, height=A4_H,
         annotations=[dict(
-            x=0.5, y=-0.20, xref="paper", yref="paper",
+            x=0.5, y=-0.08, xref="paper", yref="paper",
             text=("<i>Nota: la desagregación comunal no es representativa "
                   "en CASEN; permite observar el patrón territorial "
-                  "general. Vecindad: Queen → KNN=4 (por islas); "
+                  "general.<br>Vecindad: Queen → KNN=4 (por islas); "
                   "p ≤ 0,05.</i>"),
             showarrow=False, xanchor="center",
             font=dict(size=SZ_NOTE, color="#7F8C8D",
@@ -1290,11 +1338,12 @@ with col_g:
     )
     st.plotly_chart(fig_lineas, use_container_width=True)
 
-# --- Fila 5: Moran y LISA ---
-col_moran, col_lisa = st.columns(2)
-with col_moran:
-    fig_moran = plot_moran_scatterplot(df_spatial, stats_moran)
-    st.plotly_chart(fig_moran, use_container_width=True)
+# --- Fila 5: Análisis espacial local (Mapa LISA comunal Norte Grande) ---
+# El scatterplot de Moran global se retiró del dashboard; el mapa LISA
+# (Moran local) satisface por sí solo el requisito de autocorrelación
+# espacial del deliverable. La función plot_moran_scatterplot se conserva
+# en el código por si se necesita para la exportación al PDF.
+_, col_lisa, _ = st.columns([1, 3, 1])
 with col_lisa:
     fig_lisa = plot_lisa_comunal_norte_grande(gdf_lisa_ng)
     st.plotly_chart(fig_lisa, use_container_width=True)

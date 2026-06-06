@@ -115,19 +115,15 @@ DIR_APP = Path(__file__).resolve().parent
 DIR_PROCESSED = DIR_APP / "processed_data"
 GEOJSON_PATH = DIR_APP / "Regional.geojson"
 
-# Logo institucional del Dpto. de Ing. Industrial UdeC. Se intenta cargar
-# desde varios paths en orden de prioridad: primero los PNG locales del
-# proyecto, luego la carpeta personal del usuario (Pictures > Logo
-# departamento industrial), y al final el SVG como fallback.
+# Logo institucional del Dpto. de Ing. Industrial UdeC. Solo se buscan
+# rutas RELATIVAS al directorio del proyecto, para que el deploy en
+# Streamlit Cloud (Linux) funcione igual que en Windows local.
+# Asegurate de subir el PNG al repositorio.
 LOGO_CANDIDATES = [
     DIR_APP / "Dpto Ing Industrial (4).png",
     DIR_APP / "Dpto Ing Industrial (1).png",
     DIR_APP / "depto_industrial.png",
-    Path(r"C:\Users\Matias Arriagada R\Pictures\Logo departamento industrial\Dpto Ing Industrial (4).png"),
-    Path(r"C:\Users\Matias Arriagada R\Pictures\Logo departamento industrial\Dpto Ing Industrial (1).png"),
-    Path(r"C:\Users\Matias Arriagada R\Pictures\Logo departamento industrial\Firma DII.png"),
-    Path(r"C:\Users\Matias Arriagada R\Pictures\Logo departamento industrial\depto_industrial.png"),
-    DIR_APP / "Dpto-Ing-Industrial-_4_.svg",
+    DIR_APP / "Dpto-Ing-Industrial-_4_.svg",   # fallback SVG
 ]
 
 
@@ -135,13 +131,17 @@ LOGO_CANDIDATES = [
 def cargar_logo_b64() -> tuple:
     """Devuelve una tupla (mime, base64) del primer logo disponible
     entre los candidatos. Compatible con PNG y SVG. Devuelve
-    ("", "") si no encuentra ninguno."""
+    ("", "") si no encuentra ninguno. Robusto ante PermissionError
+    en hostings restringidos."""
     for path in LOGO_CANDIDATES:
-        if path.exists() and path.is_file():
-            data = path.read_bytes()
-            ext = path.suffix.lower()
-            mime = "image/svg+xml" if ext == ".svg" else "image/png"
-            return mime, base64.b64encode(data).decode("ascii")
+        try:
+            if path.exists() and path.is_file():
+                data = path.read_bytes()
+                ext = path.suffix.lower()
+                mime = "image/svg+xml" if ext == ".svg" else "image/png"
+                return mime, base64.b64encode(data).decode("ascii")
+        except (OSError, PermissionError):
+            continue
     return "", ""
 
 # --- Funciones de Formato de la Entrega Anterior -----------------------------

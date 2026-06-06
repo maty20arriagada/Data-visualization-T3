@@ -1,0 +1,57 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.mypy_cache/
+
+# --- Entornos virtuales ---
+venv/
+env/
+.env
+.venv/
+
+# --- Streamlit ---
+.streamlit/secrets.toml
+
+# --- IDE / editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Datos brutos pesados (NO subir a GitHub) ---
+# Estos archivos exceden el límite recomendado de 50 MB de GitHub.
+# Se mantienen localmente para reproducir el preprocesamiento.
+*.parquet
+*.dta
+zip/casen_2024.parquet
+zip/casen_2024_provincia_comuna.dta
+
+# Shapefiles del directorio de trabajo (zip/) - se conservan solo los
+# GeoJSON post-procesados en processed_data/
+zip/comunas/
+
+# --- Outputs intermedios y de prueba ---
+out.log
+test_*.png
+test_*.html
+outputs_graficos/
+scratch/
+revisar/
+debug_*.py
+**/cache/
+
+# --- PDFs grandes (entregables previos - opcional) ---
+# Descomentar si el repo crece demasiado.
+# Entrega_anterior/
+# Deliverable 3.pdf
+# Entrega 3 - Grupo 11.pdf
+# Entrega 2 - Grupo 11 (1).pdf
+
+# --- ZIP del trabajo previo ---
+zip.zip

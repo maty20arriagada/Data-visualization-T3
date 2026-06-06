@@ -24,7 +24,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Distribución territorial de la pobreza multidimensional en Chile",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # --- Inyección de CSS para fondo blanco y estilo limpio ----------------------
@@ -119,11 +119,15 @@ GEOJSON_PATH = DIR_APP / "Regional.geojson"
 # rutas RELATIVAS al directorio del proyecto, para que el deploy en
 # Streamlit Cloud (Linux) funcione igual que en Windows local.
 # Asegurate de subir el PNG al repositorio.
+# IMPORTANTE: la version (1) es la de escudo a color sobre fondo claro
+# (visible en el header blanco del dashboard). La version (4) es la
+# inversa para fondos oscuros y NO es legible aqui.
 LOGO_CANDIDATES = [
-    DIR_APP / "Dpto Ing Industrial (4).png",
-    DIR_APP / "Dpto Ing Industrial (1).png",
+    DIR_APP / "Dpto Ing Industrial (1).png",   # escudo a color (correcto)
+    DIR_APP / "Dpto Ing Industrial (2).png",
     DIR_APP / "depto_industrial.png",
     DIR_APP / "Dpto-Ing-Industrial-_4_.svg",   # fallback SVG
+    DIR_APP / "Dpto Ing Industrial (4).png",   # ultimo recurso (blanco)
 ]
 
 
@@ -220,10 +224,14 @@ gdf_lisa_ng = cargar_lisa_comunal()
 # FUNCIONES DE PLOTEO (A4 Fieles al Reporte de la Entrega Anterior)
 # =============================================================================
 
-def plot_a4_g1_donut(df_g1):
+def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
+    """A. Distribución nacional. Acepta filtro `pobreza_visibles` para
+    mostrar/ocultar categorias de pobreza (las ocultas se atenuan en
+    gris claro)."""
+    df_g1 = df_g1.copy()
     df_g1["estado_pob"] = pd.Categorical(
-        df_g1["estado_pob"], 
-        categories=list(PALETA_POBREZA.keys()), 
+        df_g1["estado_pob"],
+        categories=list(PALETA_POBREZA.keys()),
         ordered=True
     )
     df_g1 = df_g1.sort_values("estado_pob").reset_index(drop=True)
@@ -238,7 +246,11 @@ def plot_a4_g1_donut(df_g1):
     n_label = _formato_n(n_mues, n_pond)
     
     etq = [f"<b>{r.estado_pob}</b><br>{r.pct:.1f}%" for r in df_g1.itertuples()]
-    colors_g1 = [PALETA_POBREZA[k] for k in df_g1["estado_pob"]]
+    # Atenuar (gris) las categorias NO seleccionadas en el sidebar
+    if pobreza_visibles is None:
+        pobreza_visibles = list(PALETA_POBREZA.keys())
+    colors_g1 = [PALETA_POBREZA[k] if k in pobreza_visibles else "#E8EAED"
+                  for k in df_g1["estado_pob"]]
     
     fig = go.Figure(go.Pie(
         labels=df_g1["estado_pob"].tolist(), values=df_g1["expr"].tolist(), hole=0.55,
@@ -279,7 +291,15 @@ def plot_a4_g1_donut(df_g1):
     return fig
 
 
-def plot_a4_g2_macrozonas(df_g2_macro):
+def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
+                           macrozona_destacar="Ninguna"):
+    """B. Composición de la pobreza por macrozona.
+    Filtros:
+      pobreza_visibles: lista de tipos de pobreza a mostrar.
+      macrozona_destacar: zona resaltada (las demas se atenuan a 35%).
+    """
+    if pobreza_visibles is None:
+        pobreza_visibles = ORDEN_POBRES
     # Tabular la composición de manera explícita y robusta
     df_pobres = df_g2_macro[df_g2_macro["estado_pob"] != "Fuera de pobreza"].copy()
     
@@ -299,9 +319,20 @@ def plot_a4_g2_macrozonas(df_g2_macro):
     fig = go.Figure()
     for estado in ORDEN_POBRES:
         v = list(pct[estado].values)
+        # Color: si la categoria fue ocultada en el sidebar, gris claro
+        col_estado = (PALETA_POBREZA[estado]
+                      if estado in pobreza_visibles else "#E8EAED")
+        # Opacidad por barra (atenua las zonas no destacadas)
+        if macrozona_destacar == "Ninguna":
+            opacidades = [1.0] * len(ORDEN_ZONAS)
+        else:
+            opacidades = [1.0 if z == macrozona_destacar else 0.32
+                          for z in ORDEN_ZONAS]
+        # Color final por barra (combina color + opacidad)
+        marker_cols = [hex_to_rgba(col_estado, op) for op in opacidades]
         fig.add_trace(go.Bar(
             x=v, y=ORDEN_ZONAS, orientation="h", name=estado,
-            marker=dict(color=PALETA_POBREZA[estado],
+            marker=dict(color=marker_cols,
                         line=dict(color="white", width=0.6)),
             text=[f"{x:.0f}%" if x >= 9 else "" for x in v],
             textposition="inside", insidetextanchor="middle",
@@ -433,11 +464,17 @@ def plot_a4_g10_sankey(df_ng):
     )
     return fig
 
-def plot_a4_g3_barras(df_ng):
+def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     """E. Composición de la pobreza según origen del hogar en Norte Grande.
     Barras apiladas al 100% intra-grupo: hogares chilenos vs inmigrantes
     cruzados con los 3 tipos de pobreza (excluye fuera de pobreza).
+
+    Filtros:
+      pobreza_visibles: categorias visibles. Las ocultas se atenuan.
+      origen_filtro: si != 'Ambos', se atenua el grupo no seleccionado.
     """
+    if pobreza_visibles is None:
+        pobreza_visibles = ORDEN_POBRES
     # --- Agrupar y sumar ponderadores -----------------------------------
     tab = (df_ng.groupby(["origen_jefe", "estado_pob"])["expr"].sum()
            .unstack(fill_value=0)
@@ -461,12 +498,23 @@ def plot_a4_g3_barras(df_ng):
     TEXTO_GRIS = "#4A4A4A"
 
     fig = go.Figure()
+    # Opacidad por categoria X segun origen_filtro
+    opacidad_por_cat = {
+        "Hogares chilenos":    1.0 if origen_filtro in ("Ambos", "Hogares chilenos") else 0.30,
+        "Hogares inmigrantes": 1.0 if origen_filtro in ("Ambos", "Hogares inmigrantes") else 0.30,
+    }
     for estado in ORDEN_POBRES:
         valores = [float(pct.loc[cat, estado]) for cat in categorias_x]
         textos = [f"<b>{v:.1f}%</b>" if v >= 3 else "" for v in valores]
+        # Color base segun visibilidad de la categoria
+        col_base = (PALETA_POBREZA[estado]
+                    if estado in pobreza_visibles else "#E8EAED")
+        # Combinar con opacidad por categoria X
+        marker_cols = [hex_to_rgba(col_base, opacidad_por_cat[cat])
+                       for cat in categorias_x]
         fig.add_trace(go.Bar(
             x=categorias_x, y=valores, name=estado,
-            marker=dict(color=PALETA_POBREZA[estado],
+            marker=dict(color=marker_cols,
                         line=dict(color="white", width=0.8)),
             text=textos,
             textposition="inside", insidetextanchor="middle",
@@ -523,141 +571,197 @@ def plot_a4_g3_barras(df_ng):
     )
     return fig
 
-def plot_a4_g4_radar(df_radar):
-    dims = ["Educacion", "Salud", "Trabajo y Seg. Social", "Vivienda y Entorno", "Redes y Cohesion"]
-    ejes = dims + [dims[0]]
-    
-    resultados = {}
-    for _, row in df_radar.iterrows():
-        g = row["origen_jefe"]
-        resultados[g] = {
-            "scores": {d: row[d] for d in dims},
-            "n_hog": int(row["n_hog"]),
-            "n_pond": float(row["n_pond"])
-        }
-        
-    chil = resultados["Hogares chilenos"]["scores"]
-    inmi = resultados["Hogares inmigrantes"]["scores"]
-    chil_v = [chil[d] for d in dims] + [chil[dims[0]]]
-    inmi_v = [inmi[d] for d in dims] + [inmi[dims[0]]]
-    
-    max_obs = max(max(chil.values()), max(inmi.values()))
-    escala_max = max(0.5, np.ceil(max_obs * 1.25 * 2) / 2)
-    paso = 0.5 if escala_max <= 2 else 1
+def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos"):
+    """F. Intensidad de carencias por dimensión en Norte Grande.
 
-    tickvals = [0.5, 1.0]
-    ticktext = ["0,5 carencias", "1,0 carencia"]
+    Dumbbell chart (gráfico de mancuernas): cada dimensión es una fila;
+    dos puntos por fila (Chilenos en azul, Inmigrantes en naranja) unidos
+    por una línea gris. La distancia entre los puntos = brecha en
+    carencias promedio. Replica el diseño de `zip/exportar_FG.py` pero
+    en Plotly (interactivo con tooltips por dimensión).
 
-    n_mues = 9373
-    n_pond = sum(r["n_pond"] for r in resultados.values())
+    Parámetros:
+      df_radar: DataFrame con columnas [origen_jefe, Educacion, Salud, ...]
+      origen_filtro: "Ambos" | "Hogares chilenos" | "Hogares inmigrantes"
+        Si es uno de los dos últimos, se atenúa o se oculta el grupo no
+        seleccionado para resaltar el grupo objetivo.
+    """
+    dims = ["Educacion", "Salud", "Trabajo y Seg. Social",
+            "Vivienda y Entorno", "Redes y Cohesion"]
+    dims_labels = ["Educación", "Salud", "Trabajo y Seg. Social",
+                   "Vivienda y Entorno", "Redes y Cohesión"]
+
+    chil = df_radar[df_radar["origen_jefe"] == "Hogares chilenos"].iloc[0]
+    inmi = df_radar[df_radar["origen_jefe"] == "Hogares inmigrantes"].iloc[0]
+
+    n_mues = 9373  # tamaño muestral fijo para Norte Grande
+    n_pond = float(chil["n_pond"]) + float(inmi["n_pond"])
     n_label = _formato_n(n_mues, n_pond)
 
-    # --- COLORES DE TEXTO DE ALTO CONTRASTE ---
-    TEXTO_OSCURO = "#1A1A1A"   # casi negro, máximo contraste sobre blanco
-    TEXTO_GRIS = "#4A4A4A"     # para notas secundarias, pero legible
+    # Colores y opacidades segun filtro
+    TEXTO_OSCURO = "#1A1A1A"
+    TEXTO_GRIS = "#4A4A4A"
+    show_chil = origen_filtro in ("Ambos", "Hogares chilenos")
+    show_inmi = origen_filtro in ("Ambos", "Hogares inmigrantes")
+    op_chil = 1.0 if show_chil else 0.0
+    op_inmi = 1.0 if show_inmi else 0.0
+
+    # x_chil, x_inmi por dimension
+    x_chil = [float(chil[d]) for d in dims]
+    x_inmi = [float(inmi[d]) for d in dims]
+    y_pos = list(range(len(dims)))
 
     fig = go.Figure()
-    # Traza Hogares Chilenos (azul)
-    fig.add_trace(go.Scatterpolar(
-        r=chil_v, theta=ejes, mode="lines+markers",
-        name=f"Hogares Chilenos (jefe nacido en Chile) (n={resultados['Hogares chilenos']['n_hog']:,})",
-        line=dict(color=COLOR_URBANO, width=2.4),
-        marker=dict(size=6, color=COLOR_URBANO, symbol="circle",
-                    line=dict(color="white", width=0.8)),
-        fill="toself", fillcolor="rgba(43,91,132,0.22)",
-        hovertemplate="<b>%{theta}</b><br>Hogares Chilenos: %{r:.3f}<extra></extra>",
+
+    # 1) Líneas conectoras (mancuernas) - solo si ambos puntos visibles
+    if show_chil and show_inmi:
+        for i, d in enumerate(dims):
+            fig.add_trace(go.Scatter(
+                x=[x_chil[i], x_inmi[i]], y=[i, i],
+                mode="lines",
+                line=dict(color="#BDC3C7", width=2),
+                showlegend=False, hoverinfo="skip",
+            ))
+            # Etiqueta de brecha al medio de la línea
+            brecha = abs(x_inmi[i] - x_chil[i])
+            x_mid = (x_chil[i] + x_inmi[i]) / 2
+            fig.add_annotation(
+                x=x_mid, y=i - 0.32,
+                text=f"<i>Δ {brecha:.2f}</i>", showarrow=False,
+                font=dict(family=FONT_FAMILY, size=SZ_ANNOT - 1,
+                          color="#7F8C8D"),
+                xanchor="center",
+            )
+
+    # 2) Puntos Chilenos (circulos azul)
+    fig.add_trace(go.Scatter(
+        x=x_chil, y=y_pos, mode="markers",
+        name=f"Hogares chilenos (n = {int(chil['n_hog']):,})",
+        marker=dict(size=18, color=COLOR_URBANO, symbol="circle",
+                    line=dict(color="white", width=1.4),
+                    opacity=op_chil),
+        customdata=dims_labels,
+        hovertemplate=("<b>%{customdata}</b><br>"
+                       "Hogares chilenos: <b>%{x:.3f}</b> carencias/hogar"
+                       "<extra></extra>"),
+        visible=True if show_chil else "legendonly",
     ))
-    # Traza Hogares Inmigrantes (naranja)
-    fig.add_trace(go.Scatterpolar(
-        r=inmi_v, theta=ejes, mode="lines+markers",
-        name=f"Hogares Inmigrantes (jefe nacido en el extranjero) (n={resultados['Hogares inmigrantes']['n_hog']:,})",
-        line=dict(color=COLOR_RURAL, width=2.4),
-        marker=dict(size=6, color=COLOR_RURAL, symbol="square",
-                    line=dict(color="white", width=0.8)),
-        fill="toself", fillcolor="rgba(211,84,0,0.32)",
-        hovertemplate="<b>%{theta}</b><br>Hogares Inmigrantes: %{r:.3f}<extra></extra>",
+
+    # 3) Puntos Inmigrantes (cuadrados naranja)
+    fig.add_trace(go.Scatter(
+        x=x_inmi, y=y_pos, mode="markers",
+        name=f"Hogares inmigrantes (n = {int(inmi['n_hog']):,})",
+        marker=dict(size=18, color=COLOR_RURAL, symbol="square",
+                    line=dict(color="white", width=1.4),
+                    opacity=op_inmi),
+        customdata=dims_labels,
+        hovertemplate=("<b>%{customdata}</b><br>"
+                       "Hogares inmigrantes: <b>%{x:.3f}</b> carencias/hogar"
+                       "<extra></extra>"),
+        visible=True if show_inmi else "legendonly",
     ))
-    
+
+    # Rango X dinámico: agrega 15% de margen
+    x_max = max(max(x_chil), max(x_inmi)) * 1.15
+    x_min = max(0, min(min(x_chil), min(x_inmi)) - 0.05)
+
     fig.update_layout(
-        polar=dict(
-            bgcolor="#FAFAFA",
-            radialaxis=dict(
-                visible=True, range=[0, escala_max],
-                tickvals=list(tickvals),
-                ticktext=ticktext,
-                tickfont=dict(size=SZ_AX_TICK - 1, color=TEXTO_OSCURO,
-                              family=FONT_FAMILY),
-                angle=30, tickangle=0,
-                gridcolor="#E5E7E9", linecolor="#E5E7E9"
-            ),
-            angularaxis=dict(
-                tickfont=dict(size=SZ_AX_TICK + 1, color=TEXTO_OSCURO,
-                              family=FONT_FAMILY),
-                rotation=90, direction="clockwise",
-                linecolor="#BDC3C7", gridcolor="#E5E7E9"
-            ),
-        ),
         title=_titulo_a4(
             "F. Intensidad de carencias por dimensión en Norte Grande",
-            "Promedio ponderado del número de carencias de la metodología multidimensional 2015."
+            "Promedio ponderado del número de carencias del hogar por "
+            "dimensión (metodología multidimensional 2015 CASEN)."
+        ),
+        xaxis=dict(
+            title="Carencias promedio por hogar",
+            range=[x_min, x_max],
+            gridcolor="#E5E7E9", griddash="dot",
+            tickfont=dict(size=SZ_AX_TICK, color=TEXTO_OSCURO,
+                          family=FONT_FAMILY),
+            title_font=dict(size=SZ_AX_TITLE, color=TEXTO_OSCURO,
+                            family=FONT_FAMILY),
+            zeroline=False,
+        ),
+        yaxis=dict(
+            tickmode="array",
+            tickvals=y_pos,
+            ticktext=dims_labels,
+            tickfont=dict(size=SZ_AX_TICK + 1, color=TEXTO_OSCURO,
+                          family=FONT_FAMILY),
+            autorange="reversed",   # Educación arriba, Redes abajo
+            showgrid=False, zeroline=False,
         ),
         legend=dict(
-            orientation="h", yanchor="bottom", y=-0.14,
+            orientation="h", yanchor="bottom", y=-0.20,
             xanchor="center", x=0.5,
             font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                       color=TEXTO_OSCURO),
-            title=dict(text="Tipos de hogar", side="top",
-                       font=dict(size=SZ_LEGEND - 1,
-                                 color=TEXTO_OSCURO))
         ),
         font=dict(family=FONT_FAMILY, color=TEXTO_OSCURO),
-        margin=dict(t=65, b=135, l=55, r=55),
+        margin=dict(t=72, b=110, l=160, r=30),
         height=A4_H, width=A4_W,
         paper_bgcolor="white", plot_bgcolor="white",
-        annotations=[
-            dict(x=0.5, y=-0.22, xref="paper", yref="paper",
-                 text="Unidad: carencias promedio por hogar.",
-                 showarrow=False, xanchor="center",
-                 font=dict(size=SZ_ANNOT, color=TEXTO_GRIS,
-                           family=FONT_FAMILY)),
-            dict(x=0.5, y=-0.32, xref="paper", yref="paper",
+        annotations=list(fig.layout.annotations) + [
+            dict(x=0.5, y=-0.38, xref="paper", yref="paper",
                  text=f"<i>{n_label}</i>", showarrow=False,
                  xanchor="center",
                  font=dict(size=SZ_ANNOT, color=TEXTO_GRIS,
-                           family=FONT_FAMILY))
+                           family=FONT_FAMILY)),
         ],
     )
     return fig
 
-def plot_a4_g5_lineas(df_serie):
+def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
+                       macrozona_destacar="Ninguna"):
+    """G. Evolución de hogares inmigrantes por macrozona.
+    Filtros:
+      anios_range: (anio_min, anio_max) - rango de anos visibles.
+      macrozona_destacar: si != 'Ninguna', se atenuan las otras zonas.
+    """
     n_pond_2024 = 7143171
     n_mues_2024 = 78654
     n_label = (f"n CASEN 2024 = {n_pond_2024:,.0f} hogares (población "
                f"expandida) · {n_mues_2024:,} hogares en la muestra")
 
+    # Filtro de anos
+    df_serie_f = df_serie[(df_serie["anio"] >= anios_range[0])
+                          & (df_serie["anio"] <= anios_range[1])].copy()
+
     fig = go.Figure()
     for zona in ORDEN_ZONAS:
-        sub = df_serie[df_serie["zona"] == zona].sort_values("anio")
+        sub = df_serie_f[df_serie_f["zona"] == zona].sort_values("anio")
+        if len(sub) == 0:
+            continue
+        es_destacada = (macrozona_destacar == "Ninguna"
+                        or macrozona_destacar == zona)
+        op = 1.0 if es_destacada else 0.28
+        col_zona = PALETA_ZONAS[zona]
         fig.add_trace(go.Scatter(
             x=sub["anio"].tolist(), y=sub["pct_inmig"].tolist(),
             mode="lines+markers", name=zona,
-            line=dict(color=PALETA_ZONAS[zona], width=2.5),
-            marker=dict(size=8, color=PALETA_ZONAS[zona],
+            line=dict(color=col_zona, width=3 if es_destacada else 2),
+            marker=dict(size=9 if es_destacada else 6,
+                        color=col_zona,
                         line=dict(color="white", width=0.8)),
+            opacity=op,
             hovertemplate=(f"<b>{zona}</b><br>CASEN %{{x}}<br>"
                            "%{y:.2f}%<extra></extra>"),
         ))
 
-    fin = df_serie[df_serie["anio"] == 2024].sort_values("pct_inmig",
-                                                          ascending=False)
+    # Etiquetas del valor final, solo en zonas dentro del rango
+    fin_year = anios_range[1]
+    fin = (df_serie_f[df_serie_f["anio"] == fin_year]
+           .sort_values("pct_inmig", ascending=False))
     for _, r in fin.iterrows():
+        es_destacada = (macrozona_destacar == "Ninguna"
+                        or macrozona_destacar == r["zona"])
         fig.add_annotation(
             x=r["anio"], y=r["pct_inmig"],
             text=f"<b>{r['pct_inmig']:.1f}%</b>",
             showarrow=False, xanchor="left", xshift=5,
             font=dict(family=FONT_FAMILY, size=SZ_AX_TICK,
-                      color=PALETA_ZONAS[r["zona"]]))
-    y_max = df_serie["pct_inmig"].max() * 1.30
+                      color=PALETA_ZONAS[r["zona"]]),
+            opacity=1.0 if es_destacada else 0.4)
+    y_max = df_serie_f["pct_inmig"].max() * 1.30 if len(df_serie_f) else 25
 
     fig.update_layout(
         title=_titulo_a4(
@@ -668,7 +772,8 @@ def plot_a4_g5_lineas(df_serie):
                    tickmode="array",
                    tickvals=[2013, 2015, 2017, 2022, 2024],
                    ticktext=["2013", "2015", "2017", "2022", "2024"],
-                   range=[2012, 2026.5], gridcolor="#ECF0F1",
+                   range=[anios_range[0] - 0.8, anios_range[1] + 1.7],
+                   gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
                    title_font=dict(size=SZ_AX_TITLE)),
         yaxis=dict(title="% hogares inmigrantes",
@@ -989,6 +1094,63 @@ def plot_lisa_comunal_norte_grande(gdf_lisa_ng):
 
 
 # =============================================================================
+# SIDEBAR CON FILTROS GLOBALES
+# =============================================================================
+# Cuatro filtros aplicados a los graficos del dashboard. Cada grafico
+# reacciona a los filtros que le aplican (ver descripcion en cada uno).
+ORDEN_ZONAS_NS = ORDEN_ZONAS  # alias por claridad
+OPCIONES_ORIGEN = ["Ambos", "Hogares chilenos", "Hogares inmigrantes"]
+
+with st.sidebar:
+    st.markdown(
+        "<h3 style='margin-top: 0; padding-top: 0; "
+        "border-bottom: 1px solid #ECF0F1; padding-bottom: 8px;'>"
+        "Filtros globales</h3>",
+        unsafe_allow_html=True,
+    )
+
+    f_origen = st.radio(
+        "Origen del jefe de hogar",
+        options=OPCIONES_ORIGEN,
+        index=0,
+        help=("Afecta a los graficos E (barras Norte Grande) y F "
+              "(dumbbell de carencias)."),
+    )
+
+    f_pobreza = st.multiselect(
+        "Tipos de pobreza visibles",
+        options=ORDEN_POBREZA,
+        default=ORDEN_POBREZA,
+        help=("Filtra las categorias mostradas en los graficos A "
+              "(dona nacional), B (barras macrozonas) y E."),
+    )
+
+    f_macrozona = st.selectbox(
+        "Macrozona a destacar",
+        options=["Ninguna"] + ORDEN_ZONAS_NS,
+        index=0,
+        help=("Resalta una macrozona en los graficos B y G; las demas "
+              "quedan atenuadas. 'Ninguna' = sin atenuacion."),
+    )
+
+    f_anios = st.slider(
+        "Rango de anos CASEN",
+        min_value=2013, max_value=2024,
+        value=(2013, 2024), step=1,
+        help="Solo afecta al grafico G (evolucion historica de inmigracion).",
+    )
+
+    st.markdown("<hr style='border:none; border-top:1px solid #ECF0F1; margin: 1.2rem 0;'>", unsafe_allow_html=True)
+    st.markdown(
+        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35;'>"
+        "<b>Nota:</b> Los graficos C (mapa de sobrerrepresentacion), D "
+        "(Sankey trifecta) y H (LISA comunal) no reaccionan a los filtros: "
+        "su universo es fijo por diseno metodologico.</p>",
+        unsafe_allow_html=True,
+    )
+
+
+# =============================================================================
 # ESTRUCTURA E INTERFAZ DEL DASHBOARD
 # =============================================================================
 
@@ -1035,10 +1197,14 @@ st.markdown(header_html, unsafe_allow_html=True)
 # --- Fila 1: Gráficos A y B ---
 col_a, col_b = st.columns(2)
 with col_a:
-    fig_donut = plot_a4_g1_donut(df_g1)
+    fig_donut = plot_a4_g1_donut(df_g1, pobreza_visibles=f_pobreza)
     st.plotly_chart(fig_donut, use_container_width=True)
 with col_b:
-    fig_macro = plot_a4_g2_macrozonas(df_g2_macro)
+    fig_macro = plot_a4_g2_macrozonas(
+        df_g2_macro,
+        pobreza_visibles=f_pobreza,
+        macrozona_destacar=f_macrozona,
+    )
     st.plotly_chart(fig_macro, use_container_width=True)
 
 # --- Fila 2: Mapas de reemplazo de B (ahora Gráfico C) ---
@@ -1104,16 +1270,24 @@ with col_d:
     fig_sankey = plot_a4_g10_sankey(df_g3)
     st.plotly_chart(fig_sankey, use_container_width=True)
 with col_e:
-    fig_barras = plot_a4_g3_barras(df_g3)
+    fig_barras = plot_a4_g3_barras(
+        df_g3,
+        pobreza_visibles=f_pobreza,
+        origen_filtro=f_origen,
+    )
     st.plotly_chart(fig_barras, use_container_width=True)
 
-# --- Fila 4: Gráficos F y G ---
+# --- Fila 4: Gráficos F (dumbbell) y G (líneas) ---
 col_f, col_g = st.columns(2)
 with col_f:
-    fig_radar = plot_a4_g4_radar(df_g4)
-    st.plotly_chart(fig_radar, use_container_width=True)
+    fig_dumbbell = plot_a4_g4_dumbbell(df_g4, origen_filtro=f_origen)
+    st.plotly_chart(fig_dumbbell, use_container_width=True)
 with col_g:
-    fig_lineas = plot_a4_g5_lineas(df_g5)
+    fig_lineas = plot_a4_g5_lineas(
+        df_g5,
+        anios_range=f_anios,
+        macrozona_destacar=f_macrozona,
+    )
     st.plotly_chart(fig_lineas, use_container_width=True)
 
 # --- Fila 5: Moran y LISA ---

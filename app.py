@@ -116,8 +116,11 @@ st.markdown(
 # --- Constantes y Estilo de la Entrega Anterior ------------------------------
 A4_W, A4_H = 620, 506
 FONT_FAMILY = "Inter, Roboto, sans-serif"
-COLOR_TEXTO_FUERTE = "#1A2530"
-COLOR_TEXTO = "#2C3E50"
+# Formato tipografico UNICO para todos los graficos: texto en negro para
+# maxima legibilidad y consistencia. Antes habia tres tonos distintos
+# (#1A2530, #2C3E50, #1A1A1A) que se percibian apagados/inconsistentes.
+COLOR_TEXTO_FUERTE = "#111111"   # titulos y enfasis (negro)
+COLOR_TEXTO = "#111111"          # cuerpo, ejes, leyendas (negro)
 COLOR_URBANO = "#175884"     # azul (chilenos)
 COLOR_RURAL = "#D3541F"      # naranja (inmigrantes)
 
@@ -142,12 +145,16 @@ PALETA_POBREZA = {
 ORDEN_POBREZA = list(PALETA_POBREZA.keys())
 ORDEN_POBRES = [k for k in ORDEN_POBREZA if k != "Fuera de pobreza"]
 
+# Paleta de macrozonas (grafico G). Colores elegidos para ser claramente
+# distinguibles entre si en la leyenda: antes Norte Grande (#D35400) y
+# Norte Chico (#F39C12) eran dos naranjas casi identicos. Ahora cada zona
+# tiene un matiz inequivoco y suficiente contraste sobre fondo blanco.
 PALETA_ZONAS = {
-    "Norte Grande":  "#D35400",
-    "Norte Chico":   "#F39C12",
-    "Zona Central":  "#2B5B84",
-    "Zona Sur":      "#117A65",
-    "Zona Austral":  "#6C3483",
+    "Norte Grande":  "#D35400",   # naranja
+    "Norte Chico":   "#B7950B",   # dorado oscuro (antes #F39C12, muy similar)
+    "Zona Central":  "#1F618D",   # azul
+    "Zona Sur":      "#117A65",   # verde
+    "Zona Austral":  "#6C3483",   # morado
 }
 ORDEN_ZONAS = list(PALETA_ZONAS.keys())
 
@@ -439,7 +446,9 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
         # la nota del n se separa aun mas para no superponerse a la leyenda.
         legend=dict(orientation="h", yanchor="top", y=-0.26,
                     xanchor="center", x=0.5,
-                    font=dict(size=SZ_LEGEND, family=FONT_FAMILY),
+                    font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
+                              color=COLOR_TEXTO),
+                    itemsizing="constant",
                     traceorder="reversed"),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
@@ -781,26 +790,28 @@ def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos"):
             tickmode="array",
             tickvals=y_pos,
             ticktext=dims_labels,
-            tickfont=dict(size=SZ_AX_TICK + 1, color=TEXTO_OSCURO,
+            tickfont=dict(size=SZ_AX_TICK + 1, color=COLOR_TEXTO,
                           family=FONT_FAMILY),
-            autorange="reversed",   # Educación arriba, Redes abajo
+            # Rango explicito con holgura (0.6 arriba/abajo) para que los
+            # marcadores grandes NO toquen el titulo ni la leyenda.
+            range=[len(dims) - 1 + 0.6, -0.6],
             showgrid=False, zeroline=False,
         ),
         legend=dict(
-            orientation="h", yanchor="bottom", y=-0.20,
+            orientation="h", yanchor="top", y=-0.16,
             xanchor="center", x=0.5,
             font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
-                      color=TEXTO_OSCURO),
+                      color=COLOR_TEXTO),
         ),
-        font=dict(family=FONT_FAMILY, color=TEXTO_OSCURO),
-        margin=dict(t=72, b=110, l=160, r=30),
+        font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
+        margin=dict(t=72, b=120, l=160, r=30),
         height=A4_H, width=A4_W,
         paper_bgcolor="white", plot_bgcolor="white",
         annotations=list(fig.layout.annotations) + [
-            dict(x=0.5, y=-0.38, xref="paper", yref="paper",
+            dict(x=0.5, y=-0.34, xref="paper", yref="paper",
                  text=f"<i>{n_label}</i>", showarrow=False,
                  xanchor="center",
-                 font=dict(size=SZ_ANNOT, color=TEXTO_GRIS,
+                 font=dict(size=SZ_ANNOT, color="#7F8C8D",
                            family=FONT_FAMILY)),
         ],
     )
@@ -892,11 +903,15 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
                    gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
                    title_font=dict(size=SZ_AX_TITLE)),
-        # Leyenda mas abajo para no tocar el titulo del eje X; la nota del
-        # n se separa aun mas para no superponerse a la leyenda.
+        # Leyenda mas abajo para no tocar el titulo del eje X; texto en
+        # negro y swatches de tamaño constante para que el color de cada
+        # zona se distinga con claridad.
         legend=dict(orientation="h", yanchor="top", y=-0.26,
                     xanchor="center", x=0.5,
-                    font=dict(size=SZ_LEGEND, family=FONT_FAMILY)),
+                    font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
+                              color=COLOR_TEXTO),
+                    itemsizing="constant", itemwidth=40,
+                    bgcolor="rgba(255,255,255,0)"),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
         margin=dict(t=70, b=150, l=70, r=35),

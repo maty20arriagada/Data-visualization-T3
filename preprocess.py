@@ -333,8 +333,12 @@ def main():
         df_ah["es_inmigrante"] = (df_ah["lugar_nac"] == 1).astype(int)
         df_ah["zona"] = df_ah["region"].map(REGION_A_ZONA)
         df_ah = df_ah.dropna(subset=["zona"])
-        
-        for z in REGION_A_ZONA.values():
+
+        # IMPORTANTE: iterar sobre las zonas UNICAS. REGION_A_ZONA.values()
+        # repite cada zona una vez por region, lo que generaba filas
+        # duplicadas (una por region) en g5 y lineas/etiquetas superpuestas
+        # en el grafico G del dashboard.
+        for z in dict.fromkeys(REGION_A_ZONA.values()):
             sub = df_ah[df_ah["zona"] == z]
             if len(sub) == 0:
                 continue

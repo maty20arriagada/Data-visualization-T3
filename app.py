@@ -336,8 +336,10 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
                            macrozona_destacar="Ninguna"):
     """B. Composición de la pobreza por macrozona.
     Filtros:
-      pobreza_visibles: lista de tipos de pobreza a mostrar.
-      macrozona_destacar: zona resaltada (las demas se atenuan a 35%).
+      pobreza_visibles: tipos de pobreza a mostrar. Los deseleccionados se
+        OMITEN (la barra queda mas corta = participacion real de los tipos
+        elegidos sobre el total de pobreza de la zona, sin distorsion).
+      macrozona_destacar: zona resaltada (las demas se atenuan a 32%).
     """
     if pobreza_visibles is None:
         pobreza_visibles = ORDEN_POBRES
@@ -359,18 +361,21 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
     
     fig = go.Figure()
     for estado in ORDEN_POBRES:
+        # FILTRO REAL: si la categoria fue deseleccionada en el sidebar, se
+        # OMITE su segmento (la barra queda mas corta, mostrando solo la
+        # participacion real de los tipos seleccionados). No se distorsiona:
+        # el 100% sigue siendo el total de pobreza de la zona.
+        if estado not in pobreza_visibles:
+            continue
         v = list(pct[estado].values)
-        # Color: si la categoria fue ocultada en el sidebar, gris claro
-        col_estado = (PALETA_POBREZA[estado]
-                      if estado in pobreza_visibles else "#E8EAED")
         # Opacidad por barra (atenua las zonas no destacadas)
         if macrozona_destacar == "Ninguna":
             opacidades = [1.0] * len(ORDEN_ZONAS)
         else:
             opacidades = [1.0 if z == macrozona_destacar else 0.32
                           for z in ORDEN_ZONAS]
-        # Color final por barra (combina color + opacidad)
-        marker_cols = [hex_to_rgba(col_estado, op) for op in opacidades]
+        marker_cols = [hex_to_rgba(PALETA_POBREZA[estado], op)
+                       for op in opacidades]
         fig.add_trace(go.Bar(
             x=v, y=ORDEN_ZONAS, orientation="h", name=estado,
             marker=dict(color=marker_cols,
@@ -514,8 +519,10 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     cruzados con los 3 tipos de pobreza (excluye fuera de pobreza).
 
     Filtros:
-      pobreza_visibles: categorias visibles. Las ocultas se atenuan.
-      origen_filtro: si != 'Ambos', se atenua el grupo no seleccionado.
+      pobreza_visibles: tipos de pobreza a mostrar; los deseleccionados se
+        OMITEN del apilado (barra mas corta, sin distorsion).
+      origen_filtro: si != 'Ambos', se muestra SOLO el grupo seleccionado
+        (una sola columna).
     """
     if pobreza_visibles is None:
         pobreza_visibles = ORDEN_POBRES
@@ -530,9 +537,13 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     suma_por_fila = tab.sum(axis=1).replace(0, 1)
     pct = (tab.div(suma_por_fila, axis=0) * 100).fillna(0)
 
-    # Categorías del eje X en orden fijo (lista pura, evita problemas de
-    # serialización de pd.Index entre múltiples traces apilados).
-    categorias_x = ["Hogares chilenos", "Hogares inmigrantes"]
+    # FILTRO REAL de origen: muestra solo el/los grupo(s) seleccionado(s).
+    if origen_filtro == "Hogares chilenos":
+        categorias_x = ["Hogares chilenos"]
+    elif origen_filtro == "Hogares inmigrantes":
+        categorias_x = ["Hogares inmigrantes"]
+    else:
+        categorias_x = ["Hogares chilenos", "Hogares inmigrantes"]
 
     n_mues = 2613
     n_pond = float(df_ng["expr"].sum())
@@ -542,23 +553,16 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     TEXTO_GRIS = "#4A4A4A"
 
     fig = go.Figure()
-    # Opacidad por categoria X segun origen_filtro
-    opacidad_por_cat = {
-        "Hogares chilenos":    1.0 if origen_filtro in ("Ambos", "Hogares chilenos") else 0.30,
-        "Hogares inmigrantes": 1.0 if origen_filtro in ("Ambos", "Hogares inmigrantes") else 0.30,
-    }
     for estado in ORDEN_POBRES:
+        # FILTRO REAL de tipo de pobreza: omite la categoria deseleccionada
+        # (la barra apilada queda mas corta, sin distorsion).
+        if estado not in pobreza_visibles:
+            continue
         valores = [float(pct.loc[cat, estado]) for cat in categorias_x]
         textos = [f"<b>{v:.1f}%</b>" if v >= 3 else "" for v in valores]
-        # Color base segun visibilidad de la categoria
-        col_base = (PALETA_POBREZA[estado]
-                    if estado in pobreza_visibles else "#E8EAED")
-        # Combinar con opacidad por categoria X
-        marker_cols = [hex_to_rgba(col_base, opacidad_por_cat[cat])
-                       for cat in categorias_x]
         fig.add_trace(go.Bar(
             x=categorias_x, y=valores, name=estado,
-            marker=dict(color=marker_cols,
+            marker=dict(color=PALETA_POBREZA[estado],
                         line=dict(color="white", width=0.8)),
             text=textos,
             textposition="inside", insidetextanchor="middle",
@@ -766,9 +770,12 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
     n_label = (f"n CASEN 2024 = {n_pond_2024:,.0f} hogares (población "
                f"expandida) · {n_mues_2024:,} hogares en la muestra")
 
-    # Filtro de anos
-    df_serie_f = df_serie[(df_serie["anio"] >= anios_range[0])
-                          & (df_serie["anio"] <= anios_range[1])].copy()
+    # Filtro de anos + dedupe defensivo (por si el CSV trae filas
+    # repetidas por zona/ano; evita lineas y etiquetas superpuestas).
+    df_serie_f = (df_serie[(df_serie["anio"] >= anios_range[0])
+                           & (df_serie["anio"] <= anios_range[1])]
+                  .drop_duplicates(subset=["anio", "zona"])
+                  .copy())
 
     fig = go.Figure()
     for zona in ORDEN_ZONAS:
@@ -791,21 +798,32 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
                            "%{y:.2f}%<extra></extra>"),
         ))
 
-    # Etiquetas del valor final, solo en zonas dentro del rango
+    # --- Etiquetas del valor final con ANTI-SOLAPAMIENTO ----------------
+    # Cuando dos zonas terminan con valores muy cercanos, sus etiquetas %
+    # se montan. Se separa verticalmente cada etiqueta un minimo en
+    # coordenadas de dato para que sean legibles.
     fin_year = anios_range[1]
     fin = (df_serie_f[df_serie_f["anio"] == fin_year]
-           .sort_values("pct_inmig", ascending=False))
-    for _, r in fin.iterrows():
+           .drop_duplicates(subset=["zona"])
+           .sort_values("pct_inmig", ascending=True)
+           .reset_index(drop=True))
+    y_max = df_serie_f["pct_inmig"].max() * 1.30 if len(df_serie_f) else 25
+    sep_min = y_max * 0.052   # separacion vertical minima entre etiquetas
+    y_prev = -1e9
+    for _, r in fin.iterrows():   # de menor a mayor para empujar hacia arriba
+        y_lbl = float(r["pct_inmig"])
+        if y_lbl - y_prev < sep_min:
+            y_lbl = y_prev + sep_min
+        y_prev = y_lbl
         es_destacada = (macrozona_destacar == "Ninguna"
                         or macrozona_destacar == r["zona"])
         fig.add_annotation(
-            x=r["anio"], y=r["pct_inmig"],
+            x=r["anio"], y=y_lbl,
             text=f"<b>{r['pct_inmig']:.1f}%</b>",
-            showarrow=False, xanchor="left", xshift=5,
+            showarrow=False, xanchor="left", xshift=6,
             font=dict(family=FONT_FAMILY, size=SZ_AX_TICK,
                       color=PALETA_ZONAS[r["zona"]]),
             opacity=1.0 if es_destacada else 0.4)
-    y_max = df_serie_f["pct_inmig"].max() * 1.30 if len(df_serie_f) else 25
 
     fig.update_layout(
         title=_titulo_a4(
@@ -819,21 +837,24 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
                    range=[anios_range[0] - 0.8, anios_range[1] + 1.7],
                    gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
-                   title_font=dict(size=SZ_AX_TITLE)),
+                   title_font=dict(size=SZ_AX_TITLE),
+                   title_standoff=8),
         yaxis=dict(title="% hogares inmigrantes",
                    ticksuffix="%", range=[0, y_max],
                    gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
                    title_font=dict(size=SZ_AX_TITLE)),
-        legend=dict(orientation="h", yanchor="bottom", y=-0.20,
+        # Leyenda mas abajo para no tocar el titulo del eje X; la nota del
+        # n se separa aun mas para no superponerse a la leyenda.
+        legend=dict(orientation="h", yanchor="top", y=-0.26,
                     xanchor="center", x=0.5,
                     font=dict(size=SZ_LEGEND, family=FONT_FAMILY)),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
-        margin=dict(t=70, b=125, l=70, r=35),
+        margin=dict(t=70, b=150, l=70, r=35),
         width=A4_W, height=A4_H,
         annotations=list(fig.layout.annotations) + [dict(
-            x=0.5, y=-0.34, xref="paper", yref="paper",
+            x=0.5, y=-0.46, xref="paper", yref="paper",
             text=f"<i>{n_label}</i>", showarrow=False,
             xanchor="center",
             font=dict(size=SZ_ANNOT, color="#7F8C8D",

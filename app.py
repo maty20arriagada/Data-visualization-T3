@@ -266,9 +266,13 @@ gdf_lisa_ng = cargar_lisa_comunal()
 # =============================================================================
 
 def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
-    """A. Distribución nacional. Acepta filtro `pobreza_visibles` para
-    mostrar/ocultar categorias de pobreza (las ocultas se atenuan en
-    gris claro)."""
+    """A. Distribución nacional de los hogares según condición de pobreza.
+
+    FILTRO INTELIGENTE: cuando se deseleccionan categorias en el sidebar,
+    el donut se RECALCULA solo sobre las categorias seleccionadas
+    (renormalizadas a 100%), y el estadistico central y el n se recomputan
+    en consecuencia. Si no hay ninguna seleccionada, se muestran todas.
+    """
     df_g1 = df_g1.copy()
     df_g1["estado_pob"] = pd.Categorical(
         df_g1["estado_pob"],
@@ -276,40 +280,62 @@ def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
         ordered=True
     )
     df_g1 = df_g1.sort_values("estado_pob").reset_index(drop=True)
-    df_g1["pct"] = df_g1["expr"] / df_g1["expr"].sum() * 100
-    
-    hog_pob = df_g1[df_g1["estado_pob"] != "Fuera de pobreza"]["expr"].sum()
-    pct_pob = hog_pob / df_g1["expr"].sum() * 100
-    
-    # n muestral nacional se calcula dinámicamente
-    n_mues = int(df_g1["n"].sum()) if "n" in df_g1.columns else 78654
-    n_pond = float(df_g1["expr"].sum())
-    n_label = _formato_n(n_mues, n_pond)
-    
-    etq = [f"<b>{r.estado_pob}</b><br>{r.pct:.1f}%" for r in df_g1.itertuples()]
-    # Atenuar (gris) las categorias NO seleccionadas en el sidebar
-    if pobreza_visibles is None:
+
+    # --- Aplicar el filtro: subconjunto de categorias seleccionadas ------
+    if not pobreza_visibles:
         pobreza_visibles = list(PALETA_POBREZA.keys())
-    colors_g1 = [PALETA_POBREZA[k] if k in pobreza_visibles else "#E8EAED"
-                  for k in df_g1["estado_pob"]]
+    df_g1 = df_g1[df_g1["estado_pob"].isin(pobreza_visibles)].copy()
+    if len(df_g1) == 0:   # salvaguarda: nunca dejar el donut vacio
+        df_g1 = (df_g1.copy() if len(df_g1) else None)
+
+    # --- Recalcular porcentajes SOLO sobre lo seleccionado ---------------
+    total_sel = df_g1["expr"].sum()
+    df_g1["pct"] = df_g1["expr"] / total_sel * 100
+
+    # Participacion de pobreza ENTRE las categorias mostradas (se recomputa)
+    hog_pob = df_g1[df_g1["estado_pob"] != "Fuera de pobreza"]["expr"].sum()
+    pct_pob = hog_pob / total_sel * 100 if total_sel else 0
+    incluye_fuera = "Fuera de pobreza" in set(df_g1["estado_pob"])
+
+    # n recomputado sobre el subconjunto seleccionado
+    n_mues = int(df_g1["n"].sum()) if "n" in df_g1.columns else 78654
+    n_pond = float(total_sel)
+    n_label = _formato_n(n_mues, n_pond)
+
+    etq = [f"<b>{r.estado_pob}</b><br>{r.pct:.1f}%" for r in df_g1.itertuples()]
+    colors_g1 = [PALETA_POBREZA[k] for k in df_g1["estado_pob"]]
     
+    # Pull dinamico: separa levemente las porciones de pobreza, no la de
+    # "Fuera de pobreza" (longitud acorde al numero de porciones mostradas).
+    pull = [0.0 if k == "Fuera de pobreza" else 0.015
+            for k in df_g1["estado_pob"]]
+
     fig = go.Figure(go.Pie(
-        labels=df_g1["estado_pob"].tolist(), values=df_g1["expr"].tolist(), hole=0.55,
-        sort=False, direction="clockwise",
+        labels=df_g1["estado_pob"].tolist(), values=df_g1["expr"].tolist(),
+        hole=0.55, sort=False, direction="clockwise",
         marker=dict(colors=colors_g1, line=dict(color="white", width=1.5)),
         text=etq, textinfo="text", textposition="outside",
         textfont=dict(family=FONT_FAMILY, size=SZ_BAR_TXT - 1,
                       color=COLOR_TEXTO_FUERTE),
         hovertemplate=("<b>%{label}</b><br>%{value:,.0f} hogares<br>"
                        "%{percent}<extra></extra>"),
-        pull=[0, 0.01, 0.01, 0.02], showlegend=False,
+        pull=pull, showlegend=False,
     ))
+    # Estadistico central ADAPTATIVO segun el filtro:
+    #  - si se muestra "Fuera de pobreza": % de hogares en alguna pobreza.
+    #  - si solo hay tipos de pobreza: total de hogares en pobreza (millones).
+    if incluye_fuera:
+        centro_grande = f"{pct_pob:.1f}%"
+        centro_chico = "hogares en<br>alguna pobreza"
+    else:
+        centro_grande = f"{n_pond/1e6:.2f}M"
+        centro_chico = "hogares en<br>pobreza"
     fig.add_annotation(x=0.5, y=0.56, xref="paper", yref="paper",
-                       text=f"<b>{pct_pob:.1f}%</b>",
+                       text=f"<b>{centro_grande}</b>",
                        font=dict(family=FONT_FAMILY, size=36, color="#78281F"),
                        showarrow=False)
     fig.add_annotation(x=0.5, y=0.40, xref="paper", yref="paper",
-                       text=("hogares en<br>alguna pobreza"),
+                       text=centro_chico,
                        font=dict(family=FONT_FAMILY, size=SZ_AX_TICK,
                                  color=COLOR_TEXTO),
                        showarrow=False, align="center")
@@ -345,28 +371,31 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
         pobreza_visibles = ORDEN_POBRES
     # Tabular la composición de manera explícita y robusta
     df_pobres = df_g2_macro[df_g2_macro["estado_pob"] != "Fuera de pobreza"].copy()
-    
+
     tabla_expr = df_pobres.groupby(["zona", "estado_pob"])["expr"].sum().unstack(fill_value=0)
     tabla_expr = tabla_expr.reindex(columns=ORDEN_POBRES, fill_value=0)
     tabla_expr = tabla_expr.reindex(index=ORDEN_ZONAS, fill_value=0)
-    
-    sumas_zona = tabla_expr.sum(axis=1)
-    sumas_zona = sumas_zona.replace(0, 1) # Evitar división por cero
-    pct = tabla_expr.div(sumas_zona, axis=0) * 100
-    
-    # Calcular n y N para el pie (hogares pobres de la muestra y expandidos)
-    n_mues = int(df_g2_macro["n"].sum()) if "n" in df_g2_macro.columns else int(df_regional["n_sample_poor"].sum())
-    n_pond = float(df_g2_macro["expr"].sum())
+
+    # --- FILTRO INTELIGENTE: el % se RECALCULA sobre los tipos de pobreza
+    # seleccionados. El denominador de cada zona pasa a ser la suma de los
+    # tipos elegidos, asi cada barra vuelve a sumar 100% recomponiendo la
+    # composicion segun el filtro (en vez de acortarse). ------------------
+    tipos_sel = [t for t in ORDEN_POBRES if t in pobreza_visibles]
+    if not tipos_sel:                  # salvaguarda: si no hay seleccion
+        tipos_sel = list(ORDEN_POBRES)
+    sumas_zona = tabla_expr[tipos_sel].sum(axis=1).replace(0, 1)
+    pct = tabla_expr[tipos_sel].div(sumas_zona, axis=0) * 100
+
+    # n recomputado: solo hogares de los tipos de pobreza seleccionados
+    if "n" in df_g2_macro.columns:
+        n_mues = int(df_g2_macro[df_g2_macro["estado_pob"].isin(tipos_sel)]["n"].sum())
+    else:
+        n_mues = int(df_regional["n_sample_poor"].sum())
+    n_pond = float(df_g2_macro[df_g2_macro["estado_pob"].isin(tipos_sel)]["expr"].sum())
     n_label = _formato_n(n_mues, n_pond, "hogares pobres")
-    
+
     fig = go.Figure()
-    for estado in ORDEN_POBRES:
-        # FILTRO REAL: si la categoria fue deseleccionada en el sidebar, se
-        # OMITE su segmento (la barra queda mas corta, mostrando solo la
-        # participacion real de los tipos seleccionados). No se distorsiona:
-        # el 100% sigue siendo el total de pobreza de la zona.
-        if estado not in pobreza_visibles:
-            continue
+    for estado in tipos_sel:
         v = list(pct[estado].values)
         # Opacidad por barra (atenua las zonas no destacadas)
         if macrozona_destacar == "Ninguna":
@@ -387,11 +416,16 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
             hovertemplate=(f"<b>{estado}</b><br>%{{y}}<br>"
                            "%{x:.2f}%<extra></extra>"),
         ))
+    sub_b = ("% de hogares pobres por tipo, normalizado al 100% intra-zona "
+             "(excluye fuera de pobreza) (CASEN 2024).")
+    if len(tipos_sel) < len(ORDEN_POBRES):
+        sub_b = (f"% recalculado al 100% sobre {len(tipos_sel)} de "
+                 f"{len(ORDEN_POBRES)} tipos seleccionados, intra-zona "
+                 "(CASEN 2024).")
     fig.update_layout(
         barmode="stack",
         title=_titulo_a4(
-            "B. Composición de la pobreza por macrozona",
-            "% de hogares pobres por tipo, normalizado al 100% intra-zona (excluye fuera de pobreza) (CASEN 2024)."
+            "B. Composición de la pobreza por macrozona", sub_b
         ),
         xaxis=dict(title="% hogares pobres",
                    ticksuffix="%", range=[0, 100], gridcolor="#ECF0F1",
@@ -518,14 +552,18 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     Barras apiladas al 100% intra-grupo: hogares chilenos vs inmigrantes
     cruzados con los 3 tipos de pobreza (excluye fuera de pobreza).
 
-    Filtros:
-      pobreza_visibles: tipos de pobreza a mostrar; los deseleccionados se
-        OMITEN del apilado (barra mas corta, sin distorsion).
-      origen_filtro: si != 'Ambos', se muestra SOLO el grupo seleccionado
-        (una sola columna).
+    Filtros (RECALCULAN el grafico, no solo ocultan):
+      pobreza_visibles: el % de cada barra se renormaliza a 100% sobre los
+        tipos de pobreza seleccionados (denominador = suma de los tipos
+        elegidos por origen).
+      origen_filtro: si != 'Ambos', se muestra SOLO el grupo seleccionado.
     """
     if pobreza_visibles is None:
         pobreza_visibles = ORDEN_POBRES
+    tipos_sel = [t for t in ORDEN_POBRES if t in pobreza_visibles]
+    if not tipos_sel:
+        tipos_sel = list(ORDEN_POBRES)
+
     # --- Agrupar y sumar ponderadores -----------------------------------
     tab = (df_ng.groupby(["origen_jefe", "estado_pob"])["expr"].sum()
            .unstack(fill_value=0)
@@ -533,9 +571,12 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
            .reindex(index=["Hogares chilenos", "Hogares inmigrantes"],
                     fill_value=0))
 
-    # --- Normalización intra-grupo a porcentajes (0–100) ---------------
-    suma_por_fila = tab.sum(axis=1).replace(0, 1)
-    pct = (tab.div(suma_por_fila, axis=0) * 100).fillna(0)
+    # --- Renormalizacion intra-grupo SOBRE LOS TIPOS SELECCIONADOS -------
+    # El denominador es la suma de los tipos elegidos, de modo que cada
+    # columna vuelve a sumar 100% recomponiendo la composicion segun el
+    # filtro (en lugar de quedar una barra mas corta).
+    suma_por_fila = tab[tipos_sel].sum(axis=1).replace(0, 1)
+    pct = (tab[tipos_sel].div(suma_por_fila, axis=0) * 100).fillna(0)
 
     # FILTRO REAL de origen: muestra solo el/los grupo(s) seleccionado(s).
     if origen_filtro == "Hogares chilenos":
@@ -545,19 +586,20 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     else:
         categorias_x = ["Hogares chilenos", "Hogares inmigrantes"]
 
-    n_mues = 2613
-    n_pond = float(df_ng["expr"].sum())
+    # n recomputado: hogares de los tipos seleccionados y origenes mostrados
+    df_n = df_ng[df_ng["estado_pob"].isin(tipos_sel)
+                 & df_ng["origen_jefe"].isin(categorias_x)]
+    n_pond = float(df_n["expr"].sum())
+    n_mues = int(df_n["n"].sum()) if "n" in df_ng.columns else 2613
     n_label = _formato_n(n_mues, n_pond)
 
     TEXTO_OSCURO = "#1A1A1A"
     TEXTO_GRIS = "#4A4A4A"
 
     fig = go.Figure()
-    for estado in ORDEN_POBRES:
-        # FILTRO REAL de tipo de pobreza: omite la categoria deseleccionada
-        # (la barra apilada queda mas corta, sin distorsion).
-        if estado not in pobreza_visibles:
-            continue
+    for estado in tipos_sel:
+        # El % ya esta renormalizado sobre los tipos seleccionados, asi que
+        # la columna vuelve a sumar 100% recomponiendo la composicion.
         valores = [float(pct.loc[cat, estado]) for cat in categorias_x]
         textos = [f"<b>{v:.1f}%</b>" if v >= 3 else "" for v in valores]
         fig.add_trace(go.Bar(
@@ -573,12 +615,18 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
                            "Participación: %{y:.2f}%<extra></extra>"),
         ))
 
+    sub_e = ("% de hogares pobres normalizado al 100% intra-grupo "
+             "(chilenos vs inmigrantes), CASEN 2024.")
+    if len(tipos_sel) < len(ORDEN_POBRES) or len(categorias_x) < 2:
+        sub_e = (f"% recalculado al 100% sobre {len(tipos_sel)} de "
+                 f"{len(ORDEN_POBRES)} tipos seleccionados, intra-grupo "
+                 "(CASEN 2024).")
     fig.update_layout(
         barmode="stack",
         bargap=0.45,
         title=_titulo_a4(
             "E. Composición de la pobreza según origen del hogar en Norte Grande",
-            "% de hogares pobres normalizado al 100% intra-grupo (chilenos vs inmigrantes), CASEN 2024."
+            sub_e
         ),
         xaxis=dict(
             title="",
@@ -1190,8 +1238,9 @@ with st.sidebar:
         "Tipos de pobreza visibles",
         options=ORDEN_POBREZA,
         default=ORDEN_POBREZA,
-        help=("Filtra las categorias mostradas en los graficos A "
-              "(dona nacional), B (barras macrozonas) y E."),
+        help=("RECALCULA los graficos A (dona), B (macrozonas) y E "
+              "(Norte Grande): los porcentajes se renormalizan a 100% "
+              "sobre los tipos seleccionados."),
     )
 
     f_macrozona = st.selectbox(

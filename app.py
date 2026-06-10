@@ -34,9 +34,18 @@ st.markdown(
     /* Fondo blanco para todo el contenedor */
     .stApp { background-color: white !important; }
 
-    /* Contenedor principal con padding profesional */
+    /* La barra superior de Streamlit es fija (~3.7rem de alto) y flota
+       sobre el contenido: sin padding suficiente tapa el logo y el titulo
+       del trabajo. Se reserva espacio y se vuelve transparente. */
+    header[data-testid="stHeader"] {
+        background: rgba(255, 255, 255, 0.6) !important;
+        backdrop-filter: blur(2px);
+    }
+
+    /* Contenedor principal: padding-top holgado para que el header
+       institucional (logo + titulo) quede SIEMPRE debajo de la barra. */
     div.block-container {
-        padding-top: 1.1rem;
+        padding-top: 4.2rem;
         padding-bottom: 2.4rem;
         padding-left: 2.2rem;
         padding-right: 2.2rem;
@@ -135,6 +144,10 @@ SZ_LEGEND   = 12    # antes 8-9
 SZ_BAR_TXT  = 14    # antes 9.5-10 (números dentro de barras)
 SZ_ANNOT    = 11    # antes 7.5-8 (notas, n=…)
 SZ_NOTE     = 10    # antes 7-7.5 (pie de página fino)
+
+# Opacidad de los elementos NO resaltados cuando el "Modo resaltar" del
+# sidebar esta activo (enfasis visual sin recalcular datos).
+DIM_RESALTE = 0.22
 
 PALETA_POBREZA = {
     "Fuera de pobreza":              "#BDC3C7",  # Gris
@@ -272,13 +285,17 @@ gdf_lisa_ng = cargar_lisa_comunal()
 # FUNCIONES DE PLOTEO (A4 Fieles al Reporte de la Entrega Anterior)
 # =============================================================================
 
-def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
+def plot_a4_g1_donut(df_g1, pobreza_visibles=None, resaltar_pobreza="Ninguno"):
     """A. Distribución nacional de los hogares según condición de pobreza.
 
     FILTRO INTELIGENTE: cuando se deseleccionan categorias en el sidebar,
     el donut se RECALCULA solo sobre las categorias seleccionadas
     (renormalizadas a 100%), y el estadistico central y el n se recomputan
     en consecuencia. Si no hay ninguna seleccionada, se muestran todas.
+
+    MODO RESALTAR (resaltar_pobreza): enfasis visual puro; la porcion
+    elegida conserva su color pleno y se separa levemente, las demas se
+    atenuan (alpha DIM_RESALTE). No altera ningun calculo.
     """
     df_g1 = df_g1.copy()
     df_g1["estado_pob"] = pd.Categorical(
@@ -310,12 +327,27 @@ def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
     n_label = _formato_n(n_mues, n_pond)
 
     etq = [f"<b>{r.estado_pob}</b><br>{r.pct:.1f}%" for r in df_g1.itertuples()]
-    colors_g1 = [PALETA_POBREZA[k] for k in df_g1["estado_pob"]]
+    # Colores con modo resaltar: la categoria elegida a color pleno, las
+    # demas atenuadas. Solo aplica si la categoria resaltada esta visible.
+    cats_visibles = set(df_g1["estado_pob"])
+    resaltar_activo = (resaltar_pobreza not in (None, "Ninguno")
+                        and resaltar_pobreza in cats_visibles)
+    if resaltar_activo:
+        colors_g1 = [PALETA_POBREZA[k] if k == resaltar_pobreza
+                     else hex_to_rgba(PALETA_POBREZA[k], DIM_RESALTE)
+                     for k in df_g1["estado_pob"]]
+    else:
+        colors_g1 = [PALETA_POBREZA[k] for k in df_g1["estado_pob"]]
     
     # Pull dinamico: separa levemente las porciones de pobreza, no la de
-    # "Fuera de pobreza" (longitud acorde al numero de porciones mostradas).
-    pull = [0.0 if k == "Fuera de pobreza" else 0.015
-            for k in df_g1["estado_pob"]]
+    # "Fuera de pobreza". En modo resaltar, la porcion elegida se separa
+    # un poco mas para reforzar el enfasis.
+    if resaltar_activo:
+        pull = [0.05 if k == resaltar_pobreza else 0.0
+                for k in df_g1["estado_pob"]]
+    else:
+        pull = [0.0 if k == "Fuera de pobreza" else 0.015
+                for k in df_g1["estado_pob"]]
 
     fig = go.Figure(go.Pie(
         labels=df_g1["estado_pob"].tolist(), values=df_g1["expr"].tolist(),
@@ -366,13 +398,17 @@ def plot_a4_g1_donut(df_g1, pobreza_visibles=None):
 
 
 def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
-                           macrozona_destacar="Ninguna"):
+                           macrozona_destacar="Ninguna",
+                           resaltar_pobreza="Ninguno"):
     """B. Composición de la pobreza por macrozona.
-    Filtros:
-      pobreza_visibles: tipos de pobreza a mostrar. Los deseleccionados se
-        OMITEN (la barra queda mas corta = participacion real de los tipos
-        elegidos sobre el total de pobreza de la zona, sin distorsion).
-      macrozona_destacar: zona resaltada (las demas se atenuan a 32%).
+    Filtros (recalculan):
+      pobreza_visibles: el % se renormaliza a 100% sobre los tipos
+        seleccionados.
+    Resaltes (solo visuales, no recalculan):
+      macrozona_destacar: zona resaltada (las demas se atenuan).
+      resaltar_pobreza: tipo de pobreza realzado (los demas segmentos se
+        atenuan a DIM_RESALTE). Combinable con macrozona_destacar
+        (las opacidades se multiplican).
     """
     if pobreza_visibles is None:
         pobreza_visibles = ORDEN_POBRES
@@ -410,6 +446,12 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
         else:
             opacidades = [1.0 if z == macrozona_destacar else 0.32
                           for z in ORDEN_ZONAS]
+        # Modo resaltar tipo de pobreza: atenua los segmentos de los demas
+        # tipos. Se multiplica con la opacidad por zona (combinable).
+        if (resaltar_pobreza not in (None, "Ninguno")
+                and resaltar_pobreza in tipos_sel
+                and estado != resaltar_pobreza):
+            opacidades = [op * DIM_RESALTE for op in opacidades]
         marker_cols = [hex_to_rgba(PALETA_POBREZA[estado], op)
                        for op in opacidades]
         fig.add_trace(go.Bar(
@@ -442,9 +484,10 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
         yaxis=dict(title="", autorange="reversed",
                    tickfont=dict(size=SZ_AX_TICK,
                                  color=COLOR_TEXTO_FUERTE)),
-        # Leyenda mas abajo para que no choque con el titulo del eje X;
-        # la nota del n se separa aun mas para no superponerse a la leyenda.
-        legend=dict(orientation="h", yanchor="top", y=-0.26,
+        # Leyenda bajo el titulo del eje X. Con 3 items hace wrap a 2
+        # filas (~hasta y=-0.46), por lo que la nota del n va a -0.56 y
+        # el margen inferior se amplia para que nada se roce.
+        legend=dict(orientation="h", yanchor="top", y=-0.24,
                     xanchor="center", x=0.5,
                     font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                               color=COLOR_TEXTO),
@@ -452,10 +495,10 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
                     traceorder="reversed"),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
-        margin=dict(t=70, b=155, l=110, r=25),
+        margin=dict(t=70, b=175, l=110, r=25),
         width=A4_W, height=A4_H,
         annotations=[dict(
-            x=0.5, y=-0.46, xref="paper", yref="paper",
+            x=0.5, y=-0.56, xref="paper", yref="paper",
             text=f"<i>{n_label}</i>", showarrow=False,
             xanchor="center",
             font=dict(size=SZ_ANNOT, color="#7F8C8D",
@@ -464,7 +507,13 @@ def plot_a4_g2_macrozonas(df_g2_macro, pobreza_visibles=None,
     return fig
 
 
-def plot_a4_g10_sankey(df_ng):
+def plot_a4_g10_sankey(df_ng, resaltar_origen="Ninguno"):
+    """D. Sankey de flujos pobreza -> origen -> carencias.
+
+    MODO RESALTAR (resaltar_origen): los flujos del grupo elegido se
+    intensifican y los del otro grupo se atenuan; tambien se atenua el
+    color del nodo no resaltado. No recalcula los flujos.
+    """
     nodos_pobreza = ORDEN_POBRES
     nodos_origen = ["Hogares chilenos", "Hogares inmigrantes"]
     nodos_trifecta = ["Escolaridad", "Déficit cuantitativo", "Conectividad digital", "Informalidad", "Otras carencias", "Sin carencias"]
@@ -486,21 +535,49 @@ def plot_a4_g10_sankey(df_ng):
     }
     nodos_labels = [ETIQ_A4.get(n, n) for n in nodos_ids]
 
+    resaltar_on = resaltar_origen in nodos_origen
+
+    # Flujo 1 (pobreza -> origen): color por tipo de pobreza. En modo
+    # resaltar, los links que van al grupo NO elegido se atenuan y los que
+    # van al elegido se intensifican.
     f1 = df_ng.groupby(["estado_pob", "origen_jefe"])["expr"].sum().reset_index().dropna()
     f1 = f1[f1["estado_pob"].isin(nodos_pobreza)]
     src1 = f1["estado_pob"].map(idx).tolist()
     tgt1 = f1["origen_jefe"].map(idx).tolist()
     val1 = f1["expr"].tolist()
-    col1 = [hex_to_rgba(PALETA_POBREZA[s], 0.42) for s in f1["estado_pob"]]
+    col1 = []
+    for _, r in f1.iterrows():
+        if not resaltar_on:
+            alpha = 0.42
+        elif r["origen_jefe"] == resaltar_origen:
+            alpha = 0.62
+        else:
+            alpha = 0.10
+        col1.append(hex_to_rgba(PALETA_POBREZA[r["estado_pob"]], alpha))
 
+    # Flujo 2 (origen -> carencias): por defecto los flujos inmigrantes van
+    # destacados en naranja y los chilenos en gris tenue (narrativa del
+    # reporte). En modo resaltar, el grupo elegido toma color pleno y el
+    # otro queda casi transparente.
     f2 = df_ng.groupby(["origen_jefe", "trifecta"])["expr"].sum().reset_index().dropna()
     src2 = f2["origen_jefe"].map(idx).tolist()
     tgt2 = f2["trifecta"].map(idx).tolist()
     val2 = f2["expr"].tolist()
-    col_orig = {
-        "Hogares chilenos":    "rgba(189, 195, 199, 0.20)",
-        "Hogares inmigrantes": "rgba(211, 84, 0, 0.75)",
-    }
+    if not resaltar_on:
+        col_orig = {
+            "Hogares chilenos":    "rgba(189, 195, 199, 0.20)",
+            "Hogares inmigrantes": "rgba(211, 84, 0, 0.75)",
+        }
+    elif resaltar_origen == "Hogares inmigrantes":
+        col_orig = {
+            "Hogares chilenos":    "rgba(189, 195, 199, 0.08)",
+            "Hogares inmigrantes": "rgba(211, 84, 0, 0.85)",
+        }
+    else:  # resaltar chilenos
+        col_orig = {
+            "Hogares chilenos":    hex_to_rgba(COLOR_URBANO, 0.62),
+            "Hogares inmigrantes": "rgba(211, 84, 0, 0.10)",
+        }
     col2 = [col_orig[o] for o in f2["origen_jefe"]]
 
     CARENCIAS_OUTLIER = ["Escolaridad", "Déficit cuantitativo", "Conectividad digital", "Informalidad"]
@@ -516,9 +593,17 @@ def plot_a4_g10_sankey(df_ng):
     n_pond = float(df_ng["expr"].sum())
     n_label = _formato_n(n_mues, n_pond, "hogares pobres")
 
+    # Nodos: en modo resaltar, el nodo del origen NO elegido se atenua
+    col_nodo_chi = COLOR_URBANO
+    col_nodo_inm = COLOR_RURAL
+    if resaltar_on:
+        if resaltar_origen == "Hogares chilenos":
+            col_nodo_inm = hex_to_rgba(COLOR_RURAL, 0.30)
+        else:
+            col_nodo_chi = hex_to_rgba(COLOR_URBANO, 0.30)
     color_nodos = (
         [PALETA_POBREZA[k] for k in nodos_pobreza]
-        + [COLOR_URBANO, COLOR_RURAL]
+        + [col_nodo_chi, col_nodo_inm]
         + ["#7F8C8D", "#7F8C8D", "#7F8C8D", "#7F8C8D", "#95A5A6", "#D5DBDB"]
     )
 
@@ -556,7 +641,9 @@ def plot_a4_g10_sankey(df_ng):
     )
     return fig
 
-def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
+def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos",
+                       resaltar_origen="Ninguno",
+                       resaltar_pobreza="Ninguno"):
     """E. Composición de la pobreza según origen del hogar en Norte Grande.
     Barras apiladas al 100% intra-grupo: hogares chilenos vs inmigrantes
     cruzados con los 3 tipos de pobreza (excluye fuera de pobreza).
@@ -566,6 +653,12 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
         tipos de pobreza seleccionados (denominador = suma de los tipos
         elegidos por origen).
       origen_filtro: si != 'Ambos', se muestra SOLO el grupo seleccionado.
+
+    Resaltes (solo visuales, no recalculan; combinables entre si):
+      resaltar_origen: intensifica la columna del grupo elegido y atenua
+        la otra.
+      resaltar_pobreza: intensifica los segmentos del tipo elegido y
+        atenua los demas.
     """
     if pobreza_visibles is None:
         pobreza_visibles = ORDEN_POBRES
@@ -602,8 +695,14 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     n_mues = int(df_n["n"].sum()) if "n" in df_ng.columns else 2613
     n_label = _formato_n(n_mues, n_pond)
 
-    TEXTO_OSCURO = "#1A1A1A"
-    TEXTO_GRIS = "#4A4A4A"
+    TEXTO_OSCURO = COLOR_TEXTO
+    TEXTO_GRIS = "#7F8C8D"
+
+    # Factores de resaltado (solo visuales). Se combinan multiplicando.
+    res_origen_on = (resaltar_origen in categorias_x
+                     and len(categorias_x) > 1)
+    res_pob_on = (resaltar_pobreza not in (None, "Ninguno")
+                  and resaltar_pobreza in tipos_sel)
 
     fig = go.Figure()
     for estado in tipos_sel:
@@ -611,9 +710,18 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
         # la columna vuelve a sumar 100% recomponiendo la composicion.
         valores = [float(pct.loc[cat, estado]) for cat in categorias_x]
         textos = [f"<b>{v:.1f}%</b>" if v >= 3 else "" for v in valores]
+        # Opacidad por columna (origen) x por segmento (tipo de pobreza)
+        marker_cols = []
+        for cat in categorias_x:
+            alpha = 1.0
+            if res_origen_on and cat != resaltar_origen:
+                alpha *= DIM_RESALTE
+            if res_pob_on and estado != resaltar_pobreza:
+                alpha *= DIM_RESALTE
+            marker_cols.append(hex_to_rgba(PALETA_POBREZA[estado], alpha))
         fig.add_trace(go.Bar(
             x=categorias_x, y=valores, name=estado,
-            marker=dict(color=PALETA_POBREZA[estado],
+            marker=dict(color=marker_cols,
                         line=dict(color="white", width=0.8)),
             text=textos,
             textposition="inside", insidetextanchor="middle",
@@ -655,19 +763,23 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
             title_font=dict(size=SZ_AX_TITLE, color=TEXTO_OSCURO,
                             family=FONT_FAMILY),
         ),
+        # IMPORTANTE: yanchor="top" para que la leyenda crezca hacia ABAJO
+        # (con yanchor="bottom" crecia hacia arriba y tapaba los nombres
+        # del eje X "Hogares chilenos / inmigrantes").
         legend=dict(
-            orientation="h", yanchor="bottom", y=-0.20,
+            orientation="h", yanchor="top", y=-0.10,
             xanchor="center", x=0.5,
             font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                       color=TEXTO_OSCURO),
+            itemsizing="constant",
             traceorder="reversed",
         ),
         font=dict(family=FONT_FAMILY, color=TEXTO_OSCURO),
         plot_bgcolor="white", paper_bgcolor="white",
-        margin=dict(t=80, b=110, l=75, r=35),
+        margin=dict(t=80, b=150, l=75, r=35),
         width=A4_W, height=A4_H,
         annotations=[
-            dict(x=0.5, y=-0.34, xref="paper", yref="paper",
+            dict(x=0.5, y=-0.42, xref="paper", yref="paper",
                  text=f"<i>{n_label}</i>", showarrow=False,
                  xanchor="center",
                  font=dict(size=SZ_ANNOT, color=TEXTO_GRIS,
@@ -676,7 +788,8 @@ def plot_a4_g3_barras(df_ng, pobreza_visibles=None, origen_filtro="Ambos"):
     )
     return fig
 
-def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos"):
+def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos",
+                         resaltar_origen="Ninguno"):
     """F. Intensidad de carencias por dimensión en Norte Grande.
 
     Dumbbell chart (gráfico de mancuernas): cada dimensión es una fila;
@@ -710,6 +823,15 @@ def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos"):
     show_inmi = origen_filtro in ("Ambos", "Hogares inmigrantes")
     op_chil = 1.0 if show_chil else 0.0
     op_inmi = 1.0 if show_inmi else 0.0
+
+    # Modo resaltar: si ambos grupos estan visibles, el NO elegido se
+    # atenua (enfasis visual puro, los valores no cambian).
+    if show_chil and show_inmi and resaltar_origen in (
+            "Hogares chilenos", "Hogares inmigrantes"):
+        if resaltar_origen == "Hogares chilenos":
+            op_inmi = DIM_RESALTE
+        else:
+            op_chil = DIM_RESALTE
 
     # x_chil, x_inmi por dimension
     x_chil = [float(chil[d]) for d in dims]
@@ -773,8 +895,9 @@ def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos"):
     fig.update_layout(
         title=_titulo_a4(
             "F. Intensidad de carencias por dimensión en Norte Grande",
-            "Promedio ponderado del número de carencias del hogar por "
-            "dimensión (metodología multidimensional 2015 CASEN)."
+            # Subtitulo corto: la version larga se cortaba en el borde
+            # derecho del lienzo A4 (620 px).
+            "Carencias promedio por hogar y dimensión (met. 2015, CASEN 2024)."
         ),
         xaxis=dict(
             title="Carencias promedio por hogar",
@@ -903,10 +1026,10 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
                    gridcolor="#ECF0F1",
                    tickfont=dict(size=SZ_AX_TICK),
                    title_font=dict(size=SZ_AX_TITLE)),
-        # Leyenda mas abajo para no tocar el titulo del eje X; texto en
-        # negro y swatches de tamaño constante para que el color de cada
-        # zona se distinga con claridad.
-        legend=dict(orientation="h", yanchor="top", y=-0.26,
+        # Leyenda bajo el titulo del eje X. Con 5 zonas hace wrap a 2
+        # filas (~hasta y=-0.48), por lo que la nota del n baja a -0.58
+        # y el margen inferior se amplia para que no se rocen.
+        legend=dict(orientation="h", yanchor="top", y=-0.24,
                     xanchor="center", x=0.5,
                     font=dict(size=SZ_LEGEND, family=FONT_FAMILY,
                               color=COLOR_TEXTO),
@@ -914,10 +1037,10 @@ def plot_a4_g5_lineas(df_serie, anios_range=(2013, 2024),
                     bgcolor="rgba(255,255,255,0)"),
         font=dict(family=FONT_FAMILY, color=COLOR_TEXTO),
         plot_bgcolor="white", paper_bgcolor="white",
-        margin=dict(t=70, b=150, l=70, r=35),
+        margin=dict(t=70, b=175, l=70, r=35),
         width=A4_W, height=A4_H,
         annotations=list(fig.layout.annotations) + [dict(
-            x=0.5, y=-0.46, xref="paper", yref="paper",
+            x=0.5, y=-0.58, xref="paper", yref="paper",
             text=f"<i>{n_label}</i>", showarrow=False,
             xanchor="center",
             font=dict(size=SZ_ANNOT, color="#7F8C8D",
@@ -1273,12 +1396,41 @@ with st.sidebar:
         help="Solo afecta al grafico G (evolucion historica de inmigracion).",
     )
 
+    # --- Modo resaltar: enfasis VISUAL, no recalcula nada ----------------
+    st.markdown(
+        "<h3 style='border-bottom: 1px solid #ECF0F1; "
+        "padding-bottom: 8px;'>Modo resaltar</h3>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35; "
+        "margin-top:-0.3rem;'>Énfasis visual: intensifica el color de lo "
+        "elegido y atenúa el resto, <b>sin recalcular</b> los datos.</p>",
+        unsafe_allow_html=True,
+    )
+
+    f_resaltar_origen = st.radio(
+        "Resaltar origen del hogar",
+        options=["Ninguno", "Hogares chilenos", "Hogares inmigrantes"],
+        index=0,
+        help=("Realza el grupo elegido en los graficos D (Sankey), E "
+              "(barras) y F (dumbbell), atenuando el otro grupo."),
+    )
+
+    f_resaltar_pobreza = st.selectbox(
+        "Resaltar tipo de pobreza",
+        options=["Ninguno"] + ORDEN_POBREZA,
+        index=0,
+        help=("Realza ese tipo de pobreza en los graficos A (dona), B "
+              "(macrozonas) y E (barras), atenuando los demas."),
+    )
+
     st.markdown("<hr style='border:none; border-top:1px solid #ECF0F1; margin: 1.2rem 0;'>", unsafe_allow_html=True)
     st.markdown(
         "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35;'>"
-        "<b>Nota:</b> Los graficos C (mapa de sobrerrepresentacion), D "
-        "(Sankey trifecta) y H (LISA comunal) no reaccionan a los filtros: "
-        "su universo es fijo por diseno metodologico.</p>",
+        "<b>Nota:</b> Los graficos C (mapa de sobrerrepresentacion) y H "
+        "(LISA comunal) no reaccionan a filtros ni resaltado: su universo "
+        "es fijo por diseno metodologico.</p>",
         unsafe_allow_html=True,
     )
 
@@ -1330,13 +1482,18 @@ st.markdown(header_html, unsafe_allow_html=True)
 # --- Fila 1: Gráficos A y B ---
 col_a, col_b = st.columns(2)
 with col_a:
-    fig_donut = plot_a4_g1_donut(df_g1, pobreza_visibles=f_pobreza)
+    fig_donut = plot_a4_g1_donut(
+        df_g1,
+        pobreza_visibles=f_pobreza,
+        resaltar_pobreza=f_resaltar_pobreza,
+    )
     st.plotly_chart(fig_donut, use_container_width=True)
 with col_b:
     fig_macro = plot_a4_g2_macrozonas(
         df_g2_macro,
         pobreza_visibles=f_pobreza,
         macrozona_destacar=f_macrozona,
+        resaltar_pobreza=f_resaltar_pobreza,
     )
     st.plotly_chart(fig_macro, use_container_width=True)
 
@@ -1400,20 +1557,26 @@ with col_map5:
 # --- Fila 3: Gráficos D y E ---
 col_d, col_e = st.columns(2)
 with col_d:
-    fig_sankey = plot_a4_g10_sankey(df_g3)
+    fig_sankey = plot_a4_g10_sankey(df_g3, resaltar_origen=f_resaltar_origen)
     st.plotly_chart(fig_sankey, use_container_width=True)
 with col_e:
     fig_barras = plot_a4_g3_barras(
         df_g3,
         pobreza_visibles=f_pobreza,
         origen_filtro=f_origen,
+        resaltar_origen=f_resaltar_origen,
+        resaltar_pobreza=f_resaltar_pobreza,
     )
     st.plotly_chart(fig_barras, use_container_width=True)
 
 # --- Fila 4: Gráficos F (dumbbell) y G (líneas) ---
 col_f, col_g = st.columns(2)
 with col_f:
-    fig_dumbbell = plot_a4_g4_dumbbell(df_g4, origen_filtro=f_origen)
+    fig_dumbbell = plot_a4_g4_dumbbell(
+        df_g4,
+        origen_filtro=f_origen,
+        resaltar_origen=f_resaltar_origen,
+    )
     st.plotly_chart(fig_dumbbell, use_container_width=True)
 with col_g:
     fig_lineas = plot_a4_g5_lineas(

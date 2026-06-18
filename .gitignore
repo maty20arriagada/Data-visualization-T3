@@ -1,5 +1,13 @@
+# =============================================================================
+#  .gitignore - Tarea 3 dashboard
+#  El repo solo necesita: app.py, requirements.txt, packages.txt, los logos
+#  y la carpeta data_dashboard/ (insumos livianos). TODO lo demas (bases
+#  CASEN, geometrias pesadas, intermedios) se queda en local.
+# =============================================================================
+
 # --- Python ---
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -24,17 +32,18 @@ env/
 .DS_Store
 Thumbs.db
 
-# --- Datos brutos pesados (NO subir a GitHub) ---
-# Estos archivos exceden el límite recomendado de 50 MB de GitHub.
-# Se mantienen localmente para reproducir el preprocesamiento.
+# --- Bases CASEN pesadas (NO subir; solo para preparar_data_dashboard.py) ---
 *.parquet
 *.dta
-zip/casen_2024.parquet
-zip/casen_2024_provincia_comuna.dta
+zip/
+tarea 2/
 
-# Shapefiles del directorio de trabajo (zip/) - se conservan solo los
-# GeoJSON post-procesados en processed_data/
-zip/comunas/
+# --- Geometrias / intermedios pesados de ENTRADA al preprocesamiento --------
+# El dashboard NO los usa en runtime (lee data_dashboard/). Se conservan en
+# local para poder regenerar data_dashboard/ con preparar_data_dashboard.py.
+Regional.geojson
+processed_data/
+mapas/
 
 # --- Outputs intermedios y de prueba ---
 out.log
@@ -46,12 +55,14 @@ revisar/
 debug_*.py
 **/cache/
 
-# --- PDFs grandes (entregables previos - opcional) ---
-# Descomentar si el repo crece demasiado.
-# Entrega_anterior/
-# Deliverable 3.pdf
-# Entrega 3 - Grupo 11.pdf
-# Entrega 2 - Grupo 11 (1).pdf
-
-# --- ZIP del trabajo previo ---
+# --- Material previo voluminoso (no requerido por el dashboard) -------------
 zip.zip
+Entrega_anterior/
+Graficos/
+*.pdf
+Deliverable 3.txt
+Dpto-Ing-Industrial-_4_.svg
+exportar_H_ingresos_y_multidim.py
+exportar_graficos_espaciales.py
+debug_n_muestral.py
+preprocess.py

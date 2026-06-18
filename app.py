@@ -172,9 +172,12 @@ PALETA_ZONAS = {
 ORDEN_ZONAS = list(PALETA_ZONAS.keys())
 
 # --- Rutas de datos ----------------------------------------------------------
+# El dashboard lee SOLO archivos livianos pre-agregados de data_dashboard/.
+# Esa carpeta la genera `preparar_data_dashboard.py` a partir de las bases
+# CASEN pesadas (parquet/dta/shapefile), que NO se suben al repositorio.
 DIR_APP = Path(__file__).resolve().parent
-DIR_PROCESSED = DIR_APP / "processed_data"
-GEOJSON_PATH = DIR_APP / "Regional.geojson"
+DIR_DATA = DIR_APP / "data_dashboard"
+GEOJSON_PATH = DIR_DATA / "regiones_simplificado.geojson"
 
 # Logo institucional del Dpto. de Ing. Industrial UdeC. Solo se buscan
 # rutas RELATIVAS al directorio del proyecto, para que el deploy en
@@ -251,34 +254,38 @@ def cargar_geojson():
     return gdf
 
 def cargar_datos_procesados():
-    g1 = pd.read_csv(DIR_PROCESSED / "g1_donut.csv")
-    g2_macro = pd.read_csv(DIR_PROCESSED / "g2_macrozonas.csv")
-    regional = pd.read_csv(DIR_PROCESSED / "regional_poverty.csv")
-    g3 = pd.read_csv(DIR_PROCESSED / "g3_sankey.csv")
-    g4 = pd.read_csv(DIR_PROCESSED / "g4_radar.csv")
-    g5 = pd.read_csv(DIR_PROCESSED / "g5_historical_inmig.csv")
-    moran_lisa = pd.read_csv(DIR_PROCESSED / "moran_lisa.csv")
-
-    with open(DIR_PROCESSED / "moran_stats.json", "r") as f:
-        moran_stats = json.load(f)
-
-    return g1, g2_macro, regional, g3, g4, g5, moran_lisa, moran_stats
+    """Lee los CSV livianos de data_dashboard/ (uno por gráfico)."""
+    g1 = pd.read_csv(DIR_DATA / "grafico_A_distribucion_nacional.csv")
+    g2_macro = pd.read_csv(DIR_DATA / "grafico_B_macrozonas.csv")
+    regional = pd.read_csv(DIR_DATA / "grafico_C_sobrerrepresentacion.csv")
+    g3 = pd.read_csv(DIR_DATA / "grafico_D_sankey_norte_grande.csv")  # D
+    g3_e = pd.read_csv(DIR_DATA / "grafico_E_origen_norte_grande.csv")  # E
+    g4 = pd.read_csv(DIR_DATA / "grafico_F_dumbbell_carencias.csv")
+    g5 = pd.read_csv(DIR_DATA / "grafico_G_evolucion_inmigrantes.csv")
+    return g1, g2_macro, regional, g3, g3_e, g4, g5
 
 
 @st.cache_data
 def cargar_lisa_comunal():
-    """Carga el GeoJSON con la clasificacion LISA por comuna del Norte
-    Grande (pre-procesado por zip/preprocess_H_lisa_comunal.py).
-    Devuelve un GeoDataFrame en EPSG:4326 listo para Plotly."""
-    path = DIR_PROCESSED / "H_lisa_norte_grande.geojson"
-    if not path.exists():
+    """Reconstruye el GeoDataFrame del mapa LISA comunal del Norte Grande
+    uniendo el CSV liviano de atributos (grafico_H_lisa_comunal.csv) con la
+    geometría comunal simplificada (comunas_norte_grande_simplificado.geojson)
+    por la clave `comuna_norm`. Devuelve un GeoDataFrame en EPSG:4326."""
+    csv_path = DIR_DATA / "grafico_H_lisa_comunal.csv"
+    geo_path = DIR_DATA / "comunas_norte_grande_simplificado.geojson"
+    if not csv_path.exists() or not geo_path.exists():
         return gpd.GeoDataFrame()
-    gdf = gpd.read_file(path)
+    attrs = pd.read_csv(csv_path)
+    geo = gpd.read_file(geo_path)
+    gdf = geo.merge(attrs, on="comuna_norm", how="left")
+    if gdf.crs is None:
+        gdf.set_crs(epsg=4326, inplace=True)
     return gdf
 
 # Cargar todos los recursos
 gdf_chile = cargar_geojson()
-df_g1, df_g2_macro, df_regional, df_g3, df_g4, df_g5, df_spatial, stats_moran = cargar_datos_procesados()
+(df_g1, df_g2_macro, df_regional, df_g3, df_g3_e, df_g4,
+ df_g5) = cargar_datos_procesados()
 gdf_lisa_ng = cargar_lisa_comunal()
 
 # =============================================================================
@@ -1258,9 +1265,9 @@ def plot_lisa_comunal_norte_grande(gdf_lisa_ng):
             x=0.5, y=0.5, xref="paper", yref="paper",
             text=("<b>Mapa LISA no disponible</b><br>"
                   "<i>Ejecuta primero "
-                  "<code>zip/preprocess_H_lisa_comunal.py</code> para "
-                  "generar <code>processed_data/"
-                  "H_lisa_norte_grande.geojson</code>.</i>"),
+                  "<code>preparar_data_dashboard.py</code> para generar "
+                  "<code>data_dashboard/grafico_H_lisa_comunal.csv</code> y "
+                  "<code>comunas_norte_grande_simplificado.geojson</code>.</i>"),
             showarrow=False, font=dict(size=12, color="#7F8C8D",
                                         family=FONT_FAMILY),
             align="center")
@@ -1561,7 +1568,7 @@ with col_d:
     st.plotly_chart(fig_sankey, use_container_width=True)
 with col_e:
     fig_barras = plot_a4_g3_barras(
-        df_g3,
+        df_g3_e,
         pobreza_visibles=f_pobreza,
         origen_filtro=f_origen,
         resaltar_origen=f_resaltar_origen,

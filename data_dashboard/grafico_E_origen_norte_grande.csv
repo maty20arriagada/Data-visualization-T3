@@ -1,7 +1,170 @@
-origen_jefe,estado_pob,expr
-Hogares chilenos,Pobreza ingresos y multidim.,12657.0
-Hogares chilenos,Pobreza multidimensional,27003.0
-Hogares chilenos,Pobreza por ingresos,35776.0
-Hogares inmigrantes,Pobreza ingresos y multidim.,13522.0
-Hogares inmigrantes,Pobreza multidimensional,11475.0
-Hogares inmigrantes,Pobreza por ingresos,17136.0
+origen_jefe,estado_pob,area_f,sexo_jefe,edad_tramo,quintil,expr
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,58.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,135.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,100.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,43.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,90.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,90.0
+Hogares chilenos,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),III,17.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1958.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,787.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,161.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,245.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1019.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,77.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,3856.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,994.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,976.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,224.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,1559.0
+Hogares chilenos,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,268.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,9.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,62.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,134.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,302.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,91.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,102.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,75.0
+Hogares chilenos,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,96.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,5.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,37.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,475.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,115.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,56.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,66.0
+Hogares chilenos,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,67.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,611.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1980.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,2613.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1640.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,395.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,121.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,71.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,131.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,76.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,29.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,1128.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,1486.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,1040.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,525.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,204.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,813.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,3688.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,2496.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,644.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,104.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,298.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,198.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,158.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,1431.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,1765.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,1339.0
+Hogares chilenos,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,327.0
+Hogares chilenos,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,167.0
+Hogares chilenos,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,113.0
+Hogares chilenos,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,18.0
+Hogares chilenos,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,330.0
+Hogares chilenos,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,132.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,493.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,259.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,303.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,15.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,122.0
+Hogares chilenos,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,12.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,4852.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,2570.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,151.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,840.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,616.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,4355.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,572.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,64.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,8654.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,2849.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,16.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,1692.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,674.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,16.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,5238.0
+Hogares chilenos,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,653.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,525.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,33.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,303.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),II,167.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,48.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,471.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,87.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,264.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,13.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1759.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,1105.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,330.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,530.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,72.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,23.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,3943.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,2048.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),III,14.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,992.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,447.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,198.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,121.0
+Hogares inmigrantes,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),III,29.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,126.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,290.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,235.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,7.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,284.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Joven (≤29),IV,30.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,30.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,263.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,224.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,118.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,134.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Joven (≤29),III,9.0
+Hogares inmigrantes,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,28.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1119.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1106.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,568.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,116.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,400.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,601.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,153.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,23.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,57.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,33.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,368.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,1573.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,1327.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,713.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,78.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,543.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,434.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,101.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,206.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,122.0
+Hogares inmigrantes,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,56.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,341.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,63.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,19.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,570.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,534.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,165.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,11.0
+Hogares inmigrantes,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,62.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,1380.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,2224.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,201.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,502.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,184.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,171.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,150.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,4481.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,3353.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,141.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,1573.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,719.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,54.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,144.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,66.0
+Hogares inmigrantes,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,28.0

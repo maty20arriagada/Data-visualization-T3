@@ -120,13 +120,38 @@ def clasificar_pobreza(es_pob_ing, es_pob_multi):
     return "Fuera de pobreza"
 
 
+# --- Dimensiones de filtro (drill-down) -------------------------------------
+# Columnas categóricas del jefe de hogar que se guardan en los cubos para
+# permitir filtrado/recalculo real en el dashboard. Niveles fijos y pocos,
+# de modo que los cubos siguen pesando KB.
+DIMS_FILTRO = ["area_f", "sexo_jefe", "edad_tramo", "quintil"]
+
+
+def agregar_dims_filtro(df_h):
+    """Agrega al DataFrame de jefes las 4 dimensiones de filtro. Los nulos
+    se etiquetan 'Sin dato' para que la suma del cubo reproduzca el total
+    (y el filtro 'Todas/Todos' sea exacto)."""
+    df = df_h.copy()
+    df["area_f"] = df["area"].map({1: "Urbano", 2: "Rural"}).fillna("Sin dato")
+    df["sexo_jefe"] = df["sexo"].map({1: "Hombre", 2: "Mujer"}).fillna("Sin dato")
+    df["edad_tramo"] = pd.cut(
+        pd.to_numeric(df["edad"], errors="coerce"),
+        bins=[-np.inf, 29, 59, np.inf],
+        labels=["Joven (≤29)", "Adulto (30-59)", "Mayor (60+)"]
+    ).astype("object").fillna("Sin dato")
+    df["quintil"] = df["qaut"].map(
+        {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V"}).fillna("Sin dato")
+    return df
+
+
 # =============================================================================
 # 1. CARGA DE LA BASE 2024 (parquet) Y CONSTRUCCION DE df_h (jefes de hogar)
 # =============================================================================
 def cargar_hogares_2024():
     print(f"Leyendo {PARQUET_2024.name} ...")
     cols_base = ["folio", "pco1_a", "expr", "region", "area", "pobreza",
-                 "pobreza_multi", "lugar_nac", "estrato"]
+                 "pobreza_multi", "lugar_nac", "estrato",
+                 "sexo", "edad", "qaut"]  # 3 últimas: dimensiones de filtro
     cols = list(cols_base)
     for dv in DIMENSIONES_MD_2015.values():
         cols += dv
@@ -151,6 +176,7 @@ def cargar_hogares_2024():
     df_h["zona"] = df_h["region"].map(REGION_A_ZONA)
     df_h["origen_jefe"] = df_h["lugar_nac"].map(
         {0: "Hogares chilenos", 1: "Hogares inmigrantes"})
+    df_h = agregar_dims_filtro(df_h)
     print(f"  {len(df_h):,} hogares (jefes) tras limpieza.")
     return df_h
 
@@ -159,60 +185,38 @@ def cargar_hogares_2024():
 # 2. GRAFICOS A–F (todos derivados del parquet 2024)
 # =============================================================================
 def graf_A(df_h):
-    print("A · Distribución nacional ...")
-    agg = df_h.groupby("estado_pob").agg(
+    # Cubo nacional: estado_pob x dims de filtro. La app suma sobre las dims
+    # no seleccionadas para recomputar el donut con drill-down real.
+    print("A · Distribución nacional (cubo) ...")
+    agg = df_h.groupby(["estado_pob"] + DIMS_FILTRO, observed=True).agg(
         expr=("expr", "sum"), n=("expr", "count")).reset_index()
+    agg = agg[agg["expr"] > 0]
     agg.to_csv(DIR_OUT / "grafico_A_distribucion_nacional.csv", index=False)
-    return agg
 
 
 def graf_B(df_h):
-    print("B · Composición por macrozona ...")
+    # Cubo zonal: zona x estado_pob x dims (solo hogares pobres).
+    print("B · Composición por macrozona (cubo) ...")
     dfp = df_h[(df_h["es_pobre"] == 1) & df_h["zona"].notna()].copy()
-    agg = dfp.groupby(["zona", "estado_pob"]).agg(
+    agg = dfp.groupby(["zona", "estado_pob"] + DIMS_FILTRO, observed=True).agg(
         expr=("expr", "sum"), n=("expr", "count")).reset_index()
+    agg = agg[agg["expr"] > 0]
     agg.to_csv(DIR_OUT / "grafico_B_macrozonas.csv", index=False)
 
 
-def graf_C(df_h, agg_g1):
-    print("C · Sobrerrepresentación regional ...")
-    df_pobres = df_h[df_h["es_pobre"] == 1].copy()
-    dn = agg_g1[agg_g1["estado_pob"] != "Fuera de pobreza"]
-    tot_nac = dn["expr"].sum()
-    nat = {
-        "Pobreza por ingresos": round(dn.loc[dn.estado_pob == "Pobreza por ingresos", "expr"].values[0] / tot_nac * 100, 2),
-        "Pobreza multidimensional": round(dn.loc[dn.estado_pob == "Pobreza multidimensional", "expr"].values[0] / tot_nac * 100, 2),
-        "Pobreza ingresos y multidim.": round(dn.loc[dn.estado_pob == "Pobreza ingresos y multidim.", "expr"].values[0] / tot_nac * 100, 2),
-    }
-    filas = []
-    for reg_code, sub in df_pobres.groupby("region"):
-        tot = sub["expr"].sum()
-        pct = {
-            "Pobreza por ingresos": (sub.loc[sub.estado_pob == "Pobreza por ingresos", "expr"].sum() / tot * 100) if tot else 0,
-            "Pobreza multidimensional": (sub.loc[sub.estado_pob == "Pobreza multidimensional", "expr"].sum() / tot * 100) if tot else 0,
-            "Pobreza ingresos y multidim.": (sub.loc[sub.estado_pob == "Pobreza ingresos y multidim.", "expr"].sum() / tot * 100) if tot else 0,
-        }
-        pred = max(pct, key=pct.get)
-        diffs = {k: pct[k] - nat[k] for k in pct}
-        cat_s = max(diffs, key=diffs.get)
-        sub_tot = df_h[df_h["region"] == reg_code]
-        filas.append({
-            "region": int(reg_code),
-            "region_name": DICC_REGIONES.get(int(reg_code), f"Región {reg_code}"),
-            "zona": REGION_A_ZONA.get(int(reg_code)),
-            "pct_pob_ingresos": pct["Pobreza por ingresos"],
-            "pct_pob_multidimensional": pct["Pobreza multidimensional"],
-            "pct_pob_ambas": pct["Pobreza ingresos y multidim."],
-            "predominante_tipo": pred, "predominante_pct": pct[pred],
-            "n_sample_tot": len(sub_tot), "n_expanded_tot": sub_tot["expr"].sum(),
-            "n_sample_poor": len(sub), "n_expanded_poor": tot,
-            "diff_ingresos": diffs["Pobreza por ingresos"],
-            "diff_multi": diffs["Pobreza multidimensional"],
-            "diff_ambas": diffs["Pobreza ingresos y multidim."],
-            "cat_sobrerep": cat_s, "val_sobrerep": diffs[cat_s],
-        })
-    pd.DataFrame(filas).to_csv(
-        DIR_OUT / "grafico_C_sobrerrepresentacion.csv", index=False)
+def graf_C(df_h):
+    # Cubo regional: region x estado_pob x dims, TODOS los hogares (incluye
+    # 'Fuera de pobreza'). La app recomputa %tipos entre pobres, predominante,
+    # sobrerrepresentación vs nacional y tamaños muestrales según el filtro.
+    print("C · Sobrerrepresentación regional (cubo) ...")
+    agg = df_h.groupby(["region", "estado_pob"] + DIMS_FILTRO,
+                       observed=True).agg(
+        expr=("expr", "sum"), n=("expr", "count")).reset_index()
+    agg = agg[agg["expr"] > 0]
+    agg["region"] = agg["region"].astype(int)
+    agg["region_name"] = agg["region"].map(DICC_REGIONES)
+    agg["zona"] = agg["region"].map(REGION_A_ZONA)
+    agg.to_csv(DIR_OUT / "grafico_C_sobrerrepresentacion.csv", index=False)
 
 
 def _trifecta(row):
@@ -236,33 +240,40 @@ def graf_D_E(df_h):
     ng["total_car_20"] = ng[cols_20].sum(axis=1)
     ng["trifecta"] = ng.apply(_trifecta, axis=1)
 
-    # D: flujos estado -> origen -> trifecta
+    # D: flujos estado -> origen -> trifecta. El Sankey no se filtra por las
+    # dimensiones demográficas (universo fijo), así que se mantiene agregado.
     agg_d = ng.groupby(["estado_pob", "origen_jefe", "trifecta"])["expr"].sum().reset_index()
     agg_d.to_csv(DIR_OUT / "grafico_D_sankey_norte_grande.csv", index=False)
 
-    # E: composición por origen (colapsa la trifecta) -> origen x estado
-    agg_e = ng.groupby(["origen_jefe", "estado_pob"])["expr"].sum().reset_index()
+    # E: cubo origen x estado x dims (Norte Grande, solo pobres) para
+    # drill-down real en las barras por origen.
+    agg_e = ng.groupby(["origen_jefe", "estado_pob"] + DIMS_FILTRO,
+                       observed=True).agg(
+        expr=("expr", "sum"), n=("expr", "count")).reset_index()
+    agg_e = agg_e[agg_e["expr"] > 0]
     agg_e.to_csv(DIR_OUT / "grafico_E_origen_norte_grande.csv", index=False)
 
 
 def graf_F(df_h):
-    print("F · Dumbbell de carencias (Norte Grande) ...")
+    # Cubo dumbbell: origen x dims. Para recomputar el promedio ponderado de
+    # carencias por dimensión sobre cualquier subconjunto, se guarda por combo
+    # la suma de pesos (expr) y la suma ponderada de cada score (w_<dim> =
+    # Σ score·expr). En la app: promedio = Σw_<dim> / Σexpr.
+    print("F · Dumbbell de carencias (cubo) ...")
     ng = df_h[(df_h["zona"] == "Norte Grande") & df_h["origen_jefe"].notna()].copy()
     for dv in DIMENSIONES_MD_2015.values():
         for col in dv:
             ng[col] = pd.to_numeric(ng[col], errors="coerce").fillna(0)
     for dim, inds in DIMENSIONES_MD_2015.items():
-        ng[f"score_{dim}"] = ng[inds].sum(axis=1)
-    filas = []
-    for g in ["Hogares chilenos", "Hogares inmigrantes"]:
-        sub = ng[ng["origen_jefe"] == g]
-        row = {"origen_jefe": g, "n_hog": len(sub), "n_pond": sub["expr"].sum()}
-        for dim in DIMENSIONES_MD_2015:
-            row[dim] = (np.average(sub[f"score_{dim}"], weights=sub["expr"])
-                        if len(sub) else 0)
-        filas.append(row)
-    pd.DataFrame(filas).to_csv(
-        DIR_OUT / "grafico_F_dumbbell_carencias.csv", index=False)
+        ng[f"w_{dim}"] = ng[inds].sum(axis=1) * ng["expr"]  # score·peso
+
+    aggs = {"expr": ("expr", "sum"), "n": ("expr", "count")}
+    for dim in DIMENSIONES_MD_2015:
+        aggs[f"w_{dim}"] = (f"w_{dim}", "sum")
+    cubo = ng.groupby(["origen_jefe"] + DIMS_FILTRO,
+                      observed=True).agg(**aggs).reset_index()
+    cubo = cubo[cubo["expr"] > 0]
+    cubo.to_csv(DIR_OUT / "grafico_F_dumbbell_carencias.csv", index=False)
 
 
 # =============================================================================
@@ -338,9 +349,9 @@ def main():
     print("Preparando data_dashboard/ (insumos livianos para Streamlit)")
     print("=" * 70)
     df_h = cargar_hogares_2024()
-    agg_g1 = graf_A(df_h)
+    graf_A(df_h)
     graf_B(df_h)
-    graf_C(df_h, agg_g1)
+    graf_C(df_h)
     graf_D_E(df_h)
     graf_F(df_h)
     graf_G()

@@ -282,11 +282,142 @@ def cargar_lisa_comunal():
         gdf.set_crs(epsg=4326, inplace=True)
     return gdf
 
-# Cargar todos los recursos
+# Cargar todos los recursos. df_g1/g2/regional/g3_e/g4 ahora son CUBOS:
+# incluyen las dimensiones de filtro (area_f, sexo_jefe, edad_tramo, quintil).
 gdf_chile = cargar_geojson()
 (df_g1, df_g2_macro, df_regional, df_g3, df_g3_e, df_g4,
  df_g5) = cargar_datos_procesados()
 gdf_lisa_ng = cargar_lisa_comunal()
+
+
+# =============================================================================
+# FILTROS DEMOGRAFICOS (drill-down real sobre los cubos)
+# =============================================================================
+# Dimensiones de filtro presentes en los cubos y su orden de niveles.
+DIMS_FILTRO = ["area_f", "sexo_jefe", "edad_tramo", "quintil"]
+NIVELES_AREA = ["Urbano", "Rural"]
+NIVELES_SEXO = ["Hombre", "Mujer"]
+NIVELES_EDAD = ["Joven (≤29)", "Adulto (30-59)", "Mayor (60+)"]
+NIVELES_QUINTIL = ["I", "II", "III", "IV", "V"]
+
+
+def _aplicar_filtros_demo(cubo, filtros):
+    """Filtra un cubo por las dimensiones demográficas seleccionadas.
+    `filtros` = dict {columna: seleccion}. Una selección None / [] / que
+    cubre todos los niveles NO filtra (se interpreta como 'todas'). Soporta
+    selección única (str) o múltiple (lista)."""
+    df = cubo
+    for col, sel in filtros.items():
+        if col not in df.columns or sel is None:
+            continue
+        vals = [sel] if isinstance(sel, str) else list(sel)
+        if not vals:
+            continue
+        df = df[df[col].isin(vals)]
+    return df
+
+
+def reducir_A(cubo, filtros):
+    """Cubo -> donut: estado_pob, expr, n (suma sobre dims no filtradas)."""
+    d = _aplicar_filtros_demo(cubo, filtros)
+    return (d.groupby("estado_pob", as_index=False)
+            .agg(expr=("expr", "sum"), n=("n", "sum")))
+
+
+def reducir_B(cubo, filtros):
+    """Cubo -> macrozonas: zona, estado_pob, expr, n."""
+    d = _aplicar_filtros_demo(cubo, filtros)
+    return (d.groupby(["zona", "estado_pob"], as_index=False)
+            .agg(expr=("expr", "sum"), n=("n", "sum")))
+
+
+def reducir_E(cubo, filtros):
+    """Cubo -> barras Norte Grande: origen_jefe, estado_pob, expr."""
+    d = _aplicar_filtros_demo(cubo, filtros)
+    return (d.groupby(["origen_jefe", "estado_pob"], as_index=False)
+            .agg(expr=("expr", "sum")))
+
+
+def reducir_F(cubo, filtros):
+    """Cubo -> dumbbell: origen_jefe, n_hog, n_pond y promedio ponderado por
+    dimensión = Σ(w_dim) / Σ(expr) sobre el subconjunto filtrado."""
+    d = _aplicar_filtros_demo(cubo, filtros)
+    dims = ["Educacion", "Salud", "Trabajo y Seg. Social",
+            "Vivienda y Entorno", "Redes y Cohesion"]
+    filas = []
+    for origen, sub in d.groupby("origen_jefe"):
+        tot = sub["expr"].sum()
+        row = {"origen_jefe": origen,
+               "n_hog": int(sub["n"].sum()),
+               "n_pond": float(tot)}
+        for dim in dims:
+            wcol = f"w_{dim}"
+            row[dim] = (sub[wcol].sum() / tot) if tot > 0 else 0.0
+        filas.append(row)
+    return pd.DataFrame(filas)
+
+
+def reducir_C(cubo, filtros):
+    """Cubo regional (TODOS los hogares) -> tabla de sobrerrepresentación,
+    recomputada sobre el subconjunto filtrado: por región, % de cada tipo de
+    pobreza entre los pobres, predominante, diferencia vs promedio nacional y
+    tamaños muestrales. Replica exactamente la lógica del preprocesamiento."""
+    d = _aplicar_filtros_demo(cubo, filtros)
+    pobres_lbls = ["Pobreza por ingresos", "Pobreza multidimensional",
+                   "Pobreza ingresos y multidim."]
+    # Promedio nacional entre pobres (del subconjunto)
+    dp = d[d["estado_pob"].isin(pobres_lbls)]
+    tot_nac = dp["expr"].sum()
+    nat = {}
+    for lbl in pobres_lbls:
+        v = dp.loc[dp["estado_pob"] == lbl, "expr"].sum()
+        nat[lbl] = round(v / tot_nac * 100, 2) if tot_nac else 0.0
+    filas = []
+    for reg, sub in d.groupby("region"):
+        sub_p = sub[sub["estado_pob"].isin(pobres_lbls)]
+        tot = sub_p["expr"].sum()
+        pct = {}
+        for lbl in pobres_lbls:
+            v = sub_p.loc[sub_p["estado_pob"] == lbl, "expr"].sum()
+            pct[lbl] = (v / tot * 100) if tot else 0.0
+        pred = max(pct, key=pct.get)
+        diffs = {k: pct[k] - nat[k] for k in pct}
+        cat_s = max(diffs, key=diffs.get)
+        reg = int(reg)
+        filas.append({
+            "region": reg,
+            "region_name": DICC_REGIONES_APP.get(reg, f"Región {reg}"),
+            "zona": REGION_A_ZONA_APP.get(reg),
+            "pct_pob_ingresos": pct["Pobreza por ingresos"],
+            "pct_pob_multidimensional": pct["Pobreza multidimensional"],
+            "pct_pob_ambas": pct["Pobreza ingresos y multidim."],
+            "predominante_tipo": pred, "predominante_pct": pct[pred],
+            "n_sample_tot": int(sub["n"].sum()),
+            "n_expanded_tot": float(sub["expr"].sum()),
+            "n_sample_poor": int(sub_p["n"].sum()),
+            "n_expanded_poor": float(tot),
+            "diff_ingresos": diffs["Pobreza por ingresos"],
+            "diff_multi": diffs["Pobreza multidimensional"],
+            "diff_ambas": diffs["Pobreza ingresos y multidim."],
+            "cat_sobrerep": cat_s, "val_sobrerep": diffs[cat_s],
+        })
+    return pd.DataFrame(filas)
+
+
+# Mapeos para reducir_C (region -> nombre / zona)
+REGION_A_ZONA_APP = {
+    15: "Norte Grande", 1: "Norte Grande", 2: "Norte Grande",
+    3: "Norte Chico", 4: "Norte Chico",
+    5: "Zona Central", 13: "Zona Central", 6: "Zona Central", 7: "Zona Central",
+    16: "Zona Sur", 8: "Zona Sur", 9: "Zona Sur", 14: "Zona Sur", 10: "Zona Sur",
+    11: "Zona Austral", 12: "Zona Austral",
+}
+DICC_REGIONES_APP = {
+    15: "Arica y Parinacota", 1: "Tarapacá", 2: "Antofagasta", 3: "Atacama",
+    4: "Coquimbo", 5: "Valparaíso", 13: "Metropolitana", 6: "O'Higgins",
+    7: "Maule", 16: "Ñuble", 8: "Biobío", 9: "La Araucanía",
+    14: "Los Ríos", 10: "Los Lagos", 11: "Aysén", 12: "Magallanes",
+}
 
 # =============================================================================
 # FUNCIONES DE PLOTEO (A4 Fieles al Reporte de la Entrega Anterior)
@@ -819,7 +950,12 @@ def plot_a4_g4_dumbbell(df_radar, origen_filtro="Ambos",
     chil = df_radar[df_radar["origen_jefe"] == "Hogares chilenos"].iloc[0]
     inmi = df_radar[df_radar["origen_jefe"] == "Hogares inmigrantes"].iloc[0]
 
-    n_mues = 9373  # tamaño muestral fijo para Norte Grande
+    # n muestral recalculado segun el filtro (suma de n_hog por origen);
+    # cae al valor total si la columna no esta disponible.
+    if "n_hog" in df_radar.columns:
+        n_mues = int(df_radar["n_hog"].sum())
+    else:
+        n_mues = 9373
     n_pond = float(chil["n_pond"]) + float(inmi["n_pond"])
     n_label = _formato_n(n_mues, n_pond)
 
@@ -1403,6 +1539,39 @@ with st.sidebar:
         help="Solo afecta al grafico G (evolucion historica de inmigracion).",
     )
 
+    # --- Filtrar población: drill-down REAL sobre los gráficos 2024 ------
+    st.markdown(
+        "<h3 style='border-bottom: 1px solid #ECF0F1; "
+        "padding-bottom: 8px;'>Filtrar población</h3>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35; "
+        "margin-top:-0.3rem;'>Estos filtros <b>recalculan</b> los gráficos A, "
+        "B, C, E y F sobre el subconjunto de hogares elegido (CASEN 2024).</p>",
+        unsafe_allow_html=True,
+    )
+    f_area = st.radio(
+        "Área de residencia",
+        options=["Todas", "Urbano", "Rural"], index=0, horizontal=True,
+        help="Recalcula los gráficos solo con hogares urbanos o rurales.",
+    )
+    f_sexo = st.radio(
+        "Sexo del jefe de hogar",
+        options=["Todos", "Hombre", "Mujer"], index=0, horizontal=True,
+        help="Recalcula según el sexo de la jefatura de hogar.",
+    )
+    f_edad = st.multiselect(
+        "Tramo de edad del jefe",
+        options=NIVELES_EDAD, default=NIVELES_EDAD,
+        help="Joven ≤29, Adulto 30-59, Mayor 60+. Vacío = todos.",
+    )
+    f_quintil = st.multiselect(
+        "Quintil de ingreso autónomo",
+        options=NIVELES_QUINTIL, default=NIVELES_QUINTIL,
+        help="I = 20% más pobre … V = 20% más rico. Vacío = todos.",
+    )
+
     # --- Modo resaltar: enfasis VISUAL, no recalcula nada ----------------
     st.markdown(
         "<h3 style='border-bottom: 1px solid #ECF0F1; "
@@ -1435,11 +1604,32 @@ with st.sidebar:
     st.markdown("<hr style='border:none; border-top:1px solid #ECF0F1; margin: 1.2rem 0;'>", unsafe_allow_html=True)
     st.markdown(
         "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35;'>"
-        "<b>Nota:</b> Los graficos C (mapa de sobrerrepresentacion) y H "
-        "(LISA comunal) no reaccionan a filtros ni resaltado: su universo "
-        "es fijo por diseno metodologico.</p>",
+        "<b>Nota:</b> Los gráficos D (Sankey trifecta), G (serie histórica) y "
+        "H (LISA comunal) no reaccionan a 'Filtrar población': su universo es "
+        "fijo por diseño metodológico.</p>",
         unsafe_allow_html=True,
     )
+
+# --- Diccionario de filtros demográficos (drill-down) ------------------------
+# default (todo seleccionado) -> None -> NO filtra -> resultado idéntico al
+# de la versión sin filtros (incluye filas 'Sin dato').
+filtros_demo = {
+    "area_f": None if f_area == "Todas" else f_area,
+    "sexo_jefe": None if f_sexo == "Todos" else f_sexo,
+    "edad_tramo": (None if (not f_edad or set(f_edad) == set(NIVELES_EDAD))
+                   else f_edad),
+    "quintil": (None if (not f_quintil or set(f_quintil) == set(NIVELES_QUINTIL))
+                else f_quintil),
+}
+hay_filtro_demo = any(v is not None for v in filtros_demo.values())
+
+# Reducir los cubos según los filtros (drill-down real). df_g3 (Sankey) y
+# df_g5 (histórico) no se filtran.
+df_g1_r = reducir_A(df_g1, filtros_demo)
+df_g2_r = reducir_B(df_g2_macro, filtros_demo)
+df_regional_r = reducir_C(df_regional, filtros_demo)
+df_g3_e_r = reducir_E(df_g3_e, filtros_demo)
+df_g4_r = reducir_F(df_g4, filtros_demo)
 
 
 # =============================================================================
@@ -1490,14 +1680,14 @@ st.markdown(header_html, unsafe_allow_html=True)
 col_a, col_b = st.columns(2)
 with col_a:
     fig_donut = plot_a4_g1_donut(
-        df_g1,
+        df_g1_r,
         pobreza_visibles=f_pobreza,
         resaltar_pobreza=f_resaltar_pobreza,
     )
     st.plotly_chart(fig_donut, use_container_width=True)
 with col_b:
     fig_macro = plot_a4_g2_macrozonas(
-        df_g2_macro,
+        df_g2_r,
         pobreza_visibles=f_pobreza,
         macrozona_destacar=f_macrozona,
         resaltar_pobreza=f_resaltar_pobreza,
@@ -1551,15 +1741,15 @@ st.write("") # Espaciador
 
 col_map1, col_map2, col_map3, col_map4, col_map5 = st.columns(5)
 with col_map1:
-    st.plotly_chart(plot_zone_map("Norte Grande", gdf_chile, df_regional), use_container_width=True)
+    st.plotly_chart(plot_zone_map("Norte Grande", gdf_chile, df_regional_r), use_container_width=True)
 with col_map2:
-    st.plotly_chart(plot_zone_map("Norte Chico", gdf_chile, df_regional), use_container_width=True)
+    st.plotly_chart(plot_zone_map("Norte Chico", gdf_chile, df_regional_r), use_container_width=True)
 with col_map3:
-    st.plotly_chart(plot_zone_map("Zona Central", gdf_chile, df_regional), use_container_width=True)
+    st.plotly_chart(plot_zone_map("Zona Central", gdf_chile, df_regional_r), use_container_width=True)
 with col_map4:
-    st.plotly_chart(plot_zone_map("Zona Sur", gdf_chile, df_regional), use_container_width=True)
+    st.plotly_chart(plot_zone_map("Zona Sur", gdf_chile, df_regional_r), use_container_width=True)
 with col_map5:
-    st.plotly_chart(plot_zone_map("Zona Austral", gdf_chile, df_regional), use_container_width=True)
+    st.plotly_chart(plot_zone_map("Zona Austral", gdf_chile, df_regional_r), use_container_width=True)
 
 # --- Fila 3: Gráficos D y E ---
 col_d, col_e = st.columns(2)
@@ -1568,7 +1758,7 @@ with col_d:
     st.plotly_chart(fig_sankey, use_container_width=True)
 with col_e:
     fig_barras = plot_a4_g3_barras(
-        df_g3_e,
+        df_g3_e_r,
         pobreza_visibles=f_pobreza,
         origen_filtro=f_origen,
         resaltar_origen=f_resaltar_origen,
@@ -1580,7 +1770,7 @@ with col_e:
 col_f, col_g = st.columns(2)
 with col_f:
     fig_dumbbell = plot_a4_g4_dumbbell(
-        df_g4,
+        df_g4_r,
         origen_filtro=f_origen,
         resaltar_origen=f_resaltar_origen,
     )

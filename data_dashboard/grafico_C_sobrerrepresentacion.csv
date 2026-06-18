@@ -1,17 +1,2253 @@
-region,region_name,zona,pct_pob_ingresos,pct_pob_multidimensional,pct_pob_ambas,predominante_tipo,predominante_pct,n_sample_tot,n_expanded_tot,n_sample_poor,n_expanded_poor,diff_ingresos,diff_multi,diff_ambas,cat_sobrerep,val_sobrerep
-1,Tarapacá,Norte Grande,42.69790239274797,31.985875408453673,25.316222198798354,Pobreza por ingresos,42.69790239274797,3093,129731.0,913,37948.0,-5.452097607252028,-1.0041245915463293,6.456222198798354,Pobreza ingresos y multidim.,6.456222198798354
-2,Antofagasta,Norte Grande,44.525102615117135,34.48764137584915,20.987256009033715,Pobreza por ingresos,44.525102615117135,3505,235551.0,891,55791.0,-3.624897384882864,1.497641375849149,2.127256009033715,Pobreza ingresos y multidim.,2.127256009033715
-3,Atacama,Norte Chico,46.30014173176439,34.63199182570289,19.067866442532715,Pobreza por ingresos,46.30014173176439,3257,110514.0,972,30339.0,-1.8498582682356073,1.6419918257028883,0.20786644253271547,Pobreza multidimensional,1.6419918257028883
-4,Coquimbo,Norte Chico,53.2518672536561,27.117285599786268,19.63084714655763,Pobreza por ingresos,53.2518672536561,3638,308690.0,1095,86089.0,5.101867253656103,-5.872714400213734,0.7708471465576316,Pobreza por ingresos,5.101867253656103
-5,Valparaíso,Zona Central,51.7095807418388,29.357739035158392,18.932680223002805,Pobreza por ingresos,51.7095807418388,8415,736648.0,2197,186186.0,3.5595807418388006,-3.6322609648416098,0.07268022300280563,Pobreza por ingresos,3.5595807418388006
-6,O'Higgins,Zona Central,48.68338846953512,32.304351833833486,19.0122596966314,Pobreza por ingresos,48.68338846953512,5324,370065.0,1459,97637.0,0.5333884695351188,-0.6856481661665157,0.1522596966314005,Pobreza por ingresos,0.5333884695351188
-7,Maule,Zona Central,64.30280090840273,19.959121877365632,15.738077214231645,Pobreza por ingresos,64.30280090840273,5578,439872.0,1766,132100.0,16.15280090840273,-13.03087812263437,-3.121922785768355,Pobreza por ingresos,16.15280090840273
-8,Biobío,Zona Sur,53.241032897965944,27.669095290000573,19.08987181203348,Pobreza por ingresos,53.241032897965944,8124,604105.0,2263,156879.0,5.091032897965945,-5.320904709999429,0.22987181203347973,Pobreza por ingresos,5.091032897965945
-9,La Araucanía,Zona Sur,64.48287251108805,15.810292221068856,19.7068352678431,Pobreza por ingresos,64.48287251108805,5458,383022.0,1987,127164.0,16.33287251108805,-17.179707778931146,0.846835267843101,Pobreza por ingresos,16.33287251108805
-10,Los Lagos,Zona Sur,49.880021857404195,31.657599011665198,18.462379130930604,Pobreza por ingresos,49.880021857404195,4280,339814.0,1181,84182.0,1.7300218574041963,-1.332400988334804,-0.39762086906939587,Pobreza por ingresos,1.7300218574041963
-11,Aysén,Zona Austral,56.0411007440652,26.502893586866662,17.456005669068148,Pobreza por ingresos,56.0411007440652,1753,44166.0,353,8467.0,7.891100744065199,-6.48710641313334,-1.4039943309318517,Pobreza por ingresos,7.891100744065199
-12,Magallanes,Zona Austral,69.54507160909856,21.872367312552655,8.582561078348778,Pobreza por ingresos,69.54507160909856,2354,71086.0,330,9496.0,21.395071609098558,-11.117632687447347,-10.277438921651221,Pobreza por ingresos,21.395071609098558
-13,Metropolitana,Zona Central,37.131624497390234,43.983516934054315,18.88485856855545,Pobreza multidimensional,43.983516934054315,14151,2940786.0,3522,670749.0,-11.018375502609764,10.993516934054313,0.024858568555451654,Pobreza multidimensional,10.993516934054313
-14,Los Ríos,Zona Sur,59.72948981498786,21.22266866006354,19.04784152494861,Pobreza por ingresos,59.72948981498786,3433,151648.0,1041,42808.0,11.57948981498786,-11.767331339936462,0.18784152494860962,Pobreza por ingresos,11.57948981498786
-15,Arica y Parinacota,Norte Grande,49.57393483709273,29.665831244778612,20.760233918128655,Pobreza por ingresos,49.57393483709273,2795,85845.0,812,23940.0,1.4239348370927303,-3.3241687552213897,1.9002339181286558,Pobreza ingresos y multidim.,1.9002339181286558
-16,Ñuble,Zona Sur,60.327679894615514,22.75152313518854,16.92079697019595,Pobreza por ingresos,60.327679894615514,3496,191628.0,1164,60730.0,12.177679894615515,-10.238476864811464,-1.9392030298040481,Pobreza por ingresos,12.177679894615515
+region,estado_pob,area_f,sexo_jefe,edad_tramo,quintil,expr,n,region_name,zona
+1,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,3.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,390.0,12,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,504.0,8,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,248.0,6,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,90.0,6,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,25.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,43.0,3,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,24.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,172.0,6,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,255.0,11,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,314.0,6,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,573.0,12,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,24.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,98.0,3,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,178.0,8,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,503.0,10,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,112.0,3,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,44.0,2,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,2.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,106.0,6,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,144.0,5,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,127.0,5,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,5.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,14.0,1,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,460.0,10,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,3300.0,68,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,6306.0,132,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,10288.0,198,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,11592.0,197,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,827.0,14,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,725.0,15,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,1383.0,26,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,1193.0,20,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,1168.0,37,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,2143.0,57,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,3470.0,93,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,2866.0,76,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,2305.0,56,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,622.0,12,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,4513.0,121,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,8120.0,201,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,7236.0,178,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,4957.0,130,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,340.0,8,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,1429.0,30,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1060.0,26,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,926.0,23,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,1777.0,60,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,2256.0,74,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,3003.0,90,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,2538.0,76,Tarapacá,Norte Grande
+1,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,982.0,33,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,147.0,3,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,127.0,2,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,155.0,1,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),II,118.0,1,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,116.0,7,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,17.0,1,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,164.0,2,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,26.0,1,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1147.0,27,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,830.0,14,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,174.0,3,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,383.0,6,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,504.0,10,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,77.0,2,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,2405.0,63,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,1195.0,33,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),III,14.0,1,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,1105.0,11,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,162.0,4,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,509.0,17,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,203.0,6,Tarapacá,Norte Grande
+1,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),III,29.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,119.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,162.0,5,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,33.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,41.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,56.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,54.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,32.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,18.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,85.0,3,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,172.0,4,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,134.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,30.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,30.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,119.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,894.0,20,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1140.0,22,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,575.0,15,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,194.0,4,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,69.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,163.0,3,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,137.0,3,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,229.0,6,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,354.0,9,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,223.0,7,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,227.0,6,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,165.0,5,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,104.0,3,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,429.0,12,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,1748.0,47,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,1845.0,43,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,487.0,11,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,26.0,1,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,218.0,4,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,78.0,2,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,466.0,14,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,695.0,21,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,432.0,13,Tarapacá,Norte Grande
+1,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,155.0,4,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,34.0,2,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,64.0,3,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,296.0,10,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,75.0,2,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,429.0,9,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,304.0,5,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,47.0,2,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,12.0,1,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,2040.0,42,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,1688.0,32,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,174.0,3,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,366.0,7,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,416.0,9,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,1141.0,33,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,174.0,4,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,33.0,1,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,3664.0,96,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,2208.0,50,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,67.0,2,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,886.0,17,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,510.0,7,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,54.0,2,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,1269.0,43,Tarapacá,Norte Grande
+1,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,252.0,11,Tarapacá,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,174.0,7,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,343.0,11,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,1237.0,18,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,409.0,11,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,3.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,26.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,397.0,3,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,3.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,166.0,5,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,47.0,3,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,190.0,8,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,119.0,8,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,219.0,5,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,14.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,49.0,4,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,296.0,8,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,153.0,6,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,462.0,8,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,7.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,84.0,2,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,3.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,229.0,6,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,168.0,6,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,43.0,3,Antofagasta,Norte Grande
+2,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,8.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,498.0,7,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,6496.0,81,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,12458.0,169,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,19262.0,236,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,26472.0,288,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,1118.0,13,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1241.0,18,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,2674.0,35,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,2677.0,29,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,2072.0,37,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,3661.0,67,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,7382.0,122,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,7905.0,125,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,5360.0,80,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,841.0,12,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,8624.0,136,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,13398.0,208,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,14415.0,208,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,10504.0,138,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,62.0,1,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,942.0,13,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,2191.0,29,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1450.0,21,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,752.0,12,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,2157.0,44,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,5360.0,95,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,6147.0,110,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,6388.0,109,Antofagasta,Norte Grande
+2,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,2404.0,42,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,234.0,2,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,41.0,2,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,42.0,1,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,75.0,4,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,47.0,2,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,58.0,3,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1814.0,28,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,895.0,12,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,200.0,3,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,353.0,3,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,338.0,7,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,4112.0,69,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,1548.0,24,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,601.0,8,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,349.0,4,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,816.0,15,Antofagasta,Norte Grande
+2,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,186.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,51.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,169.0,5,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,49.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,269.0,4,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,7.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,223.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Joven (≤29),IV,30.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,22.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,46.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,21.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,64.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,250.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,76.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,306.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,57.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Joven (≤29),III,9.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,56.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,30.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,18.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,492.0,6,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1705.0,27,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1990.0,28,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1236.0,15,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,317.0,4,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,52.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,166.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,565.0,6,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,657.0,9,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,721.0,12,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,610.0,11,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,321.0,7,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,74.0,2,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,490.0,8,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2452.0,37,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,1481.0,24,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,580.0,7,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,54.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,78.0,1,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,422.0,7,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,490.0,7,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,203.0,3,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,658.0,13,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,929.0,17,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,576.0,12,Antofagasta,Norte Grande
+2,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,169.0,4,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,176.0,4,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,68.0,3,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,29.0,7,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,30.0,2,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,124.0,6,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,308.0,4,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,219.0,3,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,26.0,2,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,62.0,4,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,2694.0,36,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,2471.0,28,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,78.0,1,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,743.0,8,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,178.0,3,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,2246.0,37,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,488.0,7,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,6157.0,98,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,2926.0,43,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,74.0,2,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,1903.0,19,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,663.0,9,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,2770.0,53,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,380.0,10,Antofagasta,Norte Grande
+2,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,28.0,1,Antofagasta,Norte Grande
+3,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,439.0,7,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,471.0,12,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,921.0,15,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,305.0,6,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,43.0,2,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,98.0,1,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,186.0,7,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,322.0,11,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,574.0,20,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,402.0,14,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,63.0,2,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,325.0,13,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,430.0,13,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,373.0,11,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,193.0,6,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,24.0,1,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,39.0,1,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,167.0,6,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,221.0,9,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,110.0,4,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,83.0,6,Atacama,Norte Chico
+3,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,68.0,3,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,193.0,7,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,3865.0,105,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,5252.0,131,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,7896.0,189,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,9862.0,204,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,18.0,1,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,311.0,5,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,838.0,14,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,1197.0,30,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,734.0,16,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,1988.0,69,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,2616.0,89,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,2960.0,97,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,3138.0,99,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,1946.0,61,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,513.0,16,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,3960.0,132,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,5523.0,170,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,5418.0,155,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,4143.0,112,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,54.0,2,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,315.0,9,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,1005.0,26,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,497.0,15,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,474.0,16,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,1630.0,62,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,2591.0,96,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,3165.0,105,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,1660.0,65,Atacama,Norte Chico
+3,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,556.0,17,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,119.0,5,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,10.0,1,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,185.0,7,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,437.0,11,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,39.0,1,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,110.0,2,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,852.0,26,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,252.0,6,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,119.0,3,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,31.0,1,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,273.0,11,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,74.0,2,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,1876.0,58,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,415.0,12,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,383.0,9,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,32.0,1,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,537.0,24,Atacama,Norte Chico
+3,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,41.0,2,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,22.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,227.0,4,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,86.0,4,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,31.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,159.0,6,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,266.0,9,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,52.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,163.0,4,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,55.0,3,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,81.0,3,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,34.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,93.0,4,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,74.0,3,Atacama,Norte Chico
+3,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,4.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,86.0,3,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,740.0,23,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,959.0,22,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,722.0,13,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,86.0,2,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,69.0,2,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,193.0,5,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,44.0,1,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,229.0,8,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,599.0,21,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,549.0,16,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,152.0,5,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,482.0,16,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,1233.0,37,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,547.0,18,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,385.0,9,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,70.0,2,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,170.0,4,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,133.0,5,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,528.0,17,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,454.0,17,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,471.0,17,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,190.0,6,Atacama,Norte Chico
+3,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,69.0,3,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,361.0,7,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,118.0,2,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,175.0,8,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,78.0,2,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,274.0,13,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,63.0,3,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,20.0,1,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,196.0,11,Atacama,Norte Chico
+3,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,65.0,3,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,1499.0,39,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,680.0,18,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,42.0,1,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,200.0,5,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,271.0,7,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,1268.0,44,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,274.0,9,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,4101.0,132,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,987.0,33,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,30.0,1,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,427.0,12,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,453.0,15,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,2170.0,92,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,279.0,14,Atacama,Norte Chico
+3,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,16.0,1,Atacama,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,700.0,8,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,1700.0,20,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,2705.0,34,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,4630.0,44,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,3330.0,32,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,64.0,1,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,149.0,2,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,317.0,2,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,3047.0,55,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,2884.0,43,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,3387.0,49,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,1806.0,24,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,651.0,12,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,1040.0,10,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,2125.0,28,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,2919.0,40,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,1533.0,19,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,654.0,7,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,190.0,2,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,341.0,1,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,31.0,1,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,2394.0,38,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,1879.0,29,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1840.0,32,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,904.0,14,Coquimbo,Norte Chico
+4,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,16.0,1,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,1364.0,10,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,10786.0,118,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,14429.0,141,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,15105.0,137,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,19235.0,140,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,80.0,1,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,1108.0,9,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1915.0,16,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,1959.0,19,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,1991.0,14,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,5711.0,89,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,6760.0,98,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,8888.0,116,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,6119.0,76,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,4256.0,49,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,1668.0,23,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,12919.0,148,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,12273.0,142,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,12866.0,130,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,7978.0,77,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,563.0,7,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,1667.0,18,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1858.0,16,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,840.0,8,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,6250.0,88,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,7448.0,103,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,7685.0,103,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,5613.0,72,Coquimbo,Norte Chico
+4,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,2031.0,27,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,244.0,4,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,236.0,4,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,272.0,3,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,559.0,10,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,19.0,1,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,662.0,11,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,202.0,2,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,446.0,6,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,47.0,1,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,2882.0,32,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,327.0,3,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),III,87.0,1,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,178.0,2,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,201.0,2,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),III,219.0,1,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1309.0,18,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,4377.0,49,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,894.0,9,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),III,67.0,1,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,1164.0,8,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,2347.0,32,Coquimbo,Norte Chico
+4,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,161.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,175.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,369.0,5,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,242.0,4,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,671.0,10,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,485.0,8,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,158.0,3,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,162.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,255.0,5,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,392.0,7,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,49.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,53.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,154.0,3,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,191.0,4,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,88.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,125.0,3,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,393.0,5,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1553.0,15,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1533.0,13,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1505.0,13,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,102.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,74.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,192.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,126.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,281.0,3,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,583.0,8,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,981.0,13,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,430.0,6,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,272.0,4,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,125.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,970.0,11,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2901.0,32,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,2001.0,22,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,973.0,9,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,261.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,153.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,242.0,1,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,329.0,2,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,1097.0,15,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,1416.0,15,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,1106.0,15,Coquimbo,Norte Chico
+4,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,177.0,2,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,2179.0,25,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,752.0,8,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,87.0,1,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,2929.0,47,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,245.0,5,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2948.0,46,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,132.0,2,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),III,38.0,1,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,292.0,4,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,1842.0,40,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,23.0,1,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,5703.0,60,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,1724.0,20,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,177.0,1,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,560.0,7,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,524.0,6,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,3830.0,55,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,300.0,5,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,9599.0,125,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,3022.0,38,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,68.0,1,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,1492.0,15,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,427.0,4,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,6566.0,94,Coquimbo,Norte Chico
+4,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,385.0,7,Coquimbo,Norte Chico
+5,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,242.0,9,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,3064.0,80,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,5233.0,83,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,3642.0,80,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,2099.0,47,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,241.0,5,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,345.0,8,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,308.0,3,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,207.0,3,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,3237.0,64,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,2273.0,61,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,2465.0,68,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,1832.0,48,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,994.0,33,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,201.0,8,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,1687.0,48,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,2677.0,41,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,1490.0,42,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,1668.0,12,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,64.0,3,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,133.0,5,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,26.0,1,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,1198.0,44,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,1274.0,43,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1611.0,48,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,551.0,19,Valparaíso,Zona Central
+5,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,411.0,12,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,2681.0,29,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,20456.0,190,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,35017.0,325,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,45621.0,380,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,48967.0,356,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,1443.0,13,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,3268.0,31,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,5742.0,50,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,3024.0,26,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,16545.0,218,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,23659.0,292,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,25047.0,301,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,21871.0,248,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,13895.0,144,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,2613.0,31,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,31728.0,338,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,36388.0,385,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,36252.0,364,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,29706.0,265,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,183.0,2,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,2323.0,19,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,5774.0,51,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,4358.0,43,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,3881.0,37,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,16954.0,222,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,22751.0,294,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,24807.0,314,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,16759.0,207,Valparaíso,Zona Central
+5,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,9576.0,125,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,478.0,11,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),II,17.0,1,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1701.0,15,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,2195.0,19,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,270.0,3,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,291.0,8,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,5544.0,49,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,1731.0,15,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,967.0,10,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,539.0,4,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,2289.0,26,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,414.0,4,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,10764.0,113,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,2547.0,26,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,815.0,7,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,593.0,5,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,3719.0,52,Valparaíso,Zona Central
+5,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,376.0,6,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,2432.0,6,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,632.0,16,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,105.0,3,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,152.0,5,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),V,83.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,203.0,2,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,434.0,12,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,1768.0,16,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,405.0,7,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,78.0,3,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,96.0,2,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,285.0,10,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,183.0,5,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,40.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),V,84.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,66.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Joven (≤29),IV,18.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,241.0,6,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,293.0,10,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,143.0,4,Valparaíso,Zona Central
+5,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,62.0,3,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,634.0,8,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,2999.0,32,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,3262.0,32,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1672.0,15,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,305.0,2,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,75.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,285.0,2,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,162.0,2,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,85.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,1839.0,22,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,2608.0,31,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,2265.0,28,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,564.0,8,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,2157.0,22,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,6649.0,75,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,4602.0,47,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,1532.0,16,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,431.0,5,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,992.0,7,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,893.0,7,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,580.0,4,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),V,79.0,1,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,4273.0,51,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,4586.0,54,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,2435.0,28,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,702.0,10,Valparaíso,Zona Central
+5,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,191.0,3,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,1395.0,36,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,63.0,2,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,103.0,2,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,2150.0,37,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,217.0,4,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,1411.0,46,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,224.0,7,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,64.0,3,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,153.0,3,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,1096.0,45,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,249.0,9,Valparaíso,Zona Central
+5,Pobreza por ingresos,Rural,Mujer,Mayor (60+),III,19.0,1,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,13392.0,121,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,5579.0,50,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,420.0,3,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,2508.0,26,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,2088.0,20,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,83.0,1,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,9923.0,119,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,1775.0,20,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,86.0,1,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,22822.0,262,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,8323.0,96,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,2111.0,21,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,2044.0,20,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,250.0,2,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,14570.0,200,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,3073.0,36,Valparaíso,Zona Central
+5,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,85.0,1,Valparaíso,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,656.0,9,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,5351.0,85,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,5293.0,76,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,6962.0,80,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,3383.0,42,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Joven (≤29),I,35.0,1,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,25.0,1,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,528.0,7,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,86.0,2,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,91.0,1,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,4386.0,86,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,5293.0,94,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,4593.0,79,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,4244.0,65,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,1345.0,26,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,443.0,10,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,3498.0,56,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,4137.0,67,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,2646.0,51,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,1182.0,19,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,231.0,3,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,384.0,4,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,185.0,3,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Joven (≤29),V,179.0,3,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,3180.0,64,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,3337.0,59,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,2423.0,46,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,1372.0,27,O'Higgins,Zona Central
+6,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,312.0,7,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,1062.0,15,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,8284.0,103,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,14683.0,182,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,23453.0,245,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,21772.0,188,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,122.0,1,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,1148.0,13,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1118.0,14,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,2280.0,25,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,1024.0,11,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,7313.0,125,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,8996.0,141,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,10602.0,167,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,8915.0,135,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,4862.0,73,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,1303.0,20,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,14046.0,206,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,15338.0,224,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,13836.0,186,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,9145.0,110,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,62.0,1,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,916.0,12,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,1909.0,20,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1682.0,20,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,393.0,6,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,6507.0,114,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,8608.0,145,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,7858.0,131,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,6421.0,111,O'Higgins,Zona Central
+6,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,2990.0,48,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,943.0,13,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,117.0,2,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,244.0,3,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1149.0,18,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,1366.0,22,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,151.0,2,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),II,156.0,2,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,564.0,11,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,116.0,2,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,2709.0,33,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,987.0,10,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,260.0,3,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,59.0,1,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1384.0,22,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,89.0,2,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,4102.0,57,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,1184.0,16,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,487.0,6,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,367.0,4,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,1917.0,34,O'Higgins,Zona Central
+6,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,212.0,4,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,401.0,6,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,1160.0,16,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,994.0,12,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,429.0,5,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,134.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,822.0,16,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,1009.0,15,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,219.0,5,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,221.0,4,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,470.0,8,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,1051.0,17,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,42.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,140.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,141.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Joven (≤29),III,109.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,490.0,11,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,705.0,13,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,525.0,10,O'Higgins,Zona Central
+6,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,174.0,3,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,608.0,8,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,2162.0,27,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1014.0,13,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1003.0,9,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,230.0,3,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,214.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,166.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,135.0,2,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,55.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,717.0,12,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,1242.0,20,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,1238.0,18,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,600.0,7,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,72.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,893.0,13,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2679.0,40,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,2855.0,39,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,987.0,15,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,51.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,95.0,1,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,760.0,8,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,522.0,6,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,259.0,3,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,805.0,12,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,1469.0,24,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,1096.0,17,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,332.0,5,O'Higgins,Zona Central
+6,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,46.0,1,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,1982.0,28,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,500.0,9,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,429.0,5,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,150.0,2,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,2946.0,54,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,497.0,9,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Hombre,Mayor (60+),III,56.0,1,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2670.0,47,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,663.0,9,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,591.0,8,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,3055.0,64,O'Higgins,Zona Central
+6,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,254.0,8,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,5212.0,59,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,3606.0,39,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,299.0,3,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,565.0,6,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,3427.0,54,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,831.0,11,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,8556.0,128,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,3148.0,47,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,66.0,1,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,793.0,9,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,737.0,8,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,52.0,1,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,5773.0,113,O'Higgins,Zona Central
+6,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,675.0,10,O'Higgins,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,1293.0,15,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,6381.0,95,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,5981.0,75,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,8010.0,86,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,2174.0,26,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Joven (≤29),I,59.0,1,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,448.0,4,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,228.0,3,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,538.0,6,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,74.0,1,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,6811.0,119,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,5808.0,100,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,4347.0,80,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,3902.0,64,Maule,Zona Central
+7,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,1440.0,20,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,657.0,11,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,4551.0,75,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,4080.0,64,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,2579.0,39,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,1187.0,12,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,53.0,1,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,210.0,3,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,165.0,2,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,4110.0,69,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,4314.0,79,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,3130.0,51,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,1930.0,29,Maule,Zona Central
+7,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,174.0,3,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,1918.0,19,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,14624.0,162,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,17983.0,180,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,26738.0,233,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,13746.0,110,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,838.0,6,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1528.0,15,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,4259.0,34,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,2042.0,19,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,9702.0,142,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,10693.0,151,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,10727.0,148,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,7374.0,96,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,3193.0,44,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,1923.0,24,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,19989.0,247,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,20763.0,237,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,13367.0,160,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,9558.0,89,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,361.0,2,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,1076.0,10,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,2924.0,23,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,2837.0,28,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,1245.0,12,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,7107.0,106,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,9683.0,140,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,8815.0,127,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,6401.0,88,Maule,Zona Central
+7,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,1724.0,27,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,1135.0,17,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,412.0,4,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,59.0,1,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1452.0,26,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,166.0,3,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,1900.0,28,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,182.0,3,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,97.0,1,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),II,116.0,1,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,829.0,18,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,24.0,1,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,2887.0,31,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,134.0,2,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,725.0,6,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,178.0,2,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1295.0,19,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,265.0,3,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,5556.0,73,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,483.0,6,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,908.0,8,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,199.0,2,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,1475.0,23,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,240.0,3,Maule,Zona Central
+7,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),III,73.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,304.0,3,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,711.0,11,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,645.0,7,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,191.0,3,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,117.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,96.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,1439.0,26,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,807.0,14,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,341.0,5,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,34.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,651.0,11,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,643.0,9,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,395.0,6,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,156.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Joven (≤29),I,198.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,36.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,595.0,12,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,582.0,10,Maule,Zona Central
+7,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,95.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,615.0,7,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1999.0,22,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1500.0,14,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,630.0,5,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,227.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,101.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,469.0,5,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,238.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,1159.0,16,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,1130.0,16,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,925.0,12,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,152.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,169.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,1055.0,14,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2346.0,29,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,1272.0,16,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,698.0,8,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,66.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,381.0,3,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,75.0,1,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,141.0,2,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,1109.0,16,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,829.0,10,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,602.0,8,Maule,Zona Central
+7,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,442.0,7,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,4834.0,67,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,1480.0,18,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,318.0,4,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,104.0,1,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,5180.0,90,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,519.0,8,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,4740.0,74,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,1315.0,18,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),III,131.0,1,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,305.0,2,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,56.0,1,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,3938.0,77,Maule,Zona Central
+7,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,287.0,7,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,10868.0,107,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,4489.0,41,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,261.0,2,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,1214.0,13,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,1070.0,10,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,5720.0,80,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,877.0,10,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,16235.0,216,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,4081.0,49,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,83.0,1,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,2369.0,25,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,1314.0,13,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,247.0,2,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,10796.0,163,Maule,Zona Central
+7,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,2113.0,35,Maule,Zona Central
+8,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,518.0,12,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,6192.0,98,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,3186.0,64,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,3669.0,57,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,1659.0,23,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,151.0,4,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,120.0,3,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,444.0,4,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,4096.0,102,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,3198.0,75,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,2746.0,64,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,1698.0,37,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,890.0,24,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,1065.0,16,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,2523.0,56,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,1567.0,39,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,1038.0,23,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,295.0,8,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Joven (≤29),I,89.0,1,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,146.0,4,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,343.0,6,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,2928.0,76,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,2280.0,58,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1323.0,37,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,301.0,7,Biobío,Zona Sur
+8,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,171.0,5,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,3493.0,44,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,21908.0,261,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,28947.0,323,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,36935.0,364,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,41386.0,346,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,102.0,1,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,1953.0,20,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,2875.0,34,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,3837.0,38,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,2650.0,26,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,14163.0,223,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,17182.0,257,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,17279.0,239,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,14732.0,200,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,9208.0,118,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,2724.0,40,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,25885.0,347,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,28974.0,361,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,26821.0,310,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,21643.0,214,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,112.0,1,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,1749.0,19,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,3959.0,45,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,2927.0,38,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,2830.0,29,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,14440.0,233,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,18742.0,282,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,18631.0,282,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,13371.0,189,Biobío,Zona Sur
+8,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,5132.0,74,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,1479.0,29,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,142.0,2,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1052.0,25,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,32.0,1,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,1363.0,30,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,56.0,1,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,41.0,1,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,504.0,18,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,29.0,1,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,4644.0,53,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,1319.0,13,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),III,109.0,1,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,463.0,5,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,294.0,3,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1809.0,27,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,255.0,3,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,9759.0,130,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,1094.0,11,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,1036.0,9,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,616.0,6,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,3537.0,57,Biobío,Zona Sur
+8,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,315.0,5,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,533.0,11,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,786.0,16,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,605.0,10,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,8.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Joven (≤29),I,79.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,139.0,2,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,1048.0,21,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,540.0,12,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,379.0,10,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,19.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Hombre,Mayor (60+),V,28.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,321.0,7,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,774.0,19,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,121.0,3,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,30.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Joven (≤29),V,95.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,540.0,5,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,428.0,8,Biobío,Zona Sur
+8,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,169.0,6,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,1055.0,12,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,4149.0,51,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,2690.0,31,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,1821.0,18,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,676.0,5,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,85.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,225.0,3,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,274.0,3,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,79.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,1861.0,29,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,2842.0,41,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,1385.0,19,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,559.0,8,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,3024.0,39,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,4106.0,55,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,3388.0,42,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,510.0,5,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,61.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,92.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,502.0,5,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,238.0,3,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,161.0,2,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),V,72.0,1,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,1651.0,23,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,2599.0,38,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,1977.0,27,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,539.0,9,Biobío,Zona Sur
+8,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,144.0,1,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,2203.0,45,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,276.0,5,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,303.0,3,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,137.0,2,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,2663.0,56,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,65.0,2,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2077.0,47,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,533.0,11,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,404.0,5,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,20.0,1,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,1627.0,47,Biobío,Zona Sur
+8,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,210.0,5,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,11277.0,124,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,5021.0,47,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,350.0,2,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,1793.0,21,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,1488.0,18,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,347.0,4,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,7986.0,115,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,1012.0,14,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,19088.0,270,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,6423.0,90,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,230.0,3,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,2741.0,33,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,1419.0,19,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,205.0,3,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,12528.0,211,Biobío,Zona Sur
+8,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,1098.0,19,Biobío,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,1171.0,15,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,5721.0,76,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,4658.0,58,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,5076.0,44,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,3634.0,28,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,159.0,2,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,360.0,4,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,97.0,2,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,206.0,1,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,7032.0,144,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,5353.0,89,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,2832.0,42,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,1851.0,35,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,377.0,7,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,1955.0,17,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,4099.0,59,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,2002.0,31,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,2089.0,23,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,1542.0,13,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Joven (≤29),I,143.0,2,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,336.0,3,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,235.0,5,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,257.0,2,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,3700.0,83,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,2191.0,45,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1261.0,24,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,938.0,17,La Araucanía,Zona Sur
+9,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,321.0,4,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,1870.0,21,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,10769.0,136,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,16250.0,181,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,18450.0,190,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,15227.0,141,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,78.0,1,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,642.0,9,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1663.0,19,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,2108.0,26,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,3225.0,26,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,7681.0,133,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,8077.0,127,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,7749.0,116,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,6240.0,93,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,4006.0,55,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,2032.0,32,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,16579.0,222,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,15172.0,201,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,12401.0,160,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,8340.0,98,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,69.0,1,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,843.0,10,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,2099.0,29,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1541.0,20,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,1741.0,18,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,8509.0,153,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,9020.0,149,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,8004.0,135,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,4079.0,65,La Araucanía,Zona Sur
+9,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,1798.0,29,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,2569.0,42,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,80.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,119.0,2,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,2568.0,55,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,103.0,3,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,3613.0,62,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,142.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,199.0,3,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,2270.0,55,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,38.0,2,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1906.0,23,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,739.0,7,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),III,141.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,92.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1226.0,20,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,5532.0,79,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,589.0,7,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),III,60.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,386.0,5,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,347.0,4,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),III,67.0,1,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,2234.0,37,La Araucanía,Zona Sur
+9,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,40.0,1,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,817.0,14,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,939.0,15,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,321.0,5,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,248.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,257.0,3,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,1265.0,24,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,880.0,16,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,231.0,4,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,185.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,407.0,8,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,616.0,11,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,104.0,3,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Joven (≤29),I,53.0,1,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,1065.0,19,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,398.0,9,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,263.0,7,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,130.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,177.0,3,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1478.0,15,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,420.0,4,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,173.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,78.0,1,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,136.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,859.0,13,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,946.0,14,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,919.0,12,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,115.0,2,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,884.0,14,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2447.0,34,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,1035.0,14,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,325.0,5,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,68.0,1,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,265.0,4,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,208.0,3,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,67.0,1,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,288.0,6,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,462.0,8,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,463.0,7,La Araucanía,Zona Sur
+9,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,113.0,2,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,5697.0,92,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,1718.0,20,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,101.0,1,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,51.0,1,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,6037.0,111,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,392.0,7,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,5053.0,90,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,425.0,6,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,412.0,7,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,4364.0,95,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,188.0,4,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,7374.0,85,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,3269.0,39,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,494.0,5,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,1866.0,21,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,1306.0,13,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,50.0,1,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,6022.0,93,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,834.0,12,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,83.0,1,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,16555.0,243,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,3726.0,51,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,192.0,4,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,2321.0,28,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,1384.0,18,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,131.0,2,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,10638.0,185,La Araucanía,Zona Sur
+9,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,1316.0,27,La Araucanía,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,554.0,10,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,4349.0,56,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,5015.0,59,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,6744.0,61,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,4130.0,41,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,70.0,1,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,448.0,5,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,452.0,7,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,766.0,9,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,5007.0,85,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,4005.0,61,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,3276.0,47,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,2726.0,41,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,1639.0,26,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,782.0,7,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,3373.0,44,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,3317.0,47,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,3193.0,42,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,1860.0,16,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,407.0,4,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,422.0,5,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,376.0,4,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,2777.0,55,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,2295.0,45,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1621.0,24,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,991.0,15,Los Lagos,Zona Sur
+10,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,569.0,7,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,1451.0,18,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,8810.0,103,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,13026.0,137,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,20633.0,187,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,20949.0,170,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,731.0,7,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,1956.0,20,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,2535.0,25,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,2371.0,20,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,5026.0,78,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,6656.0,90,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,7536.0,102,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,6617.0,85,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,3875.0,43,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,2118.0,27,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,12660.0,164,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,16016.0,198,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,14529.0,165,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,11715.0,125,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,77.0,1,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,1003.0,11,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,2557.0,25,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,1444.0,18,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,1028.0,10,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,6206.0,101,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,7014.0,107,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,8433.0,126,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,4727.0,71,Los Lagos,Zona Sur
+10,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,2769.0,41,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,1302.0,17,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,150.0,1,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,39.0,1,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1457.0,25,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,721.0,13,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,41.0,1,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,741.0,15,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1904.0,19,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,770.0,8,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,124.0,2,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,300.0,3,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,1190.0,16,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,55.0,1,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,3253.0,41,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,802.0,9,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,322.0,4,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,248.0,2,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,1893.0,30,Los Lagos,Zona Sur
+10,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,230.0,4,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,599.0,9,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,653.0,11,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,638.0,8,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,298.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,89.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,1327.0,21,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,484.0,10,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,540.0,11,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,158.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,228.0,4,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,915.0,12,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,1090.0,14,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,164.0,2,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),V,35.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,149.0,2,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,623.0,10,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,844.0,13,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,236.0,5,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,143.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,842.0,10,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1137.0,16,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,1019.0,13,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,455.0,6,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,155.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,122.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,1015.0,18,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,736.0,9,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,220.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,201.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,808.0,12,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,2762.0,35,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,2008.0,26,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,224.0,3,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,94.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,125.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,75.0,1,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,282.0,4,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,1412.0,23,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,1772.0,26,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,1074.0,16,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,854.0,10,Los Lagos,Zona Sur
+10,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,45.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,1276.0,16,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,501.0,7,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),III,96.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,88.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,3656.0,52,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,417.0,5,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,1675.0,26,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,770.0,10,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,312.0,3,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,55.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Joven (≤29),III,40.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,3407.0,60,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,306.0,6,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,4717.0,53,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,2117.0,22,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,216.0,2,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,369.0,3,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,359.0,4,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,69.0,1,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,3104.0,41,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,598.0,8,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,7365.0,101,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,2206.0,31,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,126.0,2,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,857.0,9,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,721.0,9,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,119.0,2,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,5880.0,99,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,522.0,10,Los Lagos,Zona Sur
+10,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,46.0,1,Los Lagos,Zona Sur
+11,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,240.0,12,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,259.0,13,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,876.0,37,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,1754.0,68,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,21.0,2,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,61.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,14.0,2,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,188.0,14,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,145.0,11,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,371.0,24,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,282.0,17,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,369.0,18,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,205.0,11,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,277.0,18,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,433.0,31,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,673.0,32,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,32.0,2,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,41.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,80.0,6,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Joven (≤29),V,126.0,7,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,159.0,12,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,75.0,6,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,124.0,12,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,132.0,11,Aysén,Zona Austral
+11,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,113.0,9,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,70.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,667.0,23,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,1897.0,61,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,2729.0,82,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,4085.0,105,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,136.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,82.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,126.0,5,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,256.0,7,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,652.0,30,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,714.0,30,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,970.0,37,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,995.0,35,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,520.0,21,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,241.0,10,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,1839.0,74,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,2396.0,88,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,2801.0,103,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,2457.0,81,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,92.0,3,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,167.0,6,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,481.0,17,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,154.0,6,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,1077.0,47,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,957.0,43,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,954.0,41,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,677.0,30,Aysén,Zona Austral
+11,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,457.0,25,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,109.0,4,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,27.0,2,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,32.0,1,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,9.0,1,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,54.0,3,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,123.0,3,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,80.0,2,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,31.0,1,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,139.0,4,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,517.0,22,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,79.0,3,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,96.0,3,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,71.0,2,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,92.0,4,Aysén,Zona Austral
+11,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,19.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,15.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,54.0,3,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,25.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,32.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,35.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,13.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,33.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,69.0,3,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,10.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),V,41.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Joven (≤29),III,27.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,50.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,46.0,3,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,25.0,3,Aysén,Zona Austral
+11,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,10.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,56.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,153.0,5,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,232.0,7,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,53.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,37.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,27.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,51.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,90.0,4,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,34.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,260.0,11,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,168.0,6,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,58.0,3,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,46.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,49.0,2,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,152.0,5,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,119.0,6,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,99.0,4,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,27.0,1,Aysén,Zona Austral
+11,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,48.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,61.0,3,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,54.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),III,80.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,317.0,21,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,180.0,15,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,33.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,51.0,1,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,176.0,12,Aysén,Zona Austral
+11,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,14.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,225.0,8,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,231.0,7,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,143.0,4,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,67.0,2,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,31.0,1,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,458.0,17,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,20.0,1,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,1075.0,43,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,550.0,19,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,31.0,1,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,131.0,3,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,153.0,5,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,24.0,1,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,569.0,28,Aysén,Zona Austral
+11,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,71.0,3,Aysén,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,151.0,6,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,553.0,18,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,1043.0,30,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,1359.0,42,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,29.0,1,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,42.0,2,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Joven (≤29),V,18.0,1,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,145.0,4,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,168.0,7,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,70.0,5,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,342.0,14,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,296.0,18,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,29.0,2,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,154.0,6,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,130.0,7,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,245.0,8,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,407.0,16,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,13.0,1,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,54.0,3,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,51.0,2,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Joven (≤29),V,54.0,3,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,69.0,4,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,82.0,5,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,29.0,2,Magallanes,Zona Austral
+12,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,57.0,4,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,144.0,5,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,1285.0,37,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,3716.0,101,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,6749.0,177,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,7826.0,196,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,150.0,4,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,343.0,10,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,994.0,24,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,539.0,16,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,1389.0,53,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,1599.0,64,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,2611.0,96,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,2554.0,96,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,2640.0,96,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,202.0,8,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,2210.0,74,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,4001.0,130,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,3746.0,125,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,3965.0,121,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,187.0,5,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,261.0,9,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,509.0,20,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,345.0,13,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,1061.0,44,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,1415.0,58,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,2379.0,95,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,2130.0,93,Magallanes,Zona Austral
+12,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,1050.0,43,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,47.0,2,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,228.0,6,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,190.0,3,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,37.0,1,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,29.0,1,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,225.0,6,Magallanes,Zona Austral
+12,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,59.0,2,Magallanes,Zona Austral
+12,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,14.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,25.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,44.0,2,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,212.0,7,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,202.0,7,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,107.0,3,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,73.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,29.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,45.0,2,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,92.0,3,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,149.0,4,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,78.0,2,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,310.0,11,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,171.0,6,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,31.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,34.0,1,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,56.0,2,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,125.0,5,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,78.0,3,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,123.0,5,Magallanes,Zona Austral
+12,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,79.0,3,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,29.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,43.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),III,8.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,47.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,25.0,2,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,39.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,58.0,3,Magallanes,Zona Austral
+12,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,96.0,4,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,702.0,22,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,488.0,11,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,93.0,2,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,97.0,3,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,107.0,3,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,58.0,2,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,1093.0,37,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,82.0,3,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,29.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,1343.0,45,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,635.0,23,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,135.0,4,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,19.0,1,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,1120.0,54,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,243.0,12,Magallanes,Zona Austral
+12,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,15.0,1,Magallanes,Zona Austral
+13,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,433.0,3,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,3897.0,33,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,5207.0,39,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,10105.0,67,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,9555.0,50,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,324.0,3,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,134.0,3,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,1862.0,18,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,2051.0,23,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,3636.0,28,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,3544.0,31,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,5300.0,32,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,672.0,7,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,3957.0,37,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,6220.0,55,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,3729.0,26,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,4374.0,22,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,187.0,1,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,163.0,1,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Joven (≤29),V,171.0,1,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,3547.0,31,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,2237.0,22,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,3573.0,34,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,2811.0,19,Metropolitana,Zona Central
+13,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,792.0,10,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,5040.0,24,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,59416.0,264,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,123732.0,539,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,201758.0,764,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,376932.0,1249,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,3889.0,15,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,14772.0,64,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,25238.0,105,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,30302.0,117,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,43047.0,261,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,51500.0,297,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,72269.0,407,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,75974.0,404,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,75541.0,382,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,11422.0,64,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,88416.0,451,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,139985.0,687,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,161306.0,752,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,232318.0,962,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,6371.0,27,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,13852.0,62,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,19188.0,92,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,31024.0,133,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,48135.0,292,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,65517.0,390,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,88268.0,501,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,71396.0,411,Metropolitana,Zona Central
+13,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,54948.0,317,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,751.0,10,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,136.0,1,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,574.0,7,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,203.0,2,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,1337.0,13,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,163.0,4,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,274.0,1,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,725.0,12,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,21032.0,89,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,13581.0,50,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),III,944.0,2,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,1918.0,9,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,1150.0,5,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,7160.0,41,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,1513.0,8,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,37790.0,206,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,11667.0,61,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,4142.0,22,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,3923.0,15,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,16475.0,95,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,1091.0,7,Metropolitana,Zona Central
+13,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),III,121.0,1,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,100.0,1,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,286.0,4,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,920.0,11,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,451.0,3,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),V,201.0,3,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,804.0,10,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,542.0,6,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,772.0,4,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,544.0,4,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,116.0,3,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,1173.0,12,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,1540.0,13,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,385.0,3,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),V,48.0,1,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Joven (≤29),I,53.0,1,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,54.0,1,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Joven (≤29),IV,274.0,2,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,455.0,5,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,551.0,6,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,617.0,7,Metropolitana,Zona Central
+13,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,248.0,4,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,4257.0,23,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,20861.0,98,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,24619.0,104,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,14780.0,54,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,5239.0,21,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,2515.0,10,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,3614.0,16,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,3548.0,11,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,1529.0,2,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,11212.0,63,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,17630.0,92,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,10082.0,56,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,6294.0,31,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,1731.0,8,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,8690.0,46,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,34524.0,185,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,31293.0,153,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,13076.0,66,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,4473.0,14,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,825.0,4,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,3837.0,15,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,4074.0,19,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,1904.0,10,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),V,492.0,2,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,12170.0,74,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,18877.0,104,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,14995.0,76,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,7222.0,40,Metropolitana,Zona Central
+13,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,522.0,5,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,1462.0,12,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,683.0,3,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,1457.0,15,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,35.0,1,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2418.0,21,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,681.0,9,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),III,106.0,1,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,66.0,1,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,401.0,1,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,1793.0,19,Metropolitana,Zona Central
+13,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,168.0,3,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,36587.0,161,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,20359.0,78,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,261.0,1,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,6049.0,27,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,5255.0,20,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,407.0,2,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,22550.0,131,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,3419.0,18,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,402.0,2,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,55869.0,305,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,23624.0,123,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,796.0,4,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,7585.0,39,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,6308.0,30,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,538.0,3,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,44019.0,288,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,5469.0,35,Metropolitana,Zona Central
+13,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,293.0,2,Metropolitana,Zona Central
+14,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,607.0,15,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,2532.0,54,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,1932.0,42,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,2375.0,43,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,2260.0,32,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,116.0,2,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,344.0,7,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,208.0,3,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,1558.0,50,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,1846.0,52,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,1348.0,37,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,1344.0,42,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,561.0,15,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,409.0,12,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,1994.0,47,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,1284.0,34,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,901.0,19,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,476.0,10,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,142.0,3,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,123.0,4,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,1342.0,44,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,910.0,31,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,714.0,25,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,262.0,7,Los Ríos,Zona Sur
+14,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,223.0,8,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,445.0,9,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,4220.0,85,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,6535.0,119,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,6695.0,114,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,7910.0,117,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,309.0,6,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,637.0,12,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,1775.0,31,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,800.0,14,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,3002.0,82,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,3290.0,79,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,2506.0,66,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,2725.0,66,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,2479.0,56,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,860.0,19,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,5203.0,114,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,6121.0,134,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,6241.0,127,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,4990.0,90,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,305.0,5,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,661.0,14,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,853.0,17,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,429.0,9,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,3183.0,88,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,3810.0,99,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,3214.0,79,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,2613.0,69,Los Ríos,Zona Sur
+14,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,1218.0,34,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,811.0,17,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,138.0,4,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,506.0,16,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,38.0,1,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,889.0,26,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,105.0,3,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,87.0,2,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,389.0,12,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,17.0,1,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,949.0,19,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,88.0,2,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),III,50.0,1,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,570.0,13,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,66.0,2,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,2152.0,53,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,222.0,5,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,176.0,3,Los Ríos,Zona Sur
+14,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,901.0,26,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,160.0,4,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,228.0,6,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,195.0,4,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,80.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,502.0,15,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,89.0,3,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,208.0,6,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,62.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Hombre,Mayor (60+),V,64.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,269.0,7,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,298.0,9,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,51.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,33.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,394.0,12,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,111.0,4,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,97.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,380.0,7,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,400.0,10,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,210.0,4,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,101.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,31.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,110.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,295.0,8,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,725.0,19,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,192.0,5,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,333.0,8,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,785.0,19,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,635.0,13,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,82.0,2,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,53.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,125.0,3,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,53.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,32.0,1,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,452.0,11,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,796.0,20,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,292.0,7,Los Ríos,Zona Sur
+14,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,162.0,4,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,2067.0,43,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,400.0,9,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,25.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,65.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,1614.0,48,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,68.0,2,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2211.0,57,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,426.0,8,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),III,36.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,93.0,3,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,198.0,3,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,1367.0,39,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,207.0,6,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,1811.0,37,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,967.0,16,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,240.0,3,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,563.0,11,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,150.0,3,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,168.0,3,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,1718.0,44,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,220.0,6,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,61.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,4357.0,98,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,1255.0,26,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,30.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,510.0,10,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,815.0,16,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,32.0,1,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,3450.0,96,Los Ríos,Zona Sur
+14,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,445.0,14,Los Ríos,Zona Sur
+15,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,93.0,2,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,340.0,10,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,697.0,16,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,682.0,11,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,334.0,6,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,110.0,2,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,86.0,1,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,153.0,6,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,200.0,5,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,48.0,2,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,187.0,7,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,53.0,2,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,19.0,1,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,186.0,5,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,102.0,5,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,204.0,8,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,80.0,4,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,27.0,1,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,86.0,2,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,126.0,4,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,92.0,5,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,47.0,3,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,122.0,6,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,61.0,1,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,246.0,8,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,2352.0,73,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,4101.0,120,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,6365.0,159,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,5477.0,123,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,234.0,6,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,922.0,22,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,438.0,13,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,322.0,7,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,1532.0,61,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,2296.0,84,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,3340.0,110,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,2368.0,75,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,1452.0,46,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,592.0,21,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,3889.0,133,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,4891.0,163,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,3526.0,124,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,2323.0,79,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,27.0,1,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,153.0,7,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,724.0,20,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,756.0,20,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,226.0,7,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,1459.0,69,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,2546.0,103,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,2591.0,103,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,1765.0,75,Arica y Parinacota,Norte Grande
+15,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,857.0,36,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,202.0,6,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,148.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),II,49.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,106.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,43.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,370.0,12,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,23.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,100.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,19.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),III,17.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,823.0,23,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,167.0,4,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,117.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,39.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,289.0,10,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,23.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,1282.0,46,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,299.0,10,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,262.0,6,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,160.0,4,Arica y Parinacota,Norte Grande
+15,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,432.0,17,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,84.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,64.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,158.0,4,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,61.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,31.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,30.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,100.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,115.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,58.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,28.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,6.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,19.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,500.0,15,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,589.0,18,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,397.0,9,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,142.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,30.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,29.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,117.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,565.0,19,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,260.0,9,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,39.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,59.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,262.0,9,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,1061.0,38,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,497.0,18,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,290.0,9,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,24.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,201.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,64.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,56.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,307.0,12,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,347.0,13,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,453.0,19,Arica y Parinacota,Norte Grande
+15,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,59.0,3,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,298.0,7,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,44.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,37.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,5.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,27.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,510.0,15,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,181.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,249.0,5,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,13.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,62.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,1498.0,41,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,635.0,17,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,100.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,233.0,7,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,206.0,6,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,1139.0,38,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,60.0,2,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,31.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,3314.0,125,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,1068.0,40,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,16.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,476.0,14,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,220.0,6,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,16.0,1,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,1343.0,65,Arica y Parinacota,Norte Grande
+15,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,87.0,5,Arica y Parinacota,Norte Grande
+16,Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,319.0,6,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,2571.0,49,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,3810.0,59,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,3120.0,38,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,1505.0,19,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Joven (≤29),II,114.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Joven (≤29),III,183.0,2,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,40.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Mayor (60+),I,3312.0,67,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Mayor (60+),II,2971.0,62,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Mayor (60+),III,2159.0,48,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,825.0,17,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Hombre,Mayor (60+),V,664.0,13,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,491.0,9,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,2704.0,46,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,1770.0,34,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,1269.0,20,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,791.0,8,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Joven (≤29),I,53.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Joven (≤29),II,169.0,2,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Joven (≤29),III,42.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,256.0,3,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Mayor (60+),I,2103.0,47,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Mayor (60+),II,2031.0,45,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Mayor (60+),III,1503.0,30,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,616.0,13,Ñuble,Zona Sur
+16,Fuera de pobreza,Rural,Mujer,Mayor (60+),V,125.0,2,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,775.0,12,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,5812.0,94,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,7416.0,120,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,9300.0,134,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,6418.0,85,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,69.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,70.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,601.0,10,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,918.0,13,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,727.0,8,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,3498.0,75,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,5392.0,110,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,4406.0,87,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,3533.0,69,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,1600.0,32,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,789.0,15,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,6515.0,115,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,6902.0,123,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,6685.0,117,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,4265.0,74,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,117.0,1,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,646.0,7,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,662.0,11,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,942.0,13,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,788.0,12,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,4178.0,92,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,4649.0,96,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,4212.0,87,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,2311.0,48,Ñuble,Zona Sur
+16,Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,1186.0,27,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,1127.0,23,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,25.0,1,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,36.0,1,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,1145.0,26,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,24.0,1,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,1226.0,25,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,162.0,2,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,146.0,2,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,627.0,15,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,247.0,4,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,1087.0,14,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,186.0,4,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,48.0,1,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,655.0,13,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,2358.0,44,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,260.0,4,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,57.0,1,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,111.0,2,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,647.0,12,Ñuble,Zona Sur
+16,Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,102.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,477.0,10,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,236.0,3,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,86.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,644.0,12,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,486.0,11,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,201.0,4,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,120.0,3,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,648.0,12,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,296.0,6,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,276.0,4,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,61.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,542.0,11,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,389.0,8,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,36.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,108.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Rural,Mujer,Mayor (60+),V,59.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,263.0,5,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,1042.0,18,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,595.0,10,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,145.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,116.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,41.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,259.0,4,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,83.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,579.0,12,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,468.0,10,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,425.0,9,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,43.0,1,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,602.0,12,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,1049.0,18,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,913.0,16,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,400.0,7,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,198.0,3,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,103.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,547.0,10,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,838.0,18,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,310.0,7,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,83.0,2,Ñuble,Zona Sur
+16,Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,50.0,1,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,2448.0,45,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,556.0,10,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,2697.0,54,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,522.0,12,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,2242.0,42,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,269.0,5,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,30.0,1,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,2070.0,51,Ñuble,Zona Sur
+16,Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,163.0,6,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,4206.0,62,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,1541.0,23,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,208.0,3,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,195.0,4,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,2681.0,51,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,366.0,8,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,7600.0,145,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,1981.0,32,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,430.0,6,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,555.0,10,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,39.0,1,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,4854.0,109,Ñuble,Zona Sur
+16,Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,984.0,25,Ñuble,Zona Sur

@@ -1,5 +1,185 @@
-estado_pob,expr,n
-Fuera de pobreza,5332666.0,56708
-Pobreza ingresos y multidim.,341517.0,4070
-Pobreza multidimensional,597304.0,6351
-Pobreza por ingresos,871684.0,11525
+estado_pob,area_f,sexo_jefe,edad_tramo,quintil,expr,n
+Fuera de pobreza,Rural,Hombre,Adulto (30-59),I,6589.0,105
+Fuera de pobreza,Rural,Hombre,Adulto (30-59),II,43492.0,700
+Fuera de pobreza,Rural,Hombre,Adulto (30-59),III,45847.0,667
+Fuera de pobreza,Rural,Hombre,Adulto (30-59),IV,59340.0,717
+Fuera de pobreza,Rural,Hombre,Adulto (30-59),V,37980.0,479
+Fuera de pobreza,Rural,Hombre,Joven (≤29),I,94.0,2
+Fuera de pobreza,Rural,Hombre,Joven (≤29),II,1445.0,24
+Fuera de pobreza,Rural,Hombre,Joven (≤29),III,3229.0,51
+Fuera de pobreza,Rural,Hombre,Joven (≤29),IV,3034.0,44
+Fuera de pobreza,Rural,Hombre,Joven (≤29),V,1720.0,22
+Fuera de pobreza,Rural,Hombre,Mayor (60+),I,41358.0,832
+Fuera de pobreza,Rural,Hombre,Mayor (60+),II,36819.0,708
+Fuera de pobreza,Rural,Hombre,Mayor (60+),III,32356.0,607
+Fuera de pobreza,Rural,Hombre,Mayor (60+),IV,25677.0,476
+Fuera de pobreza,Rural,Hombre,Mayor (60+),V,14885.0,254
+Fuera de pobreza,Rural,Mujer,Adulto (30-59),I,7875.0,114
+Fuera de pobreza,Rural,Mujer,Adulto (30-59),II,31608.0,543
+Fuera de pobreza,Rural,Mujer,Adulto (30-59),III,31711.0,513
+Fuera de pobreza,Rural,Mujer,Adulto (30-59),IV,21987.0,371
+Fuera de pobreza,Rural,Mujer,Adulto (30-59),V,15844.0,193
+Fuera de pobreza,Rural,Mujer,Joven (≤29),I,285.0,4
+Fuera de pobreza,Rural,Mujer,Joven (≤29),II,2021.0,31
+Fuera de pobreza,Rural,Mujer,Joven (≤29),III,2667.0,47
+Fuera de pobreza,Rural,Mujer,Joven (≤29),IV,1513.0,27
+Fuera de pobreza,Rural,Mujer,Joven (≤29),V,530.0,14
+Fuera de pobreza,Rural,Mujer,Mayor (60+),I,27909.0,584
+Fuera de pobreza,Rural,Mujer,Mayor (60+),II,23591.0,492
+Fuera de pobreza,Rural,Mujer,Mayor (60+),III,19604.0,383
+Fuera de pobreza,Rural,Mujer,Mayor (60+),IV,11061.0,194
+Fuera de pobreza,Rural,Mujer,Mayor (60+),V,3435.0,78
+Fuera de pobreza,Urbano,Hombre,Adulto (30-59),I,21710.0,241
+Fuera de pobreza,Urbano,Hombre,Adulto (30-59),II,183050.0,1903
+Fuera de pobreza,Urbano,Hombre,Adulto (30-59),III,311748.0,2961
+Fuera de pobreza,Urbano,Hombre,Adulto (30-59),IV,457977.0,3789
+Fuera de pobreza,Urbano,Hombre,Adulto (30-59),V,637856.0,4015
+Fuera de pobreza,Urbano,Hombre,Joven (≤29),I,469.0,6
+Fuera de pobreza,Urbano,Hombre,Joven (≤29),II,14907.0,144
+Fuera de pobreza,Urbano,Hombre,Joven (≤29),III,34484.0,317
+Fuera de pobreza,Urbano,Hombre,Joven (≤29),IV,57463.0,499
+Fuera de pobreza,Urbano,Hombre,Joven (≤29),V,53877.0,376
+Fuera de pobreza,Urbano,Hombre,Mayor (60+),I,124489.0,1713
+Fuera de pobreza,Urbano,Hombre,Mayor (60+),II,155234.0,2033
+Fuera de pobreza,Urbano,Hombre,Mayor (60+),III,187742.0,2304
+Fuera de pobreza,Urbano,Hombre,Mayor (60+),IV,173926.0,1978
+Fuera de pobreza,Urbano,Hombre,Mayor (60+),V,137138.0,1356
+Fuera de pobreza,Urbano,Mujer,Adulto (30-59),I,30463.0,374
+Fuera de pobreza,Urbano,Mujer,Adulto (30-59),II,258975.0,3022
+Fuera de pobreza,Urbano,Mujer,Adulto (30-59),III,336261.0,3652
+Fuera de pobreza,Urbano,Mujer,Adulto (30-59),IV,341446.0,3364
+Fuera de pobreza,Urbano,Mujer,Adulto (30-59),V,368007.0,2765
+Fuera de pobreza,Urbano,Mujer,Joven (≤29),I,1124.0,13
+Fuera de pobreza,Urbano,Mujer,Joven (≤29),II,17824.0,172
+Fuera de pobreza,Urbano,Mujer,Joven (≤29),III,41841.0,418
+Fuera de pobreza,Urbano,Mujer,Joven (≤29),IV,42383.0,424
+Fuera de pobreza,Urbano,Mujer,Joven (≤29),V,47076.0,351
+Fuera de pobreza,Urbano,Mujer,Mayor (60+),I,130630.0,1815
+Fuera de pobreza,Urbano,Mujer,Mayor (60+),II,172367.0,2274
+Fuera de pobreza,Urbano,Mujer,Mayor (60+),III,198166.0,2429
+Fuera de pobreza,Urbano,Mujer,Mayor (60+),IV,148849.0,1779
+Fuera de pobreza,Urbano,Mujer,Mayor (60+),V,89678.0,945
+Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),I,11650.0,203
+Pobreza ingresos y multidim.,Rural,Hombre,Adulto (30-59),II,1478.0,24
+Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),I,1208.0,15
+Pobreza ingresos y multidim.,Rural,Hombre,Joven (≤29),II,184.0,3
+Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),I,12523.0,238
+Pobreza ingresos y multidim.,Rural,Hombre,Mayor (60+),II,628.0,13
+Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),I,16349.0,286
+Pobreza ingresos y multidim.,Rural,Mujer,Adulto (30-59),II,1300.0,24
+Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),I,1417.0,19
+Pobreza ingresos y multidim.,Rural,Mujer,Joven (≤29),II,272.0,3
+Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),I,7653.0,182
+Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),II,518.0,12
+Pobreza ingresos y multidim.,Rural,Mujer,Mayor (60+),III,17.0,1
+Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),I,50531.0,475
+Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),II,22276.0,155
+Pobreza ingresos y multidim.,Urbano,Hombre,Adulto (30-59),III,1281.0,5
+Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),I,5385.0,51
+Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),II,3595.0,33
+Pobreza ingresos y multidim.,Urbano,Hombre,Joven (≤29),III,269.0,2
+Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),I,20459.0,258
+Pobreza ingresos y multidim.,Urbano,Hombre,Mayor (60+),II,2831.0,28
+Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),I,96060.0,1109
+Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),II,23278.0,236
+Pobreza ingresos y multidim.,Urbano,Mujer,Adulto (30-59),III,141.0,3
+Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),I,11940.0,110
+Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),II,7178.0,55
+Pobreza ingresos y multidim.,Urbano,Mujer,Joven (≤29),III,67.0,1
+Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),I,37590.0,477
+Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),II,3216.0,46
+Pobreza ingresos y multidim.,Urbano,Mujer,Mayor (60+),III,223.0,3
+Pobreza multidimensional,Rural,Hombre,Adulto (30-59),I,5678.0,61
+Pobreza multidimensional,Rural,Hombre,Adulto (30-59),II,6835.0,124
+Pobreza multidimensional,Rural,Hombre,Adulto (30-59),III,5410.0,85
+Pobreza multidimensional,Rural,Hombre,Adulto (30-59),IV,2165.0,29
+Pobreza multidimensional,Rural,Hombre,Adulto (30-59),V,284.0,4
+Pobreza multidimensional,Rural,Hombre,Joven (≤29),I,79.0,1
+Pobreza multidimensional,Rural,Hombre,Joven (≤29),II,918.0,13
+Pobreza multidimensional,Rural,Hombre,Joven (≤29),III,519.0,6
+Pobreza multidimensional,Rural,Hombre,Joven (≤29),IV,30.0,1
+Pobreza multidimensional,Rural,Hombre,Mayor (60+),I,9075.0,174
+Pobreza multidimensional,Rural,Hombre,Mayor (60+),II,7427.0,126
+Pobreza multidimensional,Rural,Hombre,Mayor (60+),III,3795.0,72
+Pobreza multidimensional,Rural,Hombre,Mayor (60+),IV,1766.0,33
+Pobreza multidimensional,Rural,Hombre,Mayor (60+),V,92.0,2
+Pobreza multidimensional,Rural,Mujer,Adulto (30-59),I,3094.0,59
+Pobreza multidimensional,Rural,Mujer,Adulto (30-59),II,7252.0,133
+Pobreza multidimensional,Rural,Mujer,Adulto (30-59),III,4588.0,72
+Pobreza multidimensional,Rural,Mujer,Adulto (30-59),IV,1397.0,21
+Pobreza multidimensional,Rural,Mujer,Adulto (30-59),V,208.0,4
+Pobreza multidimensional,Rural,Mujer,Joven (≤29),I,304.0,4
+Pobreza multidimensional,Rural,Mujer,Joven (≤29),II,761.0,12
+Pobreza multidimensional,Rural,Mujer,Joven (≤29),III,145.0,4
+Pobreza multidimensional,Rural,Mujer,Joven (≤29),IV,292.0,3
+Pobreza multidimensional,Rural,Mujer,Joven (≤29),V,95.0,1
+Pobreza multidimensional,Rural,Mujer,Mayor (60+),I,5326.0,103
+Pobreza multidimensional,Rural,Mujer,Mayor (60+),II,4703.0,95
+Pobreza multidimensional,Rural,Mujer,Mayor (60+),III,2361.0,54
+Pobreza multidimensional,Rural,Mujer,Mayor (60+),IV,1004.0,22
+Pobreza multidimensional,Rural,Mujer,Mayor (60+),V,59.0,1
+Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),I,10021.0,103
+Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),II,41984.0,401
+Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),III,41974.0,342
+Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),IV,25274.0,180
+Pobreza multidimensional,Urbano,Hombre,Adulto (30-59),V,7630.0,49
+Pobreza multidimensional,Urbano,Hombre,Joven (≤29),I,236.0,4
+Pobreza multidimensional,Urbano,Hombre,Joven (≤29),II,4318.0,35
+Pobreza multidimensional,Urbano,Hombre,Joven (≤29),III,6071.0,49
+Pobreza multidimensional,Urbano,Hombre,Joven (≤29),IV,5157.0,34
+Pobreza multidimensional,Urbano,Hombre,Joven (≤29),V,1777.0,6
+Pobreza multidimensional,Urbano,Hombre,Mayor (60+),I,21521.0,234
+Pobreza multidimensional,Urbano,Hombre,Mayor (60+),II,31559.0,329
+Pobreza multidimensional,Urbano,Hombre,Mayor (60+),III,19966.0,218
+Pobreza multidimensional,Urbano,Hombre,Mayor (60+),IV,9477.0,84
+Pobreza multidimensional,Urbano,Hombre,Mayor (60+),V,2334.0,20
+Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),I,21191.0,240
+Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),II,67312.0,703
+Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),III,54711.0,503
+Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),IV,20607.0,175
+Pobreza multidimensional,Urbano,Mujer,Adulto (30-59),V,5961.0,36
+Pobreza multidimensional,Urbano,Mujer,Joven (≤29),I,1368.0,9
+Pobreza multidimensional,Urbano,Mujer,Joven (≤29),II,8339.0,70
+Pobreza multidimensional,Urbano,Mujer,Joven (≤29),III,7191.0,60
+Pobreza multidimensional,Urbano,Mujer,Joven (≤29),IV,3790.0,36
+Pobreza multidimensional,Urbano,Mujer,Joven (≤29),V,643.0,4
+Pobreza multidimensional,Urbano,Mujer,Mayor (60+),I,26040.0,307
+Pobreza multidimensional,Urbano,Mujer,Mayor (60+),II,36266.0,394
+Pobreza multidimensional,Urbano,Mujer,Mayor (60+),III,26504.0,278
+Pobreza multidimensional,Urbano,Mujer,Mayor (60+),IV,11305.0,112
+Pobreza multidimensional,Urbano,Mujer,Mayor (60+),V,1115.0,17
+Pobreza por ingresos,Rural,Hombre,Adulto (30-59),I,26502.0,433
+Pobreza por ingresos,Rural,Hombre,Adulto (30-59),II,7320.0,103
+Pobreza por ingresos,Rural,Hombre,Adulto (30-59),III,184.0,4
+Pobreza por ingresos,Rural,Hombre,Joven (≤29),I,1403.0,19
+Pobreza por ingresos,Rural,Hombre,Joven (≤29),II,642.0,9
+Pobreza por ingresos,Rural,Hombre,Mayor (60+),I,32176.0,613
+Pobreza por ingresos,Rural,Hombre,Mayor (60+),II,3187.0,62
+Pobreza por ingresos,Rural,Hombre,Mayor (60+),III,56.0,1
+Pobreza por ingresos,Rural,Mujer,Adulto (30-59),I,29001.0,555
+Pobreza por ingresos,Rural,Mujer,Adulto (30-59),II,6385.0,107
+Pobreza por ingresos,Rural,Mujer,Adulto (30-59),III,311.0,4
+Pobreza por ingresos,Rural,Mujer,Joven (≤29),I,3078.0,46
+Pobreza por ingresos,Rural,Mujer,Joven (≤29),II,939.0,13
+Pobreza por ingresos,Rural,Mujer,Joven (≤29),III,40.0,1
+Pobreza por ingresos,Rural,Mujer,Mayor (60+),I,25149.0,571
+Pobreza por ingresos,Rural,Mujer,Mayor (60+),II,2208.0,62
+Pobreza por ingresos,Rural,Mujer,Mayor (60+),III,19.0,1
+Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),I,109805.0,1057
+Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),II,54865.0,488
+Pobreza por ingresos,Urbano,Hombre,Adulto (30-59),III,2906.0,28
+Pobreza por ingresos,Urbano,Hombre,Joven (≤29),I,17211.0,169
+Pobreza por ingresos,Urbano,Hombre,Joven (≤29),II,14245.0,134
+Pobreza por ingresos,Urbano,Hombre,Joven (≤29),III,1213.0,15
+Pobreza por ingresos,Urbano,Hombre,Mayor (60+),I,74306.0,989
+Pobreza por ingresos,Urbano,Hombre,Mayor (60+),II,11330.0,138
+Pobreza por ingresos,Urbano,Hombre,Mayor (60+),III,725.0,8
+Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),I,187700.0,2432
+Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),II,66163.0,791
+Pobreza por ingresos,Urbano,Mujer,Adulto (30-59),III,1809.0,24
+Pobreza por ingresos,Urbano,Mujer,Joven (≤29),I,25167.0,264
+Pobreza por ingresos,Urbano,Mujer,Joven (≤29),II,17742.0,190
+Pobreza por ingresos,Urbano,Mujer,Joven (≤29),III,1707.0,21
+Pobreza por ingresos,Urbano,Mujer,Mayor (60+),I,128315.0,1893
+Pobreza por ingresos,Urbano,Mujer,Mayor (60+),II,17392.0,273
+Pobreza por ingresos,Urbano,Mujer,Mayor (60+),III,483.0,7

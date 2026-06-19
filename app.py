@@ -78,44 +78,109 @@ st.markdown(
     p, label, .stMarkdown { color: #2C3E50; }
 
     /* ----------------------------------------------------------------- */
-    /* SIDEBAR: fondo claro institucional + alto contraste de texto      */
+    /* SIDEBAR: colores institucionales Universidad de Concepción        */
     /* ----------------------------------------------------------------- */
     section[data-testid="stSidebar"] {
-        background-color: #F4F6F8 !important;
-        border-right: 1px solid #E1E5EA;
+        background: linear-gradient(180deg, #002855 0%, #001F40 100%) !important;
+        border-right: 2px solid #C9A84C;
     }
-    /* Titulos y labels de los widgets del sidebar en azul oscuro */
+    /* Scrollbar personalizada */
+    section[data-testid="stSidebar"] ::-webkit-scrollbar {
+        width: 5px;
+    }
+    section[data-testid="stSidebar"] ::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+    }
+    section[data-testid="stSidebar"] ::-webkit-scrollbar-thumb {
+        background: #C9A84C;
+        border-radius: 3px;
+    }
+    /* Expandir/colapsar boton */
+    section[data-testid="stSidebar"] button[kind="header"] {
+        color: #C9A84C !important;
+    }
+    /* Titulos y labels del sidebar en blanco/gold */
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] h4 {
+        color: #C9A84C !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.02em;
+        border-bottom-color: rgba(201, 168, 76, 0.3) !important;
+    }
     section[data-testid="stSidebar"] label,
     section[data-testid="stSidebar"] .stMarkdown,
     section[data-testid="stSidebar"] p {
-        color: #1A2530 !important;
+        color: #FFFFFF !important;
     }
-    /* Texto de las opciones (radio, multiselect, selectbox) legible */
-    section[data-testid="stSidebar"] [data-baseweb="radio"] div,
-    section[data-testid="stSidebar"] [data-baseweb="select"] div,
+    /* Widget label en blanco */
     section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {
-        color: #2C3E50 !important;
+        color: #FFFFFF !important;
+        font-weight: 500 !important;
     }
-    /* Campos (selectbox / multiselect) con fondo blanco y borde sutil */
+    /* Opciones de radio en blanco */
+    section[data-testid="stSidebar"] [data-baseweb="radio"] div {
+        color: #FFFFFF !important;
+    }
+    /* Radio buttons seleccionados con gold */
+    section[data-testid="stSidebar"] [data-baseweb="radio"] [aria-checked="true"] + div {
+        color: #C9A84C !important;
+    }
+    /* Campos (selectbox / multiselect) oscuros con borde gold */
     section[data-testid="stSidebar"] [data-baseweb="select"] > div,
     section[data-testid="stSidebar"] [data-baseweb="input"] > div {
-        background-color: #FFFFFF !important;
-        border-color: #CBD3DB !important;
-    }
-    /* Chips de los items seleccionados en el multiselect (alto contraste) */
-    section[data-testid="stSidebar"] [data-baseweb="tag"] {
-        background-color: #175884 !important;
+        background-color: #0D3B66 !important;
+        border: 1px solid rgba(201, 168, 76, 0.4) !important;
+        border-radius: 6px !important;
         color: #FFFFFF !important;
+    }
+    /* Menu dropdown con fondo oscuro */
+    section[data-testid="stSidebar"] [data-baseweb="select"] ul {
+        background-color: #0D3B66 !important;
+        border: 1px solid #C9A84C !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="select"] li {
+        color: #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="select"] li:hover {
+        background-color: #C9A84C !important;
+        color: #002855 !important;
+    }
+    /* Chips de items seleccionados en gold */
+    section[data-testid="stSidebar"] [data-baseweb="tag"] {
+        background-color: #C9A84C !important;
+        color: #002855 !important;
+        font-weight: 600 !important;
+        border-radius: 4px !important;
     }
     section[data-testid="stSidebar"] [data-baseweb="tag"] span {
+        color: #002855 !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="tag"] svg {
+        fill: #002855 !important;
+    }
+    /* Slider: track y valores en blanco, punto activo en gold */
+    section[data-testid="stSidebar"] [data-baseweb="slider"] div {
         color: #FFFFFF !important;
     }
-    /* Punto activo del radio y track del slider en azul institucional */
     section[data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[role="slider"] {
-        background-color: #175884 !important;
+        background-color: #C9A84C !important;
+        border: 2px solid #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] + div {
+        background-color: rgba(201, 168, 76, 0.3) !important;
+    }
+    /* Divisor hr del sidebar en gold tenue */
+    section[data-testid="stSidebar"] hr {
+        border-color: rgba(201, 168, 76, 0.25) !important;
+    }
+    /* Checkbox en blanco, checked en gold */
+    section[data-testid="stSidebar"] [data-baseweb="checkbox"] span {
+        color: #FFFFFF !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="checkbox"] svg {
+        fill: #C9A84C !important;
     }
     </style>
     """,
@@ -1502,7 +1567,7 @@ OPCIONES_ORIGEN = ["Ambos", "Hogares chilenos", "Hogares inmigrantes"]
 with st.sidebar:
     st.markdown(
         "<h3 style='margin-top: 0; padding-top: 0; "
-        "border-bottom: 1px solid #ECF0F1; padding-bottom: 8px;'>"
+        "color: #C9A84C; border-bottom: 1px solid rgba(201,168,76,0.3); padding-bottom: 8px;'>"
         "Filtros globales</h3>",
         unsafe_allow_html=True,
     )
@@ -1541,13 +1606,13 @@ with st.sidebar:
 
     # --- Filtrar población: drill-down REAL sobre los gráficos 2024 ------
     st.markdown(
-        "<h3 style='border-bottom: 1px solid #ECF0F1; "
+        "<h3 style='color: #C9A84C; border-bottom: 1px solid rgba(201,168,76,0.3); "
         "padding-bottom: 8px;'>Filtrar población</h3>",
         unsafe_allow_html=True,
     )
     st.markdown(
-        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35; "
-        "margin-top:-0.3rem;'>Estos filtros <b>recalculan</b> los gráficos A, "
+        "<p style='font-size:0.78rem; color: rgba(255,255,255,0.65); line-height:1.35; "
+        "margin-top:-0.3rem;'>Estos filtros <b style='color:#C9A84C;'>recalculan</b> los gráficos A, "
         "B, C, E y F sobre el subconjunto de hogares elegido (CASEN 2024).</p>",
         unsafe_allow_html=True,
     )
@@ -1574,14 +1639,14 @@ with st.sidebar:
 
     # --- Modo resaltar: enfasis VISUAL, no recalcula nada ----------------
     st.markdown(
-        "<h3 style='border-bottom: 1px solid #ECF0F1; "
+        "<h3 style='color: #C9A84C; border-bottom: 1px solid rgba(201,168,76,0.3); "
         "padding-bottom: 8px;'>Modo resaltar</h3>",
         unsafe_allow_html=True,
     )
     st.markdown(
-        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35; "
+        "<p style='font-size:0.78rem; color: rgba(255,255,255,0.65); line-height:1.35; "
         "margin-top:-0.3rem;'>Énfasis visual: intensifica el color de lo "
-        "elegido y atenúa el resto, <b>sin recalcular</b> los datos.</p>",
+        "elegido y atenúa el resto, <b style='color:#C9A84C;'>sin recalcular</b> los datos.</p>",
         unsafe_allow_html=True,
     )
 
@@ -1601,10 +1666,10 @@ with st.sidebar:
               "(macrozonas) y E (barras), atenuando los demas."),
     )
 
-    st.markdown("<hr style='border:none; border-top:1px solid #ECF0F1; margin: 1.2rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border:none; border-top:1px solid rgba(201,168,76,0.25); margin: 1.2rem 0;'>", unsafe_allow_html=True)
     st.markdown(
-        "<p style='font-size:0.78rem; color:#7F8C8D; line-height:1.35;'>"
-        "<b>Nota:</b> Los gráficos D (Sankey trifecta), G (serie histórica) y "
+        "<p style='font-size:0.78rem; color: rgba(255,255,255,0.55); line-height:1.35;'>"
+        "<b style='color:#C9A84C;'>Nota:</b> Los gráficos D (Sankey trifecta), G (serie histórica) y "
         "H (LISA comunal) no reaccionan a 'Filtrar población': su universo es "
         "fijo por diseño metodológico.</p>",
         unsafe_allow_html=True,
